@@ -1,0 +1,175 @@
+$principal-color1: #2e53fe;
+$principal-color2: #a83fe1;
+$principal-color3: #1cd1e2;
+
+
+:host {
+    display: block;
+}
+
+header{
+    height: 100%;
+    width: 90%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-left: 5%;
+    padding-right: 5%;
+    background-color: white;
+
+    #logo{ 
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+
+        img{
+            height: 100%;
+        }
+    }
+
+    nav{
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        width: 100%;
+
+        .top-nav{
+            height: 70%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            .search{
+                
+                padding: 0;
+                background-color: $principal-color1;
+                box-sizing: border-box;
+                display: flex;
+                align-items: center;
+                justify-content: left;
+                width: 60%;
+                border-radius: 10px;
+                border:none;
+                height: 40%;
+                overflow: hidden;
+                cursor: pointer;
+
+                input{
+                    left: 0;
+                    box-sizing: border-box;
+                    width: 95%;
+                    height: 100%;
+                    border-top-left-radius: 10px;
+                    border-bottom-left-radius: 10px;
+                    border: 3px solid $principal-color1;
+                }
+
+                .search-icon{
+                    flex: 1;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    color: white;
+                    padding-right: 1%;
+                }
+
+                &:hover {
+                    input{
+                        border: 3px solid $principal-color2;
+                    }
+                    background-color: $principal-color2;
+                }
+                &:active{
+                    input{
+                        border: 3px solid $principal-color3;
+                    }
+                    background-color: $principal-color3;
+                }
+
+            }
+
+            .user-contacts{
+                flex: 1;
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-around;
+                align-items: stretch;
+
+                .contacs{
+                    height: 50%;
+                    display: flex;
+                    flex-direction:row;
+                    justify-content: right;
+                    align-items: center;
+
+                    .phone-address{
+                        display: flex;
+                        justify-content: space-around;
+                        align-items: center;
+                        height: 100%;
+                        width: 85%;
+                        line-height: 100%;
+                        font-size: 120%;
+
+                        a{
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            text-decoration: none;
+                            color: $principal-color1;
+                            font-weight: bold;
+
+                            #whatsapp{
+                                line-height: 100%;
+                                font-size: 165%;
+                            }
+                        }
+
+                        a:hover{
+                            color: $principal-color2;
+                        }
+                    }
+
+                    .social-media{
+                        flex: 1;
+                        display: flex;
+                        justify-content: space-around;
+                        align-items: center;
+                        height: 100%;
+                        line-height: 100%;
+                        font-size: 160%;
+                        
+                        a{
+                            text-decoration: none;
+                            color: $principal-color1;
+                        }
+                        a:hover{
+                            color: $principal-color2;
+                        }
+                    }
+                }
+
+                .user-options{
+                    height: 50%;
+                    display: flex;
+                    justify-content: right;
+                    align-items: center;
+                }
+            }
+        }
+
+        .bottom-nav{
+            flex: 1;
+            background-color:aquamarine;
+            display: flex;
+        }
+    }
+}
+
+span{
+    white-space: pre-wrap;
+}
+
