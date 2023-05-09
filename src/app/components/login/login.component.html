@@ -1,1 +1,17 @@
-<p>login works!</p>
+<form [formGroup]="userFormGroup">
+
+    <mat-form-field>
+        <mat-label >Nombre de usuario</mat-label>
+        <input matInput formControlName="username">
+        <mat-error *ngIf="userFormGroup.get('username')?.errors?.['required']">Por favor ingresa el nombre de usuario</mat-error>
+        <mat-error *ngIf="userFormGroup.get('username')?.errors?.['pattern']">El nombre de usuario no puede tener espacios, comas, tildes, ñ o caracteres especiales(#, $, ~, etc).</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label >Contraseña</mat-label>
+        <input matInput formControlName="password">
+        <mat-error *ngIf="userFormGroup.get('password')?.errors?.['required']">por favor ingresa la contraseña</mat-error>
+    </mat-form-field>
+    <button type="submit" mat-raised-button color="primary">Crear usuario</button>
+</form>
+
