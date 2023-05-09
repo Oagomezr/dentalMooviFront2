@@ -1,6 +1,7 @@
 $principal-color1: #2e53fe;
 $principal-color2: #a83fe1;
 $principal-color3: #1cd1e2;
+$principal-color3: #02a1ff;
 
 
 :host {
@@ -16,6 +17,7 @@ header{
     padding-left: 5%;
     padding-right: 5%;
     background-color: white;
+    font-family: 'Roboto', sans-serif;
 
     #logo{ 
         display: flex;
@@ -42,14 +44,13 @@ header{
             align-items: center;
 
             .search{
-                
                 padding: 0;
                 background-color: $principal-color1;
                 box-sizing: border-box;
                 display: flex;
                 align-items: center;
                 justify-content: left;
-                width: 60%;
+                width: 50%;
                 border-radius: 10px;
                 border:none;
                 height: 40%;
@@ -126,10 +127,9 @@ header{
                                 line-height: 100%;
                                 font-size: 165%;
                             }
-                        }
-
-                        a:hover{
-                            color: $principal-color2;
+                            &:hover {
+                                color: $principal-color2;
+                            }
                         }
                     }
 
@@ -145,9 +145,9 @@ header{
                         a{
                             text-decoration: none;
                             color: $principal-color1;
-                        }
-                        a:hover{
-                            color: $principal-color2;
+                            &:hover {
+                                color: $principal-color2;
+                            }
                         }
                     }
                 }
@@ -157,6 +157,25 @@ header{
                     display: flex;
                     justify-content: right;
                     align-items: center;
+                    line-height: 100%;
+                    font-size: 100%;
+
+                    a{
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        text-decoration: none;
+                        color: $principal-color1;
+                        font-weight: bold;
+
+                        &:hover {
+                            color: $principal-color2;
+                        }
+                    }
+
+                    .login{
+                        margin-right: 5%;
+                    }
                 }
             }
         }
