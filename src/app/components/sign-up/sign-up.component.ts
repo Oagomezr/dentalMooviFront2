@@ -21,7 +21,7 @@ export class SignUpComponent {
                             asyncValidators: uniqueValueValidator(this.userService, 'email'),
                             updateOn: 'blur'}),
     celPhone: new FormControl('', { validators: [Validators.required, Validators.minLength(12), Validators.pattern('^[0-9-]*$')]}),
-    birthdate: new FormControl(new Date(1990, 0, 1)),
+    birthday: new FormControl(''),
     gender: new FormControl('', Validators.required),
     password: new FormControl('', Validators.required)
   });
