@@ -1,0 +1,10 @@
+<mat-form-field>
+    <mat-label>Género</mat-label>
+    <mat-select [formControl]="formGender">
+        <mat-option value="Masculino">Masculino</mat-option>
+        <mat-option value="Femenino">Femenino</mat-option>
+        <mat-option value="Otro">Otro</mat-option>
+        <mat-option value=" ">Prefiero no decirlo</mat-option>
+    </mat-select>
+    <mat-error>Seleccione un género</mat-error>
+</mat-form-field>

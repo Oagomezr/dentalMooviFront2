@@ -8,16 +8,16 @@ import { Users } from '../../models/users';
 })
 export class UsersService {
 
-  private baseUrl = 'http://localhost:8087/users';
+  private baseUrl = 'http://localhost:8087';
 
   constructor(private http: HttpClient) {}
 
   getAllUsers(): Observable<Users[]>{
-    return this.http.get<Users[]>(`${this.baseUrl}`);
+    return this.http.get<Users[]>(`${this.baseUrl}/admin`);
   }
 
   createUser(user:Users): Observable<Users>{
-    return this.http.post<Users>(this.baseUrl, user);
+    return this.http.post<Users>(`${this.baseUrl}/public/create`, user);
   }
 
   getUser(id:number): Observable<Users>{

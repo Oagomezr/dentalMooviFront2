@@ -11,7 +11,7 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
 import { RouterModule, Routes } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HeaderComponent } from './components/home/header/header.component';
+import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/home/footer/footer.component';
 import { BodyComponent } from './components/home/body/body.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -20,6 +20,11 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { CartBadgeComponent } from './components/header/cart-badge/cart-badge.component';
+import { SelectGenderComponent } from './components/sign-up/select-gender/select-gender.component';
+import { PasswordComponent } from './components/sign-up/password/password.component';
+import { BirthComponent } from './components/sign-up/birth/birth.component';
+import { CelPhoneComponent } from './components/sign-up/cel-phone/cel-phone.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -39,7 +44,10 @@ const routes: Routes = [
     PageNotFoundComponent,
     HeaderComponent,
     FooterComponent,
-    BodyComponent
+    BodyComponent,
+    
+    
+    
   ],
   imports: [
     BrowserModule,
@@ -53,7 +61,12 @@ const routes: Routes = [
     MatInputModule,
     MatButtonModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    CartBadgeComponent,
+    SelectGenderComponent,
+    PasswordComponent,
+    BirthComponent,
+    CelPhoneComponent,
   ],
   providers: [],
   bootstrap: [AppComponent]

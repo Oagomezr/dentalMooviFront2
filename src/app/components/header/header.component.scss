@@ -50,7 +50,7 @@ header{
                 display: flex;
                 align-items: center;
                 justify-content: left;
-                width: 50%;
+                width: 40%;
                 border-radius: 10px;
                 border:none;
                 height: 40%;
@@ -182,8 +182,38 @@ header{
 
         .bottom-nav{
             flex: 1;
-            background-color:aquamarine;
             display: flex;
+            align-items: center;
+            justify-content: space-between;
+            .menu{
+                height: 100%;
+                width: 75%;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                font-size: 160%;
+                button{
+                    height: 100%;
+                    border: none;
+                    font-weight: bold;
+                    background-color: white;
+                    border-radius: 10px;
+                    text-decoration: none;
+                    &:hover {
+                        background-color: $principal-color1;
+                        color: white;
+                        overflow: hidden;
+                        cursor: pointer;
+                    }
+                }
+            }
+            .cart{
+                flex: 1;
+                height: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
         }
     }
 }

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { UsersService } from 'src/app/services/user/users.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { uniqueValueValidator } from 'src/app/validators/userFieldsValidator';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sign-up',
@@ -19,19 +20,20 @@ export class SignUpComponent {
     email: new FormControl( '', { validators: [Validators.required, Validators.email],
                             asyncValidators: uniqueValueValidator(this.userService, 'email'),
                             updateOn: 'blur'}),
-    celPhone: new FormControl('', { validators: [Validators.required, Validators.pattern('^[0-9]*$')], updateOn: 'blur'}),
-    birthday: new FormControl(''),
+    celPhone: new FormControl('', { validators: [Validators.required, Validators.minLength(12), Validators.pattern('^[0-9-]*$')]}),
+    birthdate: new FormControl(new Date(1990, 0, 1)),
     gender: new FormControl('', Validators.required),
-    password: new FormControl('')
+    password: new FormControl('', Validators.required)
   });
 
-  constructor(private userService: UsersService){}
+  constructor(private userService: UsersService, private router: Router){}
 
   createUser(): void {
     this.organizeInformation();
     this.userService.createUser(this.userFormGroup.value).subscribe({
       next: userCreated => {
         console.log(userCreated);
+        this.router.navigate(['/login']);
       },
       error: error => {
         console.error(error.error.message);
@@ -41,9 +43,12 @@ export class SignUpComponent {
 
   //process each field to have organized information to database
   private organizeInformation(): void{
+    //the fields we'll organize
+    const fields = ["username", "firstName", "lastName", "email", "gender"];
+
     Object.keys(this.userFormGroup.controls).forEach(key => { //iterate all fields
-      let keyValue = this.userFormGroup.get(key)?.value;
-      if(typeof keyValue==='string' && !(/\d/.test(keyValue))){
+      if(fields.includes(key)){ //select only fields we'll organize
+        let keyValue = this.userFormGroup.get(key)?.value;
         this.userFormGroup.get(key)?.setValue(this.changeTheText(keyValue));
       }
     });
