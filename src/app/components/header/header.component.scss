@@ -42,15 +42,16 @@ header{
             display: flex;
             justify-content: space-between;
             align-items: center;
+            
 
             .search{
+                flex: 1;
                 padding: 0;
                 background-color: $principal-color1;
                 box-sizing: border-box;
                 display: flex;
                 align-items: center;
                 justify-content: left;
-                width: 40%;
                 border-radius: 10px;
                 border:none;
                 height: 40%;
@@ -92,7 +93,6 @@ header{
             }
 
             .user-contacts{
-                flex: 1;
                 height: 100%;
                 display: flex;
                 flex-direction: column;
@@ -105,6 +105,7 @@ header{
                     flex-direction:row;
                     justify-content: right;
                     align-items: center;
+                    width: 510px;
 
                     .phone-address{
                         display: flex;

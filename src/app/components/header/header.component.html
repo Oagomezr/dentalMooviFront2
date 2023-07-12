@@ -25,9 +25,13 @@
                         </a>
                     </div>
                 </div>
-                <div class="user-options">
+                <div *ngIf="!isAuthenticate" class="user-options">
                     <a href="/login" class="login">INICIAR SESIÓN</a>
                     <a href="/signup" class="signup">REGISTRARSE</a>
+                </div>
+                <div *ngIf="isAuthenticate" class="user-options">
+                    <button>{{name}}</button>
+                    <button>Mis compras</button>
                 </div>
             </div>
         </div>

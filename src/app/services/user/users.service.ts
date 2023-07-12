@@ -33,6 +33,6 @@ export class UsersService {
   }
 
   checkIfValueExists(field: string, value: string) {
-    return this.http.get<boolean>(`${this.baseUrl}/checkValueExists/${field}/${value}`);
+    return this.http.get<boolean>(`${this.baseUrl}/public/${field}/${value}`);
   }
 }

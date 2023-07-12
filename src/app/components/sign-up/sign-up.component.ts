@@ -13,12 +13,12 @@ export class SignUpComponent {
   userFormGroup = new FormGroup({
     idUser: new FormControl(0),
     username: new FormControl('', { validators:[Validators.required, Validators.pattern('^[a-zA-Z0-9_-]*$')],
-                              asyncValidators: uniqueValueValidator(this.userService, 'username'),
+                              asyncValidators: uniqueValueValidator(this.userService, true),
                               updateOn: 'blur'}),
     firstName: new FormControl('', { validators: [Validators.required, Validators.pattern('^[a-zA-Z0-9_áéíóúÁÉÍÓÚñÑ\\s]*$')], updateOn: 'blur'}),
     lastName: new FormControl('', { validators: [Validators.required, Validators.pattern('^[a-zA-Z0-9_áéíóúÁÉÍÓÚñÑ\\s]*$')], updateOn: 'blur'}),
     email: new FormControl( '', { validators: [Validators.required, Validators.email],
-                            asyncValidators: uniqueValueValidator(this.userService, 'email'),
+                            asyncValidators: uniqueValueValidator(this.userService, true),
                             updateOn: 'blur'}),
     celPhone: new FormControl('', { validators: [Validators.required, Validators.minLength(12), Validators.pattern('^[0-9-]*$')]}),
     birthday: new FormControl(''),
@@ -29,16 +29,19 @@ export class SignUpComponent {
   constructor(private userService: UsersService, private router: Router){}
 
   createUser(): void {
-    this.organizeInformation();
-    this.userService.createUser(this.userFormGroup.value).subscribe({
-      next: userCreated => {
-        console.log(userCreated);
-        this.router.navigate(['/login']);
-      },
-      error: error => {
-        console.error(error.error.message);
-      }
-    });
+    if(this.userFormGroup.valid){
+      this.organizeInformation();
+      this.userService.createUser(this.userFormGroup.value).subscribe({
+        next: userCreated => {
+          console.log(userCreated);
+          this.router.navigate(['/login']);
+        },
+        error: error => {
+          console.error(error.error.message);
+        }
+      });
+    }
+    
   }
 
   //process each field to have organized information to database
@@ -58,7 +61,7 @@ export class SignUpComponent {
   private changeTheText(value: string): string {
     let word = value.charAt(0).toUpperCase()+ value.slice(1).toLowerCase(); //Change the first letter to upper case and the rest lower case
     word = word.normalize('NFD').replace(/[\u0300-\u036f]/g, ''); //replace all accents letters to normal letters
-    word.replace(/(\s|^)\w/g, (l) => l.toUpperCase()); //transform to upperCase after the space character
+    word = word.replace(/(\s|^)\w/g, (l) => l.toUpperCase()); //transform to upperCase after the space character
     return word.trim().replace(/\s+/g, ' '); //delete all spaces at the start and allow only one space between letters
   }
 }

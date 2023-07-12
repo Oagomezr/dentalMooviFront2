@@ -22,7 +22,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { CartBadgeComponent } from './components/header/cart-badge/cart-badge.component';
 import { SelectGenderComponent } from './components/sign-up/select-gender/select-gender.component';
-import { PasswordComponent } from './components/sign-up/password/password.component';
+import { PasswordComponent } from './components/password-field/password.component';
 import { BirthComponent } from './components/sign-up/birth/birth.component';
 import { CelPhoneComponent } from './components/sign-up/cel-phone/cel-phone.component';
 
@@ -48,6 +48,7 @@ const routes: Routes = [
     
     
     
+    
   ],
   imports: [
     BrowserModule,
@@ -66,7 +67,7 @@ const routes: Routes = [
     SelectGenderComponent,
     PasswordComponent,
     BirthComponent,
-    CelPhoneComponent,
+    CelPhoneComponent
   ],
   providers: [],
   bootstrap: [AppComponent]
