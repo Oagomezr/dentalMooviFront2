@@ -33,12 +33,10 @@ export class LoginComponent implements OnInit{
         let token = response.jwtToken;
 
         localStorage.setItem('token', token);
-        console.log(token);
         this.router.navigate(['/']);
       },
       error: () => {
         this.errorAuthentication = true;
-        console.log(this.userAuthFormGroup.get('email')?.value);
       }
     });
   }
