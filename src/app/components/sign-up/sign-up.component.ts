@@ -12,9 +12,6 @@ import { Router } from '@angular/router';
 export class SignUpComponent {
   userFormGroup = new FormGroup({
     idUser: new FormControl(0),
-    username: new FormControl('', { validators:[Validators.required, Validators.pattern('^[a-zA-Z0-9_-]*$')],
-                              asyncValidators: uniqueValueValidator(this.userService, true),
-                              updateOn: 'blur'}),
     firstName: new FormControl('', { validators: [Validators.required, Validators.pattern('^[a-zA-Z0-9_áéíóúÁÉÍÓÚñÑ\\s]*$')], updateOn: 'blur'}),
     lastName: new FormControl('', { validators: [Validators.required, Validators.pattern('^[a-zA-Z0-9_áéíóúÁÉÍÓÚñÑ\\s]*$')], updateOn: 'blur'}),
     email: new FormControl( '', { validators: [Validators.required, Validators.email],

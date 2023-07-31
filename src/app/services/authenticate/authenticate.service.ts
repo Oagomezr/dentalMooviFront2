@@ -18,8 +18,14 @@ export class AuthenticateService {
     return this.http.post<JwtResponse>(`${this.baseUrl}/public/authenticate`, userAuth);
   }
 
-  getUserByToken(token: string): Observable<Users> {
+  getUserByEmail(email: string): Observable<Users> {
+    let token = localStorage.getItem('token');
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-    return this.http.get<Users>(`${this.baseUrl}/user/${token}`, {headers});
+    return this.http.get<Users>(`${this.baseUrl}/user/${email}/info`, {headers});
+  }
+
+  logout(token: string) {
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.delete(`${this.baseUrl}/public/logout/${token}`, {headers});
   }
 }

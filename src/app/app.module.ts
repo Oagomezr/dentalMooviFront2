@@ -25,6 +25,7 @@ import { SelectGenderComponent } from './components/sign-up/select-gender/select
 import { PasswordComponent } from './components/password-field/password.component';
 import { BirthComponent } from './components/sign-up/birth/birth.component';
 import { CelPhoneComponent } from './components/sign-up/cel-phone/cel-phone.component';
+import { HoverBoxProfileComponent } from './components/header/hover-box-profile/hover-box-profile.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -45,6 +46,7 @@ const routes: Routes = [
     HeaderComponent,
     FooterComponent,
     BodyComponent,
+    HoverBoxProfileComponent,
     
     
     

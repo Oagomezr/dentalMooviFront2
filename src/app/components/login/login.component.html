@@ -5,14 +5,12 @@
     <h3 *ngIf="errorAuthentication">Usuario y/o contraseña incorrecto</h3>
     <form (ngSubmit)="authenticate()" [formGroup]="userAuthFormGroup">
         <mat-form-field>
-            <mat-label >Nombre de usuario o correo electrónico</mat-label>
-            <input matInput formControlName="usernameOrEmail">
-            <mat-error *ngIf="userAuthFormGroup.get('usernameOrEmail')?.errors?.['required']">Por favor ingresa un correo electrónico o nombre de usuario</mat-error>
-            <mat-error *ngIf="userAuthFormGroup.get('usernameOrEmail')?.errors?.['uniqueValue']">No encontrado </mat-error>
+            <mat-label >Correo electrónico</mat-label>
+            <input matInput formControlName="email">
+            <mat-error *ngIf="userAuthFormGroup.get('email')?.errors?.['required']">Por favor ingresa un correo electrónico</mat-error>
+            <mat-error *ngIf="userAuthFormGroup.get('email')?.errors?.['uniqueValue']">No encontrado </mat-error>
         </mat-form-field>
         <app-password [formPassword]="userAuthFormGroup.controls.password"></app-password>
         <button type="submit" mat-raised-button color="primary" [disabled]="userAuthFormGroup.invalid">Iniciar sesión</button>
     </form>
 </div>
-
-

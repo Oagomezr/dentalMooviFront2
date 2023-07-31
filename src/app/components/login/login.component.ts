@@ -13,7 +13,7 @@ import { UsersService } from 'src/app/services/user/users.service';
 export class LoginComponent implements OnInit{
   errorAuthentication: boolean = false;
   userAuthFormGroup = new FormGroup({
-    usernameOrEmail: new FormControl('', { validators:[Validators.required, Validators.pattern('^[a-zA-Z0-9_-]*$')],
+    email: new FormControl('', { validators:[Validators.required],
                               asyncValidators: [uniqueValueValidator(this.userService, false)],
                               updateOn: 'blur'}),
     password: new FormControl('', { validators: Validators.required, updateOn: 'blur'})
@@ -21,8 +21,7 @@ export class LoginComponent implements OnInit{
 
   constructor(private authSer: AuthenticateService, private router: Router, private userService: UsersService,){}
   ngOnInit(): void {
-    let token = localStorage.getItem('token');
-    if(token != null){
+    if(localStorage.getItem('token') != null){
       this.router.navigate(['/']);
     }
   }
@@ -31,21 +30,24 @@ export class LoginComponent implements OnInit{
     this.organizeInformation();
     this.authSer.login(this.userAuthFormGroup.value).subscribe({
       next: response => {
-        const token = response.jwtToken;
+        let token = response.jwtToken;
+
         localStorage.setItem('token', token);
         console.log(token);
         this.router.navigate(['/']);
       },
       error: () => {
         this.errorAuthentication = true;
+        console.log(this.userAuthFormGroup.get('email')?.value);
       }
     });
   }
 
   private organizeInformation(): void{
-    let keyValue = this.userAuthFormGroup.get("username")?.value;
+    let keyValue = this.userAuthFormGroup.get("email")?.value;
     if(keyValue != null){
-      this.userAuthFormGroup.get("usernameOrEmail")?.setValue(this.changeTheText(keyValue));
+      this.userAuthFormGroup.get("email")?.setValue(this.changeTheText(keyValue));
+      localStorage.setItem('email', this.changeTheText(keyValue));
     }
   }
 

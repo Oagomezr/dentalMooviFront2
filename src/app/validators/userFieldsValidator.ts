@@ -7,7 +7,7 @@ export function uniqueValueValidator(userService: UsersService, errorIfExists:bo
         let field;
         let realValue = control.value.charAt(0).toUpperCase()+ control.value.slice(1).toLowerCase();
         realValue.includes('@') ? field = 'email' : field = 'username';
-        return userService.checkIfValueExists(field, (realValue)).pipe(
+        return userService.checkIfValueExists(realValue).pipe(
             map(exists => ((exists && errorIfExists) || (!exists && !errorIfExists)) ? { uniqueValue: true } : null)
         );
     };

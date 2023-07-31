@@ -3,7 +3,6 @@ import { Roles } from "./roles";
 
 export interface Users {
     idUser?: number | null;
-    username?: string | null;
     firstName?: string | null;
     lastName?: string | null;
     email?: string | null;

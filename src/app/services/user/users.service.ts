@@ -32,7 +32,7 @@ export class UsersService {
     return this.http.delete<void>(`${this.baseUrl}/${id}`);
   }
 
-  checkIfValueExists(field: string, value: string) {
-    return this.http.get<boolean>(`${this.baseUrl}/public/${field}/${value}`);
+  checkIfValueExists(email: string) {
+    return this.http.get<boolean>(`${this.baseUrl}/public/${email}`);
   }
 }

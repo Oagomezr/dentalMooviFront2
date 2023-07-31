@@ -30,8 +30,14 @@
                     <a href="/signup" class="signup">REGISTRARSE</a>
                 </div>
                 <div *ngIf="isAuthenticate" class="user-options">
-                    <button>{{name}}</button>
+                    <div class="profile">
+                        <button (click)="showBox()">
+                            <i class="material-icons">person</i>{{name}}<i class="material-icons">expand_more</i>
+                        </button>
+                        <app-hover-box-profile *ngIf="showHoverBox" [profileName]="name"></app-hover-box-profile>
+                    </div>
                     <button>Mis compras</button>
+                    <button (click)="logout()">Salir <i class="material-icons">logout</i></button>
                 </div>
             </div>
         </div>

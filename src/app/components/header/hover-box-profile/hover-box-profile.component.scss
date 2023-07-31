@@ -1,0 +1,11 @@
+.profile-box{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    .welcome{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
