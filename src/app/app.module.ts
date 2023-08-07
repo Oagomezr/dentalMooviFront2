@@ -26,6 +26,7 @@ import { PasswordComponent } from './components/password-field/password.componen
 import { BirthComponent } from './components/sign-up/birth/birth.component';
 import { CelPhoneComponent } from './components/sign-up/cel-phone/cel-phone.component';
 import { HoverBoxProfileComponent } from './components/header/hover-box-profile/hover-box-profile.component';
+import { HoverBoxProductsComponent } from './components/header/hover-box-products/hover-box-products.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -47,6 +48,7 @@ const routes: Routes = [
     FooterComponent,
     BodyComponent,
     HoverBoxProfileComponent,
+    HoverBoxProductsComponent,
     
     
     
