@@ -13,8 +13,8 @@
             <div class="user-contacts">
                 <div class="contacs">
                     <div class="phone-address">
-                        <a href="#"> <i class="fas fa-map-marker-alt"></i> <span> Av Cra 104 #140a - 52 piso 2</span></a>
-                        <a href="#"> <i class="fa-brands fa-square-whatsapp" id="whatsapp"></i> <span> 3144536435</span></a>
+                        <a href="#"> <i class="fas fa-map-marker-alt" id="location-icon"></i> <span> Av Cra 104 #140a - 52 piso 2</span></a>
+                        <a href="#"> <i class="fa-brands fa-square-whatsapp" id="whatsapp-icon"></i> <span> 3144536435</span></a>
                     </div>
                     <div class="social-media">
                         <a href="https://www.facebook.com/people/Dental-Moovi/100063699296329/" target="_blank">
@@ -30,11 +30,11 @@
                     <a href="/signup" class="signup">REGISTRARSE</a>
                 </div>
                 <div *ngIf="isAuthenticate" class="user-options">
-                    <div class="profile">
-                        <button (click)="showBox()">
+                    <div class="profile" (mouseover)="showBoxProfile(true)" (mouseout)="showBoxProfile(false)">
+                        <button>
                             <i class="material-icons">person</i>{{name}}<i class="material-icons">expand_more</i>
                         </button>
-                        <app-hover-box-profile *ngIf="showHoverBox" [profileName]="name"></app-hover-box-profile>
+                        <app-hover-box-profile [hidden]="showHoverBoxProfile" [profileName]="name"></app-hover-box-profile>
                     </div>
                     <button>Mis compras</button>
                     <button (click)="logout()">Salir <i class="material-icons">logout</i></button>
@@ -44,7 +44,13 @@
         <div class="bottom-nav">
             <div class="menu">
                 <button>INICIO</button>
-                <button>CATEGORIAS</button>
+                <div class="products" (mouseover)="showBoxProducts(true)" (mouseout)="showBoxProducts(false)">
+                    <button>
+                        PRODUCTOS 
+                        <i class="material-icons" [ngClass]="{'expanded-icon': !showHoverBoxProducts, 'no-expanded-icon': showHoverBoxProducts}">expand_more</i>
+                    </button>
+                    <app-hover-box-products [hidden]="showHoverBoxProducts" [categories]="categories"></app-hover-box-products>
+                </div>
                 <button>QUIENES SOMOS</button>
                 <button>SEDE</button>
                 <button>CONTACTENOS</button>

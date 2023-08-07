@@ -1,0 +1,14 @@
+
+<ul class="products-box">
+    <li *ngFor="let category of categories | keyvalue" >
+        <div>
+            <span>{{ category.key }}</span>
+            <i class="material-icons" *ngIf="category.value.length != 0">chevron_right</i>
+        </div>
+        <ul class="subcategories" *ngIf="category.value.length != 0">
+        <li *ngFor="let item of category.value">
+            {{ item }}
+        </li>
+        </ul>
+    </li>
+</ul>

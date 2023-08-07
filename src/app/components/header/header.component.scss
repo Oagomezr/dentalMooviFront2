@@ -2,6 +2,8 @@ $principal-color1: #2e53fe;
 $principal-color2: #a83fe1;
 $principal-color3: #1cd1e2;
 $principal-color3: #02a1ff;
+$font-size-letter: small;
+
 
 
 :host {
@@ -18,6 +20,8 @@ header{
     padding-right: 5%;
     background-color: white;
     font-family: 'Roboto', sans-serif;
+    font-size: $font-size-letter;
+
 
     #logo{ 
         display: flex;
@@ -100,21 +104,22 @@ header{
                 align-items: stretch;
 
                 .contacs{
+                    font-size: medium;
                     height: 50%;
                     display: flex;
                     flex-direction:row;
                     justify-content: right;
                     align-items: center;
-                    width: 510px;
+                    width: 500px;
 
                     .phone-address{
                         display: flex;
                         justify-content: space-around;
                         align-items: center;
                         height: 100%;
-                        width: 85%;
+                        width: 80%;
                         line-height: 100%;
-                        font-size: 120%;
+                        padding-left: 10px;
 
                         a{
                             display: flex;
@@ -124,10 +129,16 @@ header{
                             color: $principal-color1;
                             font-weight: bold;
 
-                            #whatsapp{
+                            #whatsapp-icon{
                                 line-height: 100%;
                                 font-size: 165%;
                             }
+
+                            #location-icon{
+                                line-height: 100%;
+                                font-size: 150%;
+                            }
+
                             &:hover {
                                 color: $principal-color2;
                             }
@@ -159,7 +170,6 @@ header{
                     justify-content: right;
                     align-items: center;
                     line-height: 100%;
-                    font-size: 100%;
 
                     a{
                         display: flex;
@@ -221,13 +231,17 @@ header{
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
-                font-size: 160%;
                 button{
+                    font-family: 'Roboto', sans-serif;
+                    font-size:$font-size-letter;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
                     height: 100%;
                     border: none;
                     font-weight: bold;
                     background-color: white;
-                    border-radius: 10px;
+                    border-radius: 3px;
                     text-decoration: none;
                     cursor: pointer;
                     &:hover {
@@ -235,6 +249,37 @@ header{
                         color: white;
                         overflow: hidden;
                         cursor: pointer;
+                    }
+                }
+                .products {
+                    position: relative;
+                    display: inline-block;
+                    height: 100%;
+                    app-hover-box-products {
+                        position: absolute;
+                        top: 100%;
+                        left: 0;
+                        z-index: 1;
+                        height: auto;
+                    }
+                    &:hover {
+                        button{
+                            background-color: $principal-color1;
+                            color: white;
+                            overflow: hidden;
+                            cursor: pointer;
+                        }
+                    }
+
+                    .expanded-icon {
+                        transform: rotate(180deg);
+                        transition: transform 0.3s ease;
+                        
+                    }
+                    
+                    .no-expanded-icon {
+                        transform: rotate(360deg);
+                        transition: transform 0.3s ease;
                     }
                 }
             }
