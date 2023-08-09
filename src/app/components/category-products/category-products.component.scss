@@ -1,0 +1,105 @@
+:host {
+    display: block;
+}
+
+.category-direction{
+    position: relative;
+    width: 90%;
+    padding-left: 5%;
+    padding-right: 5%;
+    height: 50px;
+    background-color: #02a1ff;
+    display: flex;
+    align-items: center;
+    justify-content:space-between;
+}
+
+.search-products{
+    position: relative;
+    width: 90%;
+    margin-left: 5%;
+    margin-right: 5%;
+    //background-color: yellow;
+    display: flex;
+    justify-content: center;
+    align-items:flex-start;
+    .categories{
+        margin-top: 0;
+        margin-bottom: 0;
+        width: 227.22px;
+        height: 100%;
+        list-style: none;
+        padding: 0;
+        position: relative;
+        font-size: small;
+        li{
+            position: relative;
+            font-size: smaller;
+            font-family: 'Roboto', sans-serif;
+            color:darkslategray;
+            margin-bottom: 4px;
+            list-style: none;
+            div{
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                a{
+                    text-decoration: none;
+                    color:darkslategray;
+                }
+                button{
+                    border: none;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    height: 16px;
+                    width: 16px;
+                    padding: 0;
+                    border-radius: 50%;
+                    cursor: pointer;
+                    &:hover{
+                        background-color: #1cd1e2;
+                        color: white;
+                    }
+                    .expanded-icon {
+                        transform: rotate(180deg);
+                        transition: transform 0.3s ease;
+                        
+                    }
+                    
+                    .no-expanded-icon {
+                        transform: rotate(360deg);
+                        transition: transform 0.3s ease;
+                    }
+                }
+            }
+            .subcategories{
+                padding: 0;
+                li{
+                    padding: 0;
+                    margin-left: 15px;
+                }
+                
+            }
+            /* &:active{
+                .subcategories{
+                    display: block;
+                }
+            } */
+        }
+    }
+    .products{
+        margin-left: 25px;
+        padding: 10px 0px;
+        flex: 1;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(3, 1fr);
+        grid-gap: 10px;
+        background-color: aquamarine;
+        height: 300px;
+        div{
+            background-color: pink;
+        }
+    }
+}

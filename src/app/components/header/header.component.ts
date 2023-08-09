@@ -17,7 +17,7 @@ export class HeaderComponent {
   constructor(private authSer: AuthenticateService, private categoriesSer: CategoriesService){}
 
   ngOnInit(): void {
-    this.categoriesSer.getMaxId().subscribe({
+    this.categoriesSer.checkupdate().subscribe({
       next: response => {
         console.log(response);
         if(localStorage.getItem('numberOfCategories') != response || localStorage.getItem('categories') == null){

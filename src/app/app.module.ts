@@ -27,13 +27,16 @@ import { BirthComponent } from './components/sign-up/birth/birth.component';
 import { CelPhoneComponent } from './components/sign-up/cel-phone/cel-phone.component';
 import { HoverBoxProfileComponent } from './components/header/hover-box-profile/hover-box-profile.component';
 import { HoverBoxProductsComponent } from './components/header/hover-box-products/hover-box-products.component';
+import { CategoryProductsComponent } from './components/category-products/category-products.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignUpComponent },
   { path: 'admin', component: AdminComponent },
-  { path: '**', component: PageNotFoundComponent }
+  { path: 'category', component: CategoryProductsComponent},
+  { path: '**', component: PageNotFoundComponent },
+  
 ];
 
 @NgModule({
@@ -49,6 +52,7 @@ const routes: Routes = [
     BodyComponent,
     HoverBoxProfileComponent,
     HoverBoxProductsComponent,
+    CategoryProductsComponent,
     
     
     

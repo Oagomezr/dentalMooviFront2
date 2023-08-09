@@ -16,8 +16,8 @@ header{
     display: flex;
     justify-content: center;
     align-items: center;
-    padding-left: 5%;
-    padding-right: 5%;
+    margin-left: 5%;
+    margin-right: 5%;
     background-color: white;
     font-family: 'Roboto', sans-serif;
     font-size: $font-size-letter;
@@ -25,7 +25,7 @@ header{
 
     #logo{ 
         display: flex;
-        justify-content: center;
+        justify-content:left;
         align-items: center;
         height: 100%;
 
@@ -40,6 +40,7 @@ header{
         flex-direction: column;
         height: 100%;
         width: 100%;
+        margin-left: 25px;
 
         .top-nav{
             height: 70%;

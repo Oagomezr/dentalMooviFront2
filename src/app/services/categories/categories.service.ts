@@ -15,7 +15,7 @@ export class CategoriesService {
     return this.http.get<string[]>(`${this.baseUrl}/public/categories`);
   }
 
-  getMaxId(): Observable<string>{
-    return this.http.get<string>(`${this.baseUrl}/public/categories/count`);
+  checkupdate(): Observable<string>{
+    return this.http.get<string>(`${this.baseUrl}/public/categories/checkupdate`);
   }
 }

@@ -1,12 +1,12 @@
 .products-box{
     width: 210px;
     top: 0;
-    background-color: coral;
+    background-color: white;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2),-2px -2px 4px rgba(0, 0, 0, 0.2); 
     position: relative;
     list-style: none;
     padding-left: 0;
-    padding-top: 1px;
-    padding-bottom: 1px;
+    padding: 1px;
     z-index: 1;
     margin-top: 0;
     margin-bottom: 0;
@@ -19,26 +19,45 @@
         font-size: small;
         font-family: 'Roboto', sans-serif;
         //font-weight: bold;
+        color:darkslategray;
         cursor: pointer;
-        background-color: pink;
-        margin-bottom: 1px;
+        //background-color: #2e53fe;
+        background-color: white;
         padding-left: 5px;
+        margin-bottom: 4px;
 
         .subcategories{
             position: absolute;
             top: 0;
-            left: 100%;
+            left: 100.8%;
             display: none;
-            background-color: yellow;
+            background-color: white;
             list-style: none;
             padding: 0;
+            width: 120px;
+            box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2),-2px -2px 4px rgba(0, 0, 0, 0.2); 
+            margin-top: 0;
+
+            
+            
+            li{
+                border-bottom: 1px solid #00000017;
+                margin-bottom: 0;
+                padding-bottom: 1px;
+                padding-top: 1px;
+                &:hover {
+                    background-color: #a83fe1;
+                }
+            }
         }
 
         &:hover {
             .subcategories{
                 display: block;
             }
-            background-color: chartreuse;
+            background-color: #2e53fe;
+            color: white;
+            border-radius: 3px;
         }
 
         div{
