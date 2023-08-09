@@ -14,35 +14,10 @@ export class HeaderComponent {
   lastName?: string|null;
   categories: { [key: string]: string[] } | null = JSON.parse(localStorage.getItem('categories') || 'null');
 
-  constructor(private authSer: AuthenticateService, private categoriesSer: CategoriesService){}
+  constructor(private authSer: AuthenticateService){}
 
   ngOnInit(): void {
-    this.categoriesSer.checkupdate().subscribe({
-      next: response => {
-        console.log(response);
-        if(localStorage.getItem('numberOfCategories') != response || localStorage.getItem('categories') == null){
-          this.categoriesSer.getCategories().subscribe({
-            next: responseGetC =>{
-              let jsonCategories = JSON.stringify(responseGetC);
-              localStorage.setItem('categories', jsonCategories);
-              localStorage.setItem('numberOfCategories', response);
-              this.categories = JSON.parse(localStorage.getItem('categories') || 'null');
-              //window.location.reload();
-            },
-            error: error=>{
-              localStorage.removeItem('categories');
-              localStorage.removeItem('numberOfCategories');
-              console.log('Error to get categories', error);
-            }
-          });
-        }
-      },
-      error: error =>{ 
-        localStorage.removeItem('categories');
-        localStorage.removeItem('numberOfCategories');
-        console.log("Error to get number of categories", error);
-      }
-    });
+    
     let email = localStorage.getItem('email');
     if(email!=null){
       this.authSer.getUserByEmail(email).subscribe({
