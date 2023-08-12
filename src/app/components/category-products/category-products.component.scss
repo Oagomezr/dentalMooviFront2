@@ -19,7 +19,6 @@
     width: 90%;
     margin-left: 5%;
     margin-right: 5%;
-    //background-color: yellow;
     display: flex;
     justify-content: center;
     align-items:flex-start;
@@ -56,9 +55,10 @@
                     width: 16px;
                     padding: 0;
                     border-radius: 50%;
+                    background-color: #a83fe10f;
                     cursor: pointer;
                     &:hover{
-                        background-color: #1cd1e2;
+                        background-color: #a83fe1;
                         color: white;
                     }
                     .expanded-icon {
@@ -73,13 +73,27 @@
                     }
                 }
             }
-            .subcategories{
+            .one{
                 padding: 0;
                 li{
                     padding: 0;
-                    margin-left: 15px;
+                    margin-left: 25px;
+                    button{
+                        background-color: #1cd1e210;
+                        &:hover{
+                            background-color: #1cd1e2;
+                            color: white;
+                        }
+                    }
                 }
-                
+                .two{
+                    padding: 0;
+                    li{
+                        padding: 0;
+                        margin-left: 25px;
+                    }
+                    
+                }
             }
             /* &:active{
                 .subcategories{

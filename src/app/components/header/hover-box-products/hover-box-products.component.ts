@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { Categories } from 'src/app/models/categories';
 
 @Component({
   selector: 'app-hover-box-products',
@@ -6,12 +7,16 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./hover-box-products.component.scss']
 })
 export class HoverBoxProductsComponent {
-  @Input() categories?: { [key: string]: string[] } | null = null;
-  number:number = 0;
-  transitionIcon: boolean = false;
+  @Input() categories?: Categories[];
+  classSubcategory: string[] =['one','two','three','four'];
 
-  showBoxSubcategories(transition:boolean){
-    this.transitionIcon = transition;
+  ngOnInit(): void {
+    console.log(this.categories);
   }
+
+  assignClass(number: number): number {
+    return (number - 1) % 4;
+  }
+
 
 }

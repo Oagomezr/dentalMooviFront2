@@ -1,20 +1,20 @@
+$width-categories: 210px;
+$width-subcategories: 150px;
+
 .products-box{
-    width: 210px;
+    width: $width-categories;
     top: 0;
     background-color: white;
     box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2),-2px -2px 4px rgba(0, 0, 0, 0.2); 
     position: relative;
     list-style: none;
-    padding-left: 0;
-    padding: 1px;
+    padding: 0;
     z-index: 1;
     margin-top: 0;
     margin-bottom: 0;
     border-radius: 3px;
 
-    
-
-    li{
+    .categories{
         position: relative;
         font-size: small;
         font-family: 'Roboto', sans-serif;
@@ -25,34 +25,10 @@
         background-color: white;
         padding-left: 5px;
         margin-bottom: 4px;
-
-        .subcategories{
-            position: absolute;
-            top: 0;
-            left: 100.8%;
-            display: none;
-            background-color: white;
-            list-style: none;
-            padding: 0;
-            width: 120px;
-            box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2),-2px -2px 4px rgba(0, 0, 0, 0.2); 
-            margin-top: 0;
-
-            
-            
-            li{
-                border-bottom: 1px solid #00000017;
-                margin-bottom: 0;
-                padding-bottom: 1px;
-                padding-top: 1px;
-                &:hover {
-                    background-color: #a83fe1;
-                }
-            }
-        }
+        z-index: 1;
 
         &:hover {
-            .subcategories{
+            .one{
                 display: block;
             }
             background-color: #2e53fe;
@@ -81,5 +57,110 @@
 
         }
     }
+
+    .one{
+        position: absolute;
+        top: 0;
+        left: $width-categories+1.5px;
+        display: none;
+        background-color: white;
+        list-style: none;
+        padding: 0;
+        width: $width-subcategories;
+        box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2),-2px -2px 4px rgba(0, 0, 0, 0.2); 
+        margin-top: 0;
+        z-index: 2;
+        
+        
+        li{
+            border-bottom: 1px solid #00000017;
+            margin-bottom: 0;
+            padding-bottom: 1px;
+            padding-top: 1px;
+            &:hover {
+                background-color: #a83fe1;
+                .two{
+                    display: block;
+                }
+            }
+        }
+    }
+
+    .two{
+        position: absolute;
+        top: 0;
+        left: $width-subcategories+1px;
+        display: none;
+        background-color: white;
+        list-style: none;
+        padding: 0;
+        width: $width-subcategories;
+        box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2),-2px -2px 4px rgba(0, 0, 0, 0.2); 
+        margin-top: 0;
+        z-index: 3;
+        
+        
+        li{
+            border-bottom: 1px solid #00000017;
+            margin-bottom: 0;
+            padding-bottom: 1px;
+            padding-top: 1px;
+            &:hover {
+                background-color: #02a1ff;;
+            }
+        }
+    }
+
+    .three{
+        position: absolute;
+        top: 0;
+        left: $width-subcategories+1px;
+        display: none;
+        background-color: white;
+        list-style: none;
+        padding: 0;
+        width: $width-subcategories;
+        box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2),-2px -2px 4px rgba(0, 0, 0, 0.2); 
+        margin-top: 0;
+        z-index: 3;
+        
+        
+        li{
+            border-bottom: 1px solid #00000017;
+            margin-bottom: 0;
+            padding-bottom: 1px;
+            padding-top: 1px;
+            &:hover {
+                background-color: #1cd1e2;
+            }
+        }
+    }
+
+    .four{
+        position: absolute;
+        top: 0;
+        left: $width-subcategories+1px;
+        display: none;
+        background-color: white;
+        list-style: none;
+        padding: 0;
+        width: $width-subcategories;
+        box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2),-2px -2px 4px rgba(0, 0, 0, 0.2); 
+        margin-top: 0;
+        z-index: 3;
+        
+        
+        li{
+            border-bottom: 1px solid #00000017;
+            margin-bottom: 0;
+            padding-bottom: 1px;
+            padding-top: 1px;
+            &:hover {
+                background-color: #2e53fe;
+            }
+        }
+    }
+
+    
 
 }

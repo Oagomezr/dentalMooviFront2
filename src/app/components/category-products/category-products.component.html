@@ -6,7 +6,7 @@
     <div class="name-category">Nombre categoria</div>
 </div>
 <div class="search-products">
-    <ul class="categories">
+    <!-- <ul class="categories">
         <li *ngFor="let category of categories | keyvalue" >
             <div>
                 <a href="/category">{{ category.key }}</a>
@@ -20,6 +20,24 @@
                 </li>
             </ul>
         </li>
+    </ul> -->
+    <ul class="categories">
+        <ng-template #recursiveList let-categories>
+            <li *ngFor="let category of categories">
+                
+                <div>
+                    <a href="/category">{{ category.name }}</a>
+                    <button (click)="toggleSubcategories(category.name, category.levelCategory)" *ngIf="category.childrenCategories?.length > 0">
+                        <i class="material-icons" [ngClass]="{'expanded-icon': expandedCategories[category.name], 'no-expanded-icon': !expandedCategories[category.name]}">expand_more</i>
+                    </button>
+                </div>
+                
+                <ul *ngIf="category.childrenCategories?.length > 0 && expandedCategories[category.name]" [ngClass]="classSubcategory[category.levelCategory]">
+                    <ng-container *ngTemplateOutlet="recursiveList; context:{ $implicit: category.childrenCategories }"></ng-container>
+                </ul>
+            </li>
+        </ng-template>
+        <ng-container *ngTemplateOutlet="recursiveList; context:{ $implicit: categories }"></ng-container>
     </ul>
     <div class="products">
         <div>producto1</div>

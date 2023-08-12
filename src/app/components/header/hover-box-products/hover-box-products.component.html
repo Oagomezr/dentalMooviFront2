@@ -1,14 +1,15 @@
-
 <ul class="products-box">
-    <li *ngFor="let category of categories | keyvalue" >
-        <div>
-            <span>{{ category.key }}</span>
-            <i class="material-icons" *ngIf="category.value.length != 0">chevron_right</i>
-        </div>
-        <ul class="subcategories" *ngIf="category.value.length != 0">
-        <li *ngFor="let item of category.value">
-            {{ item }}
+    <ng-template #recursiveList let-categories>
+        <li *ngFor="let category of categories" class="categories">
+            <div>
+                <span>{{ category.name }}</span>
+                <i class="material-icons" *ngIf="category.childrenCategories?.length > 0">chevron_right</i>
+            </div>
+            
+            <ul *ngIf="category.childrenCategories?.length > 0" [ngClass]="classSubcategory[category.levelCategory]">
+                <ng-container *ngTemplateOutlet="recursiveList; context:{ $implicit: category.childrenCategories }"></ng-container>
+            </ul>
         </li>
-        </ul>
-    </li>
+    </ng-template>
+    <ng-container *ngTemplateOutlet="recursiveList; context:{ $implicit: categories }"></ng-container>
 </ul>

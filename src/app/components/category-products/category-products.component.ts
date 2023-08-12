@@ -7,13 +7,14 @@ import { Component } from '@angular/core';
 })
 export class CategoryProductsComponent {
   categories: { [key: string]: string[] } | null = JSON.parse(localStorage.getItem('categories') || 'null');
+  classSubcategory: string[] =['one','two','three','four'];
   
-  beforeExpanded?: string;
+  beforeExpanded: string[]=[];
   expandedCategories: { [key: string]: boolean } = {};
 
-  toggleSubcategories(categoryKey: string) {
+  toggleSubcategories(categoryKey: string, lvlCategory: number) {
     this.expandedCategories[categoryKey] = !this.expandedCategories[categoryKey];
-    if(this.beforeExpanded && this.beforeExpanded != categoryKey) this.expandedCategories[this.beforeExpanded] = false;
-    this.beforeExpanded = categoryKey;
+    if(this.beforeExpanded && this.beforeExpanded[lvlCategory] != categoryKey) this.expandedCategories[this.beforeExpanded[lvlCategory]] = false;
+    this.beforeExpanded[lvlCategory] = categoryKey;
   }
 }
