@@ -10,10 +10,6 @@ export class HoverBoxProductsComponent {
   @Input() categories?: Categories[];
   classSubcategory: string[] =['one','two','three','four'];
 
-  ngOnInit(): void {
-    console.log(this.categories);
-  }
-
   assignClass(number: number): number {
     return (number - 1) % 4;
   }

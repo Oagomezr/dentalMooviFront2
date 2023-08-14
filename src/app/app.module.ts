@@ -34,7 +34,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignUpComponent },
   { path: 'admin', component: AdminComponent },
-  { path: 'category', component: CategoryProductsComponent},
+  { path: 'category/:categoryIdentifier', component: CategoryProductsComponent},
   { path: '**', component: PageNotFoundComponent },
   
 ];
