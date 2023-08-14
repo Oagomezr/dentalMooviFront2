@@ -15,4 +15,8 @@ export class ProductsService {
   getProductsByCategory(id:number): Observable<Products[]>{
     return this.http.get<Products[]>(`${this.baseUrl}/public/products/${id}`);
   }
+
+  checkupdate(id:number): Observable<string>{
+    return this.http.get<string>(`${this.baseUrl}/public/products/checkupdate/${id}`);
+  }
 }
