@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Categories } from 'src/app/models/categories';
+import { CategoriesData } from 'src/app/models/categories/categoriesData';
 
 @Component({
   selector: 'app-hover-box-products',
@@ -7,8 +7,7 @@ import { Categories } from 'src/app/models/categories';
   styleUrls: ['./hover-box-products.component.scss']
 })
 export class HoverBoxProductsComponent {
-  @Input() categories?: Categories[];
-  classSubcategory: string[] =['one','two','three','four'];
+  @Input() categories?: CategoriesData[];
 
   assignClass(number: number): number {
     return (number - 1) % 4;

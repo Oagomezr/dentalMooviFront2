@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { CategoriesService } from './services/categories/categories.service';
-import { Categories } from './models/categories';
 
 @Component({
   selector: 'app-root',
@@ -9,23 +8,26 @@ import { Categories } from './models/categories';
 })
 export class AppComponent {
   title = 'dental-moovi';
+  loading = JSON.parse(localStorage.getItem('loading') ?? 'null');
 
   constructor(private categoriesSer: CategoriesService){}
 
   ngOnInit(){
     this.categoriesSer.checkupdate().subscribe({
       next: response => {
-        if(localStorage.getItem('numberOfCategories') != response || localStorage.getItem('categories') == null){
+        if(localStorage.getItem('checkUpdateCategories') != response || localStorage.getItem('categories') == null){
           this.categoriesSer.getCategories().subscribe({
             next: responseGetC =>{
-              let jsonCategories = JSON.stringify(responseGetC);
+              let jsonCategories = JSON.stringify(responseGetC.data);
               localStorage.setItem('categories', jsonCategories);
-              localStorage.setItem('numberOfCategories', response);
+              localStorage.setItem('checkUpdateCategories', response);
+              localStorage.setItem('loading', JSON.stringify(true));
               window.location.reload();
             },
             error: error=>{
               localStorage.removeItem('categories');
-              localStorage.removeItem('numberOfCategories');
+              localStorage.removeItem('checkUpdateCategories');
+              localStorage.removeItem('loading');
               console.log('Error to get categories', error);
             }
           });
@@ -33,8 +35,9 @@ export class AppComponent {
       },
       error: error =>{ 
         localStorage.removeItem('categories');
-        localStorage.removeItem('numberOfCategories');
-        console.log("Error to get number of categories", error);
+        localStorage.removeItem('checkUpdateCategories');
+        localStorage.removeItem('loading');
+        console.log("Error to get checkUpdate of categories", error);
       }
     });
   }

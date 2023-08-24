@@ -1,53 +1,35 @@
 <app-header></app-header>
-<div class="category-direction">
+<app-direction [currentPageOrProduct]="currentPage" [locationCategory]="locationCategory"></app-direction>
+<!-- <div class="category-direction">
     <div class="category-section">
-        Seccion categoria
-    </div>
-    <div class="name-category">Nombre categoria</div>
-</div>
-<div class="search-products">
-    <!-- <ul class="categories">
-        <li *ngFor="let category of categories | keyvalue" >
-            <div>
-                <a href="/category">{{ category.key }}</a>
-                <button (click)="toggleSubcategories(category.key)" *ngIf="category.value.length != 0">
-                    <i class="material-icons" [ngClass]="{'expanded-icon': expandedCategories[category.key], 'no-expanded-icon': !expandedCategories[category.key]}">expand_more</i>
-                </button>
+        <a href="/" class="init-location">INICIO</a>
+        <span class="location-category">
+            <div>{{ currentPage }}</div> <i class="material-icons" *ngIf="currentPage">arrow_right</i>
+            <div *ngFor="let parentCategory of locationCategory; let i = index">
+                <i class="material-icons">arrow_right</i><a [href]="'/category/'+locationCategory.slice(i)" [ngClass]="'location-'+(locationCategory.length-1-i)">{{parentCategory}}</a>
             </div>
-            <ul class="subcategories" *ngIf="expandedCategories[category.key] && category.value.length !== 0">
-                <li *ngFor="let item of category.value">
-                    {{ item }}
-                </li>
-            </ul>
-        </li>
-    </ul> -->
+        </span>
+    </div>
+    <div [ngClass]="'location-'+(locationCategory.length-1)" id="current-section">{{locationCategory[0]}}</div>
+</div> -->
+<div class="search-products">
     <ul class="categories">
         <ng-template #recursiveList let-categories>
             <li *ngFor="let category of categories">
                 
                 <div>
-                    <a [href]="'/category/'+category.idCategory">{{ category.name }}</a>
-                    <button (click)="toggleSubcategories(category.name, category.levelCategory)" *ngIf="category.childrenCategories?.length > 0">
-                        <i class="material-icons" [ngClass]="{'expanded-icon': expandedCategories[category.name], 'no-expanded-icon': !expandedCategories[category.name]}">expand_more</i>
+                    <a [href]="'/category/'+category.categoryAndParents" [ngClass]="{'currentCategory': locationCategory[0] == category.categoryAndParents[0], 'otherCategory': locationCategory[0] != category.categoryAndParents[0]}">{{ category.categoryAndParents[0] }}<span *ngIf="locationCategory[0] == category.categoryAndParents[0]">&nbsp;{{'<-'}}</span></a>
+                    <button (click)="toggleSubcategories(category.categoryAndParents, false)" *ngIf="category.childrenCategories?.length > 0">
+                        <i class="material-icons" [ngClass]="{'expanded-icon': expandedCategories[category.categoryAndParents[0]], 'no-expanded-icon': !expandedCategories[category.categoryAndParents[0]]}">expand_more</i>
                     </button>
                 </div>
                 
-                <ul *ngIf="category.childrenCategories?.length > 0 && expandedCategories[category.name]" [ngClass]="classSubcategory[category.levelCategory]">
+                <ul *ngIf="category.childrenCategories?.length > 0 && expandedCategories[category.categoryAndParents[0]]" [ngClass]="'lvl-'+(category.categoryAndParents.length)">
                     <ng-container *ngTemplateOutlet="recursiveList; context:{ $implicit: category.childrenCategories }"></ng-container>
                 </ul>
             </li>
         </ng-template>
         <ng-container *ngTemplateOutlet="recursiveList; context:{ $implicit: categories }"></ng-container>
     </ul>
-    <div class="products">
-        <div>producto1</div>
-        <div>producto2</div>
-        <div>producto3</div>
-        <div>producto1</div>
-        <div>producto2</div>
-        <div>producto3</div>
-        <div>producto1</div>
-        <div>producto2</div>
-        <div>producto3</div>
-    </div>
+    <app-products (sendCurrentPage)="receiveCurrentPage($event)" [locationCategory]="locationCategory"></app-products>
 </div>

@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Categories } from 'src/app/models/categories';
+import { CategoriesResponse } from 'src/app/models/categories/categoriesResponse';
 
 @Injectable({
   providedIn: 'root'
@@ -12,11 +12,15 @@ export class CategoriesService {
 
   constructor(private http: HttpClient) { }
 
-  getCategories(): Observable<Categories[]>{
-    return this.http.get<Categories[]>(`${this.baseUrl}/public/categories`);
+  getCategories(): Observable<CategoriesResponse>{
+    return this.http.get<CategoriesResponse>(`${this.baseUrl}/public/categories`);
   }
 
   checkupdate(): Observable<string>{
     return this.http.get<string>(`${this.baseUrl}/public/categories/checkupdate`);
+  }
+
+  getNameCategoryById(id:number): Observable<string>{
+    return this.http.get<string>(`${this.baseUrl}/public/categories/${id}`);
   }
 }

@@ -4,8 +4,6 @@ $principal-color3: #1cd1e2;
 $principal-color3: #02a1ff;
 $font-size-letter: small;
 
-
-
 :host {
     display: block;
 }
@@ -16,8 +14,7 @@ header{
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-left: 5%;
-    margin-right: 5%;
+    margin: 0 5%;
     background-color: white;
     font-family: 'Roboto', sans-serif;
     font-size: $font-size-letter;
@@ -112,6 +109,10 @@ header{
                     justify-content: right;
                     align-items: center;
                     width: 500px;
+                    //background-color: aquamarine;
+                    @media (max-width: 930px) {
+                        width: 300px;
+                    }
 
                     .phone-address{
                         display: flex;
@@ -121,6 +122,10 @@ header{
                         width: 80%;
                         line-height: 100%;
                         padding-left: 10px;
+
+                        @media (max-width: 930px) {
+                            width: 50%;
+                        }
 
                         a{
                             display: flex;
@@ -132,7 +137,7 @@ header{
 
                             #whatsapp-icon{
                                 line-height: 100%;
-                                font-size: 165%;
+                                font-size: 170%;
                             }
 
                             #location-icon{
@@ -142,6 +147,12 @@ header{
 
                             &:hover {
                                 color: $principal-color2;
+                            }
+
+                            @media (max-width: 930px) {
+                                span{
+                                    display: none;
+                                }
                             }
                         }
                     }
@@ -228,10 +239,17 @@ header{
             justify-content: space-between;
             .menu{
                 height: 100%;
-                width: 75%;
+                width: 80%;
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
+
+                @media (max-width: 930px) {
+                    .inicio{
+                        display: none;
+                    }
+                } 
+
                 button{
                     font-family: 'Roboto', sans-serif;
                     font-size:$font-size-letter;

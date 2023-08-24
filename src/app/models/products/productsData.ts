@@ -1,9 +1,10 @@
-import { Images } from "./Images";
+import { Images } from "../Images";
 
-export interface Products {
+export interface ProductsData {
     nameProduct: string;
     unitPrice: number;
     description: string;
     stock: number;
     images:Images[];
+    location: string[];
 }

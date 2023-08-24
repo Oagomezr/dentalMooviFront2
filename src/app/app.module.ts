@@ -28,13 +28,17 @@ import { CelPhoneComponent } from './components/sign-up/cel-phone/cel-phone.comp
 import { HoverBoxProfileComponent } from './components/header/hover-box-profile/hover-box-profile.component';
 import { HoverBoxProductsComponent } from './components/header/hover-box-products/hover-box-products.component';
 import { CategoryProductsComponent } from './components/category-products/category-products.component';
+import { ProductsComponent } from './components/category-products/products/products.component';
+import { ProductComponent } from './components/category-products/product/product.component';
+import { DirectionComponent } from './components/category-products/direction/direction.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignUpComponent },
   { path: 'admin', component: AdminComponent },
-  { path: 'category/:categoryIdentifier', component: CategoryProductsComponent},
+  { path: 'category/:parents', component: CategoryProductsComponent},
+  { path: 'product/:product', component: ProductComponent},
   { path: '**', component: PageNotFoundComponent },
   
 ];
@@ -53,6 +57,9 @@ const routes: Routes = [
     HoverBoxProfileComponent,
     HoverBoxProductsComponent,
     CategoryProductsComponent,
+    ProductsComponent,
+    ProductComponent,
+    DirectionComponent,
     
     
     

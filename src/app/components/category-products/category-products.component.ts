@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
-import { Products } from 'src/app/models/products';
+import { CategoriesData } from 'src/app/models/categories/categoriesData';
+import { ProductsData } from 'src/app/models/products/productsData';
 import { ImagesService } from 'src/app/services/images/images.service';
 import { ProductsService } from 'src/app/services/products/products.service';
 
@@ -11,50 +12,57 @@ import { ProductsService } from 'src/app/services/products/products.service';
 })
 export class CategoryProductsComponent {
 
-  constructor(private route: ActivatedRoute, private productSer: ProductsService, private imageSer: ImagesService) {}
+  constructor(private route: ActivatedRoute) {}
 
-  categoryIdentifier : number = 0;
-  products?: Products[] = JSON.parse(localStorage.getItem('categories') || 'null');
-
+  locationCategory: string[] = [];
+  currentPage?: string;
+  categories?: CategoriesData[] = JSON.parse(localStorage.getItem('categories') || 'null');
+  beforeExpanded: string[]=[];
+  expandedCategories: { [key: string]: boolean } = {};
+  
   ngOnInit(): void {
     this.route.params.subscribe((params: Params) => {
-      this.categoryIdentifier = params['categoryIdentifier'];
-      this.products = JSON.parse(localStorage.getItem('productsByCategory#'+this.categoryIdentifier) || 'null');
-      console.log(this.products);
-      this.productSer.checkupdate(this.categoryIdentifier).subscribe({
-        next: responseCheck => {
-          if(localStorage.getItem('numberOfProducts#'+this.categoryIdentifier) != responseCheck || localStorage.getItem('productsByCategory#'+this.categoryIdentifier) == null){
-            this.productSer.getProductsByCategory(this.categoryIdentifier).subscribe({
-              next: response => {
-                let jsonProducts = JSON.stringify(response);
-                    localStorage.setItem('productsByCategory#'+this.categoryIdentifier, jsonProducts);
-                    localStorage.setItem('numberOfProducts#'+this.categoryIdentifier, responseCheck);
-                    window.location.reload();
-              },
-              error: error => {
-                console.error("error to load product: "+error);
-              }
-            });
-          }
-        },
-        error: error => {
-          console.error("error to check: "+error);
-        }
-      });
+      this.locationCategory = params['parents'].split(',');
+      this.toggleSubcategories(this.locationCategory, true);
     });
   }
 
-  
-
-  categories: { [key: string]: string[] } | null = JSON.parse(localStorage.getItem('categories') || 'null');
-  classSubcategory: string[] =['one','two','three','four'];
-  
-  beforeExpanded: string[]=[];
-  expandedCategories: { [key: string]: boolean } = {};
-
-  toggleSubcategories(categoryKey: string, lvlCategory: number) {
-    this.expandedCategories[categoryKey] = !this.expandedCategories[categoryKey];
-    if(this.beforeExpanded && this.beforeExpanded[lvlCategory] != categoryKey) this.expandedCategories[this.beforeExpanded[lvlCategory]] = false;
-    this.beforeExpanded[lvlCategory] = categoryKey;
+  toggleSubcategories(categoryAndParents: string[], init: boolean) { 
+    if(init){
+      for(let i=0; i < categoryAndParents.length ; i++){
+        this.expandedCategories[categoryAndParents[categoryAndParents.length-i-1]] = true;
+        this.beforeExpanded[i] = categoryAndParents[categoryAndParents.length-i-1];
+      }
+    }else{
+      this.expandedCategories[categoryAndParents[0]] = !this.expandedCategories[categoryAndParents[0]];
+      if(this.beforeExpanded && this.beforeExpanded[categoryAndParents.length-1] != categoryAndParents[0]){
+        this.expandedCategories[this.beforeExpanded[categoryAndParents.length-1]] = false;
+      } 
+      this.beforeExpanded[categoryAndParents.length-1] = categoryAndParents[0];
+    }
   }
+  
+  receiveCurrentPage(currentPage : number){
+    this.currentPage = 'Pagina '+currentPage;
+  }
+
+  checkLocalStorage() {
+    const used = Math.round((JSON.stringify(localStorage).length / 1024));
+
+    for (let i = 0, data = "1".repeat(10000); ; i++) {
+        try { 
+            localStorage.setItem("DATA", data);
+            data = data +  "1".repeat(100000);
+        } catch(e) {
+            const total = Math.round((JSON.stringify(localStorage).length / 1024));
+            console.log("Total: " + total + " kB");
+            console.log("Used: " + used + " kB");
+            console.log("FREE: " + (total - used) + " kB");
+            break;
+        }
+    }
+
+    localStorage.removeItem('DATA');
+  }
+
 }

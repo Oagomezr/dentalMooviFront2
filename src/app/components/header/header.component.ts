@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Categories } from 'src/app/models/categories';
+import { CategoriesData } from 'src/app/models/categories/categoriesData';
 import { AuthenticateService } from 'src/app/services/authenticate/authenticate.service';
 
 @Component({
@@ -12,7 +12,7 @@ export class HeaderComponent {
   isAuthenticate:boolean = false;
   name?: string|null;
   lastName?: string|null;
-  categories?: Categories[] = JSON.parse(localStorage.getItem('categories') || 'null');
+  categories?: CategoriesData[] = JSON.parse(localStorage.getItem('categories') ?? 'null');
 
   constructor(private authSer: AuthenticateService){}
 
