@@ -1,8 +1,8 @@
 <app-header></app-header>
 
-<div class="all-page">
+<div *ngIf="!confirm" class="all-page">
     <h2>REGISTRO</h2>
-    <form (ngSubmit)="createUser()" [formGroup]="userFormGroup">
+    <form (ngSubmit)="sendCode()" [formGroup]="userFormGroup">
     
         <div class="names">
             <mat-form-field>
@@ -43,3 +43,30 @@
         <button type="submit" mat-raised-button color="primary" [disabled]="userFormGroup.invalid">Crear usuario</button>
     </form>
 </div>
+
+<div *ngIf="confirm && !showRegisterOK" class="confirmation-code">
+    <h2>Acabamos de enviar un codigo de confirmación de registro a tu correo</h2>
+    <div class="code">
+        <input type="text" maxlength="1" (input)="typeCode(0, $event)" />
+        <input type="text" maxlength="1" (input)="typeCode(1, $event)" />
+        <input type="text" maxlength="1" (input)="typeCode(2, $event)" />
+        <input type="text" maxlength="1" (input)="typeCode(3, $event)" />
+        <input type="text" maxlength="1" (input)="typeCode(4, $event)" />
+        <input type="text" maxlength="1" (input)="typeCode(5, $event)" />
+    </div>
+    <div class="buttons" >
+        <button mat-raised-button color="primary" (click)="confirmCode()">Confirmar</button>
+        <button mat-raised-button color="primary" [disabled]="waitTime > 0" (click)="sendCode()">
+            Reenviar codigo <span id="tiempoRestante" *ngIf="waitTime > 0">en {{waitTime}} segundos</span>
+        </button>
+    </div>
+
+</div>
+
+<div class="registerOK" *ngIf="showRegisterOK">
+    <img src="assets/images/registerOK.png" alt="registerOK">
+    <h2>Registro exitoso</h2>
+    <p>Te estamos redirigiendo al inicio de sesión</p>
+</div>
+
+

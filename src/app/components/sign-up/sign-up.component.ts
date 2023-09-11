@@ -3,6 +3,7 @@ import { UsersService } from 'src/app/services/user/users.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { uniqueValueValidator } from 'src/app/validators/userFieldsValidator';
 import { Router } from '@angular/router';
+import { delay } from 'rxjs';
 
 @Component({
   selector: 'app-sign-up',
@@ -20,18 +21,23 @@ export class SignUpComponent {
     celPhone: new FormControl('', { validators: [Validators.required, Validators.minLength(12), Validators.pattern('^[0-9-]*$')]}),
     birthday: new FormControl(''),
     gender: new FormControl('', Validators.required),
-    password: new FormControl('', Validators.required)
+    password: new FormControl('', Validators.required),
+    confirmCode: new FormControl('------')
   });
+
+  confirm : boolean = false;
 
   constructor(private userService: UsersService, private router: Router){}
 
-  createUser(): void {
+  sendCode(): void {
     if(this.userFormGroup.valid){
       this.organizeInformation();
-      this.userService.createUser(this.userFormGroup.value).subscribe({
-        next: userCreated => {
-          console.log(userCreated);
-          this.router.navigate(['/login']);
+      let email = this.userFormGroup.get('email')?.value || '';
+      this.userService.sendEmailNotification(email).subscribe({
+        next: () => {
+          this.confirm = true;
+          this.waitTime = 60;
+          this.counter();
         },
         error: error => {
           console.error(error.error.message);
@@ -61,4 +67,55 @@ export class SignUpComponent {
     word = word.replace(/(\s|^)\w/g, (l) => l.toUpperCase()); //transform to upperCase after the space character
     return word.trim().replace(/\s+/g, ' '); //delete all spaces at the start and allow only one space between letters
   }
+
+  typeCode(index: number, event: any) {
+    let character = event.target.value;
+
+    let charaters = this.userFormGroup.get('confirmCode')?.value?.split('') || [''];
+    
+    //If the entered value is numeric, add and focus the next input
+    if (/^\d*$/.test(character) && character != '') {
+
+      charaters[index] = character;
+      this.userFormGroup.get('confirmCode')?.setValue(charaters.join(''));
+
+      let nextInput = event.target.nextElementSibling as HTMLInputElement;
+      if (nextInput) {
+        nextInput.focus();
+      }
+      console.log(this.userFormGroup.get('confirmCode')?.value);
+
+    } else {
+      //If the entered value is not numeric, delete the content
+      event.target.value = '';
+    }
+  }
+
+  waitTime: number = 0;
+  counter(){
+
+    setTimeout(() => {
+      this.waitTime -= 1;
+      if(this.waitTime > 0) this.counter();
+    }, 1000);
+
+  }
+  
+  showRegisterOK: boolean = false;
+  confirmCode(){
+    if (/^\d*$/.test(this.userFormGroup.get('confirmCode')?.value || 'x')) {
+      this.userService.createUser(this.userFormGroup.value).subscribe({
+        next: () => {
+          this.showRegisterOK = true
+          setTimeout(() => {
+            this.router.navigate(['/login']);
+          }, 3000);
+        },
+        error: error => {
+          console.error(error);
+        }
+      });
+    }
+  }
+
 }

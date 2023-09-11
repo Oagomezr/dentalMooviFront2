@@ -17,15 +17,11 @@ export class ProductsService {
     return this.http.get<ProductsResponse>(`${this.baseUrl}/public/products/category/${name}/${currentPage}/${productsPerPage}`);
   }
 
-  checkupdateByCategory(name:string): Observable<string>{
-    return this.http.get<string>(`${this.baseUrl}/public/products/category/checkupdate/${name}`);
-  }
-
-  checkupdateProduct(name:string): Observable<string>{
-    return this.http.get<string>(`${this.baseUrl}/public/products/checkupdate/${name}`);
-  }
-
   getProductByName(name:string): Observable<ProductsData>{
     return this.http.get<ProductsData>(`${this.baseUrl}/public/products/${name}`);
+  }
+
+  getProductsBySearch(search: string, limit: boolean, currentPage: number, productsPerPage: number): Observable<ProductsResponse>{
+    return this.http.get<ProductsResponse>(`${this.baseUrl}/public/products/search/${search}/${limit}/${currentPage}/${productsPerPage}`);
   }
 }

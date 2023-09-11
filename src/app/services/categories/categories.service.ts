@@ -19,8 +19,4 @@ export class CategoriesService {
   checkupdate(): Observable<string>{
     return this.http.get<string>(`${this.baseUrl}/public/categories/checkupdate`);
   }
-
-  getNameCategoryById(id:number): Observable<string>{
-    return this.http.get<string>(`${this.baseUrl}/public/categories/${id}`);
-  }
 }

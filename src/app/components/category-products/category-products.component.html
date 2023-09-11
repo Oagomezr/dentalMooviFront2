@@ -1,17 +1,5 @@
 <app-header></app-header>
 <app-direction [currentPageOrProduct]="currentPage" [locationCategory]="locationCategory"></app-direction>
-<!-- <div class="category-direction">
-    <div class="category-section">
-        <a href="/" class="init-location">INICIO</a>
-        <span class="location-category">
-            <div>{{ currentPage }}</div> <i class="material-icons" *ngIf="currentPage">arrow_right</i>
-            <div *ngFor="let parentCategory of locationCategory; let i = index">
-                <i class="material-icons">arrow_right</i><a [href]="'/category/'+locationCategory.slice(i)" [ngClass]="'location-'+(locationCategory.length-1-i)">{{parentCategory}}</a>
-            </div>
-        </span>
-    </div>
-    <div [ngClass]="'location-'+(locationCategory.length-1)" id="current-section">{{locationCategory[0]}}</div>
-</div> -->
 <div class="search-products">
     <ul class="categories">
         <ng-template #recursiveList let-categories>
@@ -28,6 +16,7 @@
                     <ng-container *ngTemplateOutlet="recursiveList; context:{ $implicit: category.childrenCategories }"></ng-container>
                 </ul>
             </li>
+            <li>AÑADIR CATEGORIA</li>
         </ng-template>
         <ng-container *ngTemplateOutlet="recursiveList; context:{ $implicit: categories }"></ng-container>
     </ul>

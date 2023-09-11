@@ -16,8 +16,12 @@ export class UsersService {
     return this.http.get<Users[]>(`${this.baseUrl}/admin`);
   }
 
-  createUser(user:Users): Observable<Users>{
-    return this.http.post<Users>(`${this.baseUrl}/public/create`, user);
+  createUser(user: Users): Observable<void> {
+    return this.http.post<void>(`${this.baseUrl}/public/create`, user);
+  }
+
+  sendEmailNotification(email:string): Observable<void>{
+    return this.http.post<void>(`${this.baseUrl}/public/sendEmail`, email);
   }
 
   getUser(id:number): Observable<Users>{

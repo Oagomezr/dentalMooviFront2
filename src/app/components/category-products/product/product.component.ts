@@ -14,7 +14,16 @@ export class ProductComponent {
 
   locationCategory: string[] = [];
   nameProduct: string = '';
-  product?: ProductsData;
+  indexImg: number = 0;
+
+  product: ProductsData ={
+    nameProduct: '',
+    unitPrice: 0,
+    description: '',
+    stock: 0,
+    images:[],
+    location: [],
+  };
 
   ngOnInit(): void {
     this.route.params.subscribe((params: Params) => {
@@ -31,5 +40,9 @@ export class ProductComponent {
         }
       });
     });
+  }
+
+  changeImg(index: number){
+    this.indexImg = index;
   }
 }

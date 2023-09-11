@@ -1,0 +1,98 @@
+.product{
+    //background-color: rgba(0, 0, 0, 0.105);
+    width: 90%;
+    margin: 1% 5%;
+    padding: 0.5% 0%;
+    display: flex;
+
+    .product-images{
+        width: 70px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        img{
+            width: 90%;
+            margin-bottom: 10%;
+            
+        }
+        .currentImg{
+            box-shadow: 2px 2px 4px #1cd1e2,-2px -2px 4px #1cd1e2; 
+        }
+        .otherImg{
+            box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2),-1px -1px 2px rgba(0, 0, 0, 0.2); 
+        }
+    }
+
+    .image{
+        flex: 1;
+        img{
+            width: 98%;
+            padding: 0 1%;
+        }
+    }
+
+    .characteristics{
+        width: 40%;
+        box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2), -2px -2px 4px rgba(0, 0, 0, 0.2); 
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+
+        .product-name{
+            display: flex;
+            align-items: center;
+            justify-content: left;
+            text-decoration: none;
+            margin: 3% 5%;
+            height: 40px;
+            font-size: 30px;
+
+            color: black;
+        }
+
+        .product-description{
+            display: flex;
+            align-items: center;
+            justify-content: left;
+            text-decoration: none;
+            
+            margin: 0 5%;
+            height: 120px;
+            p{
+                text-align: left;
+                color: darkslategray;
+            }
+        }
+        .product-price{
+            display: flex;
+            align-items: center;
+            justify-content: left;
+            text-decoration: none;
+            margin: 0 5%;
+            font-weight: bolder;
+            font-size: 25px;
+            height: 30px;
+            color: black;
+        }
+        .product-stock{
+            display: flex;
+            align-items: center;
+            justify-content: left;
+            text-decoration: none;
+            margin: 0 5%;
+        }
+        .product-add-cart{
+            display: flex;
+            align-items: center;
+            justify-content: left;
+            text-decoration: none;
+            margin: 0 5%;
+            button{
+                width: 100%;
+                margin-bottom: 5%;
+            }
+        }
+        
+    }
+}

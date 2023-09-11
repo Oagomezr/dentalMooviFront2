@@ -1,2 +1,35 @@
 <app-header></app-header>
 <app-direction [currentPageOrProduct]="nameProduct" [locationCategory]="locationCategory"></app-direction>
+<div class="product">
+    <div class="product-images">
+        <img (mouseover)="changeImg(i)" 
+            *ngFor="let image of product?.images; let i = index" 
+            [src]="'data:image/'+image.contentType+';base64,'+image.imageBase64" alt=""
+            [ngClass]="{'currentImg': indexImg == i, 'otherImg': indexImg != i}">
+    </div>
+    <div class="image">
+        <img *ngIf="product?.images?.length == 0" src="assets/images/productWithoutImage.png" alt="">
+        <img *ngIf="product?.images?.length != 0" [src]="'data:image/'+(product.images[indexImg].contentType || null)+';base64,'+product.images[indexImg].imageBase64" alt="">
+    </div>
+    <div class="characteristics">
+        <div class="product-name">
+            {{ product.nameProduct }}
+        </div>
+
+        <div class="product-price">
+            {{'$'+ product.unitPrice}}
+        </div>
+
+        <div class="product-description">
+            <p>{{ product.description}}</p>
+        </div>
+        
+        <div class="product-stock">
+            <span *ngIf="product.stock>0" style="color: green;">{{'Hay '+ product.stock+' disponibles'}}</span>
+            <span *ngIf="product.stock<=0" style="color: red;">No hay unidades disponibles</span>
+        </div>
+        <div class="product-add-cart">
+            <button class="material-icons">add_shopping_cart</button>
+        </div>
+    </div>
+</div>

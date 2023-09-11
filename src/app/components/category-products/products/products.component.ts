@@ -9,9 +9,6 @@ import { ProductsService } from 'src/app/services/products/products.service';
 })
 export class ProductsComponent {
 
-    /* this.categoriesSer.checkupdate().subscribe({
-        next: response => { */
-
     ngOnInit(): void {
         this.getProducts();
     }
@@ -46,17 +43,31 @@ export class ProductsComponent {
     }
 
     private getProducts(){
-        this.productsSer.getProductsByCategory(this.locationCategory[0], this.currentPage, this.productsPerPage).subscribe({
-            next: response =>{
-                this.products = response.data;
-                if(this.totalPages < 1)this.totalPages = Math.ceil(response.amountProducts / this.productsPerPage);
-                if(this.totalPages > 1) this.sendCurrentPage.emit(this.currentPage);
-                window.scrollTo({ top: 100, behavior: 'smooth' });
-            },
-            error: error =>{
-                console.error('Error to get products', error)
-            }
-        });
+        if(this.locationCategory[1] == "Buscar"){
+            this.productsSer.getProductsBySearch(this.locationCategory[0], false, this.currentPage, this.productsPerPage).subscribe({
+                next: response => {
+                    this.products = response.data;
+                    if(this.totalPages < 1) this.totalPages = Math.ceil(response.amountProducts / this.productsPerPage);
+                    if(this.totalPages > 1) this.sendCurrentPage.emit(this.currentPage);
+                    window.scrollTo({ top: 100, behavior: 'smooth' });
+                },
+                error: error => {
+                    console.error("Products not found:", error);
+                }
+            });
+        }else{
+            this.productsSer.getProductsByCategory(this.locationCategory[0], this.currentPage, this.productsPerPage).subscribe({
+                next: response =>{
+                    this.products = response.data;
+                    if(this.totalPages < 1) this.totalPages = Math.ceil(response.amountProducts / this.productsPerPage);
+                    if(this.totalPages > 1) this.sendCurrentPage.emit(this.currentPage);
+                    window.scrollTo({ top: 100, behavior: 'smooth' });
+                },
+                error: error =>{
+                    console.error('Error to get products', error)
+                }
+            });
+        }
     }
 
 }

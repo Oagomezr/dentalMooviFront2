@@ -1,9 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { CategoriesData } from 'src/app/models/categories/categoriesData';
-import { ProductsData } from 'src/app/models/products/productsData';
-import { ImagesService } from 'src/app/services/images/images.service';
-import { ProductsService } from 'src/app/services/products/products.service';
 
 @Component({
   selector: 'app-category-products',
