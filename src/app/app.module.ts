@@ -31,6 +31,10 @@ import { CategoryProductsComponent } from './components/category-products/catego
 import { ProductsComponent } from './components/category-products/products/products.component';
 import { ProductComponent } from './components/category-products/product/product.component';
 import { DirectionComponent } from './components/category-products/direction/direction.component';
+import { ConfirmCodeComponent } from './components/confirm-code/confirm-code.component';
+import { DialogComponent } from './components/dialog/dialog.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { VisibilityIconComponent } from './components/category-products/product/visibility-icon/visibility-icon.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -60,6 +64,8 @@ const routes: Routes = [
     ProductsComponent,
     ProductComponent,
     DirectionComponent,
+    ConfirmCodeComponent,
+    DialogComponent,
     
     
     
@@ -82,7 +88,9 @@ const routes: Routes = [
     SelectGenderComponent,
     PasswordComponent,
     BirthComponent,
-    CelPhoneComponent
+    CelPhoneComponent,
+    MatDialogModule,
+    VisibilityIconComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

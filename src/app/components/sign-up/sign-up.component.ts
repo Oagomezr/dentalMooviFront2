@@ -3,7 +3,6 @@ import { UsersService } from 'src/app/services/user/users.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { uniqueValueValidator } from 'src/app/validators/userFieldsValidator';
 import { Router } from '@angular/router';
-import { delay } from 'rxjs';
 
 @Component({
   selector: 'app-sign-up',
@@ -19,25 +18,25 @@ export class SignUpComponent {
                             asyncValidators: uniqueValueValidator(this.userService, true),
                             updateOn: 'blur'}),
     celPhone: new FormControl('', { validators: [Validators.required, Validators.minLength(12), Validators.pattern('^[0-9-]*$')]}),
-    birthday: new FormControl(''),
+    birthdate: new FormControl(''),
     gender: new FormControl('', Validators.required),
     password: new FormControl('', Validators.required),
-    confirmCode: new FormControl('------')
+    code: new FormControl('------')
   });
 
   confirm : boolean = false;
+
+  email : string = '';
 
   constructor(private userService: UsersService, private router: Router){}
 
   sendCode(): void {
     if(this.userFormGroup.valid){
       this.organizeInformation();
-      let email = this.userFormGroup.get('email')?.value || '';
-      this.userService.sendEmailNotification(email).subscribe({
+      this.email = this.userFormGroup.get('email')?.value ?? '';
+      this.userService.sendEmailNotification(this.email).subscribe({
         next: () => {
           this.confirm = true;
-          this.waitTime = 60;
-          this.counter();
         },
         error: error => {
           console.error(error.error.message);
@@ -50,7 +49,7 @@ export class SignUpComponent {
   //process each field to have organized information to database
   private organizeInformation(): void{
     //the fields we'll organize
-    const fields = ["username", "firstName", "lastName", "email", "gender"];
+    const fields = ["username", "firstName", "lastName", "email"];
 
     Object.keys(this.userFormGroup.controls).forEach(key => { //iterate all fields
       if(fields.includes(key)){ //select only fields we'll organize
@@ -71,19 +70,19 @@ export class SignUpComponent {
   typeCode(index: number, event: any) {
     let character = event.target.value;
 
-    let charaters = this.userFormGroup.get('confirmCode')?.value?.split('') || [''];
+    let charaters = this.userFormGroup.get('code')?.value?.split('') ?? [''];
     
     //If the entered value is numeric, add and focus the next input
     if (/^\d*$/.test(character) && character != '') {
 
       charaters[index] = character;
-      this.userFormGroup.get('confirmCode')?.setValue(charaters.join(''));
+      this.userFormGroup.get('code')?.setValue(charaters.join(''));
 
       let nextInput = event.target.nextElementSibling as HTMLInputElement;
       if (nextInput) {
         nextInput.focus();
       }
-      console.log(this.userFormGroup.get('confirmCode')?.value);
+      console.log(this.userFormGroup.get('code')?.value);
 
     } else {
       //If the entered value is not numeric, delete the content
@@ -91,31 +90,26 @@ export class SignUpComponent {
     }
   }
 
-  waitTime: number = 0;
-  counter(){
-
-    setTimeout(() => {
-      this.waitTime -= 1;
-      if(this.waitTime > 0) this.counter();
-    }, 1000);
-
-  }
   
   showRegisterOK: boolean = false;
-  confirmCode(){
-    if (/^\d*$/.test(this.userFormGroup.get('confirmCode')?.value || 'x')) {
+  badCode: boolean = false;
+  confirmCode(code: string){
+    this.userFormGroup.get('code')?.setValue(code);
+    if (/^\d*$/.test(this.userFormGroup.get('code')?.value || 'x')) {
       this.userService.createUser(this.userFormGroup.value).subscribe({
         next: () => {
-          this.showRegisterOK = true
+          this.showRegisterOK = true;
+          localStorage.removeItem("register");
+          localStorage.setItem("register", "true");
           setTimeout(() => {
             this.router.navigate(['/login']);
           }, 3000);
         },
         error: error => {
           console.error(error);
+          this.badCode = true;
         }
       });
     }
   }
-
 }

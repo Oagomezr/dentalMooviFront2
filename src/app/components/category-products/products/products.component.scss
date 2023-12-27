@@ -25,6 +25,25 @@
         display: flex;
         flex-wrap: wrap;
         justify-content: left;
+
+        .addProduct{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            i{
+                font-size: 200px;
+                color: green;
+            }
+            background-color: white;
+            cursor: pointer;
+        }
+
+        .hiddenProduct{
+            background-color: lightgray;
+            img{
+                opacity: 0.5;
+            }
+        }
         
         .product{
             box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2),-2px -2px 4px rgba(0, 0, 0, 0.2); 
@@ -75,6 +94,16 @@
                 p{
                     text-align: left;
                     color: darkslategray;
+                }
+                textarea{
+                    z-index: 1;
+                }
+                .editOptions{
+                    border-radius: 5px;
+                    cursor: pointer;
+                    color: white;
+                    background-color: #2e54fe;
+                    border: none;
                 }
             }
             .product-price{

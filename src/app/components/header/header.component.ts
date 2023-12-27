@@ -3,7 +3,9 @@ import { Router } from '@angular/router';
 import { CategoriesData } from 'src/app/models/categories/categoriesData';
 import { ProductsData } from 'src/app/models/products/productsData';
 import { AuthenticateService } from 'src/app/services/authenticate/authenticate.service';
+import { CategoriesService } from 'src/app/services/categories/categories.service';
 import { ProductsService } from 'src/app/services/products/products.service';
+import { UsersService } from 'src/app/services/user/users.service';
 
 @Component({
   selector: 'app-header',
@@ -15,37 +17,45 @@ export class HeaderComponent {
   isAuthenticate:boolean = false;
   name?: string|null;
   lastName?: string|null;
-  categories?: CategoriesData[] = JSON.parse(localStorage.getItem('categories') ?? 'null');
+  categories?: CategoriesData[];
 
-  constructor(private authSer: AuthenticateService, private productsSer: ProductsService, private router: Router){}
+  constructor(private userSer: UsersService, private productsSer: ProductsService, 
+    private router: Router, private categoriesSer: CategoriesService, private authSer: AuthenticateService){
+    this.categoriesSer.getCategories().subscribe({
+      next: responseGetC =>{
+        this.categories = responseGetC.data;
+      },
+      error: error=>{
+        console.log('Error to get categories', error);
+      }
+    });
 
-  ngOnInit(): void {
-    let email = localStorage.getItem('email');
-    if(email!=null){
-      this.authSer.getUserByEmail(email).subscribe({
+    let isLogged = localStorage.getItem('isLogged');
+    if(isLogged!=null){
+      this.userSer.getUser().subscribe({
         next: response => {
           this.name=response.firstName;
           this.lastName=response.lastName;
           this.isAuthenticate=true;
         },
         error: error => {
-          localStorage.removeItem('token');
-          localStorage.removeItem('email');
+          localStorage.removeItem("isLogged");
+          localStorage.removeItem("isAdmin");
           this.isAuthenticate=false;
-          console.log("Error to get email", error);
+          console.log("Error to get user info", error);
         }
       });
     }
   }
 
   logout(){
-    let jwt = localStorage.getItem('token');
-    if(jwt != null){
-      this.authSer.logout(jwt).subscribe({
+    let isLogged = localStorage.getItem('isLogged');
+    if(isLogged != null){
+      this.authSer.logout().subscribe({
         next: () => {
           console.log("Logout complete");
-          localStorage.removeItem('token');
-          localStorage.removeItem('email');
+          localStorage.removeItem('isLogged');
+          localStorage.removeItem("isAdmin");
           window.location.reload();
         },
         error: error => {
@@ -78,7 +88,7 @@ export class HeaderComponent {
       this.productsSer.getProductsBySearch(nameProduct, true, 0, 0).subscribe({
         next: response => {
           this.products = response.data;
-          this.products.length == 0 ? this.notFoundProducts = true : this.notFoundProducts = false;
+          this.notFoundProducts = this.products.length == 0;
         },
         error: error => {
           console.error("Products not found:", error);

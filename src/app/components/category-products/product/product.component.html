@@ -2,31 +2,81 @@
 <app-direction [currentPageOrProduct]="nameProduct" [locationCategory]="locationCategory"></app-direction>
 <div class="product">
     <div class="product-images">
-        <img (mouseover)="changeImg(i)" 
-            *ngFor="let image of product?.images; let i = index" 
-            [src]="'data:image/'+image.contentType+';base64,'+image.imageBase64" alt=""
-            [ngClass]="{'currentImg': indexImg == i, 'otherImg': indexImg != i}">
+        <div 
+        class="imageContainer" *ngFor="let image of product?.images; let i = index"
+        [ngClass]="{'currentImg': indexImg == i, 'otherImg': indexImg != i}">
+            <img (mouseover)="changeImg(i)" 
+                [src]="'data:image/'+image.contentType+';base64,'+image.imageBase64" alt="">
+        </div>
+        <input #fileInput type="file" style="display: none" (change)="onFileSelected($event)" />
+        <button (click)="openFileExplorer()" *ngIf="isAdmin"><i class="material-icons">add</i> Añadir imagen</button>
     </div>
     <div class="image">
+        <div class="imageOptions" *ngIf="isAdmin">
+            <button class="setMainImage" *ngIf="indexImg !=0" (click)="openDialog(product.images[indexImg].id,0)">Establecer como imagen principal</button>
+            <button class="deleteImage" *ngIf="indexImg !=0 || product.images.length == 1" (click)="openDialog(product.images[indexImg].id,1)">Eliminar imagen</button>
+        </div>
+        
         <img *ngIf="product?.images?.length == 0" src="assets/images/productWithoutImage.png" alt="">
         <img *ngIf="product?.images?.length != 0" [src]="'data:image/'+(product.images[indexImg].contentType || null)+';base64,'+product.images[indexImg].imageBase64" alt="">
     </div>
     <div class="characteristics">
+        <app-visibility-icon *ngIf="isAdmin" [hide]="product.hidden != null" (changeVisibility)="openDialog($event,2)"></app-visibility-icon>
         <div class="product-name">
-            {{ product.nameProduct }}
+            <span *ngIf="editArray[0]">{{ product.nameProduct }}</span>
+            <input *ngIf="!editArray[0]" type="text" [(ngModel)]="textEdit" />
+            <button *ngIf="isAdmin && editArray[0]" (click)="editProductInformation(0)" class="editOptions">
+                <i class="material-icons">edit</i>
+            </button>
+            <button *ngIf="isAdmin && !editArray[0]" (click)="updateProductInformation(0)" class="editOptions" style="background: green;">
+                <i class="material-icons">done</i>
+            </button>
+            <button *ngIf="isAdmin && !editArray[0]" (click)="editProductInformation(0)" class="editOptions" style="background: red;">
+                <i class="material-icons">cancel</i>
+            </button>
         </div>
 
         <div class="product-price">
-            {{'$'+ product.unitPrice}}
+            <span *ngIf="editArray[1]">{{'$'+ product.unitPrice}}</span>
+            <input *ngIf="!editArray[1]" type="text" [(ngModel)]="textEdit" />
+            <button *ngIf="isAdmin && editArray[1]" (click)="editProductInformation(1)" class="editOptions">
+                <i class="material-icons">edit</i>
+            </button>
+            <button *ngIf="isAdmin && !editArray[1]" (click)="updateProductInformation(1)" class="editOptions" style="background: green;">
+                <i class="material-icons">done</i>
+            </button>
+            <button *ngIf="isAdmin && !editArray[1]" (click)="editProductInformation(1)" class="editOptions" style="background: red;">
+                <i class="material-icons">cancel</i>
+            </button>
         </div>
 
         <div class="product-description">
-            <p>{{ product.description}}</p>
+            <p *ngIf="editArray[2]">{{ product.description}}</p>
+            <textarea *ngIf="!editArray[2]" type="text" [(ngModel)]="textEdit"></textarea>
+            <button *ngIf="isAdmin && editArray[2]" (click)="editProductInformation(2)" class="editOptions">
+                <i class="material-icons">edit</i>
+            </button>
+            <button *ngIf="isAdmin && !editArray[2]" (click)="updateProductInformation(2)" class="editOptions" style="background: green;">
+                <i class="material-icons">done</i>
+            </button>
+            <button *ngIf="isAdmin && !editArray[2]" (click)="editProductInformation(2)" class="editOptions" style="background: red;">
+                <i class="material-icons">cancel</i>
+            </button>
         </div>
         
         <div class="product-stock">
-            <span *ngIf="product.stock>0" style="color: green;">{{'Hay '+ product.stock+' disponibles'}}</span>
-            <span *ngIf="product.stock<=0" style="color: red;">No hay unidades disponibles</span>
+            <span *ngIf="product.stock>0 && editArray[3]" style="color: green;">{{'Hay '+ product.stock+' disponibles'}}</span>
+            <span *ngIf="product.stock<=0 && editArray[3]" style="color: red;">No hay unidades disponibles</span>
+            <input *ngIf="!editArray[3]" type="text" [(ngModel)]="textEdit" />
+            <button *ngIf="isAdmin && editArray[3]" (click)="editProductInformation(3)" class="editOptions">
+                <i class="material-icons">edit</i>
+            </button>
+            <button *ngIf="isAdmin && !editArray[3]" (click)="updateProductInformation(3)" class="editOptions" style="background: green;">
+                <i class="material-icons">done</i>
+            </button>
+            <button *ngIf="isAdmin && !editArray[3]" (click)="editProductInformation(3)" class="editOptions" style="background: red;">
+                <i class="material-icons">cancel</i>
+            </button>
         </div>
         <div class="product-add-cart">
             <button class="material-icons">add_shopping_cart</button>

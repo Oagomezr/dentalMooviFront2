@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthenticateService } from 'src/app/services/authenticate/authenticate.service';
 import { uniqueValueValidator } from 'src/app/validators/userFieldsValidator';
@@ -10,29 +10,79 @@ import { UsersService } from 'src/app/services/user/users.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit{
+export class LoginComponent{
   errorAuthentication: boolean = false;
+  adminAuthentication: boolean = false;
   userAuthFormGroup = new FormGroup({
-    email: new FormControl('', { validators:[Validators.required],
+    userName: new FormControl('', { validators:[Validators.required],
                               asyncValidators: [uniqueValueValidator(this.userService, false)],
                               updateOn: 'blur'}),
-    password: new FormControl('', { validators: Validators.required, updateOn: 'blur'})
+    password: new FormControl('', { validators: Validators.required, updateOn: 'blur'}),
+    code: new FormControl('------')
   });
 
-  constructor(private authSer: AuthenticateService, private router: Router, private userService: UsersService,){}
-  ngOnInit(): void {
-    if(localStorage.getItem('token') != null){
-      this.router.navigate(['/']);
+  constructor(private authSer: AuthenticateService, 
+    private router: Router, private userService: UsersService,){
+      if(localStorage.getItem('isLogged') != null){
+        this.router.navigate(['/']);
+      }
+      if (localStorage.getItem('register') != null) {
+        localStorage.removeItem("register");
+        this.register = true;
+      } else {
+        this.register = false;
+      }
+  }
+
+  register: boolean;
+
+  email : string = '';
+  authenticate(){
+    this.organizeInformation();
+    this.authSer.checkRole(this.userAuthFormGroup.value).subscribe({
+      next: reponse =>{
+        if(reponse){
+          this.adminAuthentication = true;
+          this.email = this.userAuthFormGroup.get('userName')?.value ?? '';
+        }else this.login();
+        
+      },
+      error: () =>{
+        this.errorAuthentication = true;
+      }
+    });
+  }
+
+  showOK: boolean = false;
+  badCode: boolean = false;
+  confirmCode(code: string){
+    this.userAuthFormGroup.get('code')?.setValue(code);
+    if (/^\d*$/.test(this.userAuthFormGroup.get('code')?.value || 'x')) {
+      this.authSer.login(this.userAuthFormGroup.value).subscribe({
+        next: () => {
+          this.showOK = true;
+          localStorage.removeItem("isLogged");
+          localStorage.setItem("isLogged", "true");
+          localStorage.removeItem("isAdmin");
+          localStorage.setItem("isAdmin", "true");
+          setTimeout(() => {
+            this.router.navigate(['/']);
+          }, 3000);
+
+        },
+        error: error => {
+          console.error(error);
+          this.badCode = true;
+        }
+      });
     }
   }
 
-  authenticate(){
-    this.organizeInformation();
+  private login(){
     this.authSer.login(this.userAuthFormGroup.value).subscribe({
-      next: response => {
-        let token = response.jwtToken;
-
-        localStorage.setItem('token', token);
+      next: () => {
+        localStorage.removeItem("isLogged");
+        localStorage.setItem("isLogged", "true");
         this.router.navigate(['/']);
       },
       error: () => {
@@ -42,10 +92,9 @@ export class LoginComponent implements OnInit{
   }
 
   private organizeInformation(): void{
-    let keyValue = this.userAuthFormGroup.get("email")?.value;
+    let keyValue = this.userAuthFormGroup.get("userName")?.value;
     if(keyValue != null){
-      this.userAuthFormGroup.get("email")?.setValue(this.changeTheText(keyValue));
-      localStorage.setItem('email', this.changeTheText(keyValue));
+      this.userAuthFormGroup.get("userName")?.setValue(this.changeTheText(keyValue));
     }
   }
 

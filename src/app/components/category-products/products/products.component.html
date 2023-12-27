@@ -1,16 +1,37 @@
 <div class="products-section">
     <div class="products">
-        <div *ngFor="let product of products" class="product animation">
-            <a class="product-img" [href]="'/product/'+product.nameProduct">
+        <button *ngIf="isAdmin && isInCategory" class="product addProduct" (click)="createProduct()">
+            <div *ngIf="!edit">
+                <i class="material-icons">add</i> Nuevo producto
+            </div>
+            
+        </button>
+        <div *ngFor="let product of products" class="product animation" [ngClass]="{'hiddenProduct': product.hidden != null}">
+            <a class="product-img" [href]="'/product/'+product.nameProduct"  >
                 <img *ngIf="product.images.length == 0" src="assets/images/productWithoutImage.png" alt="">
                 <img *ngIf="product.images.length > 0" [src]="'data:image/'+product.images[0].contentType+';base64,'+product.images[0].imageBase64" alt="">
             </a>
             <a class="product-name" [href]="'/product/'+product.nameProduct">
                 {{ product.nameProduct }}
             </a>
-            <a class="product-description" [href]="'/product/'+product.nameProduct">
-                <p>{{ product.description}}</p>
+            <a *ngIf="!isAdmin" class="product-description" [href]="'/product/'+product.nameProduct">
+                <p>{{ product.shortDescription}}</p>
             </a>
+            <div class="product-description" *ngIf="isAdmin">
+                <p *ngIf="!edit || productEdit != product.nameProduct">{{ product.shortDescription}}</p>
+                <textarea *ngIf="edit && productEdit == product.nameProduct" type="text" [(ngModel)]="textEdit"></textarea>
+                <div>
+                    <button *ngIf="!edit" (click)="editProductInformation(product.shortDescription, product.nameProduct)" class="editOptions">
+                        <i class="material-icons">edit</i>
+                    </button>
+                    <button *ngIf="edit && productEdit == product.nameProduct" (click)="updateProductInformation(product.nameProduct)" class="editOptions" style="background: green;">
+                        <i class="material-icons">done</i>
+                    </button>
+                    <button *ngIf="edit && productEdit == product.nameProduct" (click)="editProductInformation(product.shortDescription, product.nameProduct)" class="editOptions" style="background: red;">
+                        <i class="material-icons">cancel</i>
+                    </button>
+                </div>
+            </div>
             <a class="product-price" [href]="'/product/'+product.nameProduct">
                 {{'$'+ product.unitPrice}}
             </a>
@@ -21,8 +42,6 @@
             <div class="product-add-cart">
                 <button class="material-icons">add_shopping_cart</button>
             </div>
-            
-
         </div>
     </div>
     <div class="pagination" *ngIf="totalPages > 1">

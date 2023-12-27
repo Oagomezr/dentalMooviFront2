@@ -1,5 +1,7 @@
+
+
 $principal-color1: #2e53fe;
-$principal-color2: #a83fe1;
+$principal-color2: #c776f3;
 $principal-color3: #1cd1e2;
 $principal-color3: #02a1ff;
 $font-size-letter: small;
@@ -201,7 +203,6 @@ header{
                     justify-content: right;
                     align-items: center;
                     width: 500px;
-                    //background-color: aquamarine;
                     @media (max-width: 930px) {
                         width: 300px;
                     }

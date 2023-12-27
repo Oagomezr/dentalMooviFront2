@@ -1,9 +1,7 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { JwtResponse } from 'src/app/models/jwtResponse';
 import { UserAuth } from 'src/app/models/userAuth';
-import { Users } from 'src/app/models/users';
 
 @Injectable({
   providedIn: 'root'
@@ -14,18 +12,15 @@ export class AuthenticateService {
 
   constructor(private http: HttpClient) {}
 
-  login(userAuth: UserAuth): Observable<JwtResponse> {
-    return this.http.post<JwtResponse>(`${this.baseUrl}/public/authenticate`, userAuth);
+  login(userAuth: UserAuth): Observable<any> {
+    return this.http.post<any>(`${this.baseUrl}/public/login`, userAuth, {withCredentials:true});
   }
 
-  getUserByEmail(email: string): Observable<Users> {
-    let token = localStorage.getItem('token');
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-    return this.http.get<Users>(`${this.baseUrl}/user/${email}/info`, {headers});
+  checkRole(userAuth: UserAuth): Observable<any> {
+    return this.http.post<any>(`${this.baseUrl}/public/isAuthorized`, userAuth, {withCredentials:true});
   }
 
-  logout(token: string) {
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-    return this.http.delete(`${this.baseUrl}/public/logout/${token}`, {headers});
+  logout() {
+    return this.http.delete(`${this.baseUrl}/public/logout`, {withCredentials:true});
   }
 }

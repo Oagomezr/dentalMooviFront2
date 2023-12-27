@@ -1,0 +1,19 @@
+<div class="confirmation-code">
+    <h2>Acabamos de enviar un codigo de confirmación a tu correo:</h2>
+    <h3 style="font-weight: bolder;">{{ email }}</h3>
+    <h3 *ngIf="badCode" class="badCode">Codigo enviado incorrecto</h3>
+    <div class="code">
+        <input type="text" maxlength="1" (input)="typeCode(0, $event)" />
+        <input type="text" maxlength="1" (input)="typeCode(1, $event)" />
+        <input type="text" maxlength="1" (input)="typeCode(2, $event)" />
+        <input type="text" maxlength="1" (input)="typeCode(3, $event)" />
+        <input type="text" maxlength="1" (input)="typeCode(4, $event)" />
+        <input type="text" maxlength="1" (input)="typeCode(5, $event)" />
+    </div>
+    <div class="buttons" >
+        <button mat-raised-button color="primary" (click)="confirmCode()">Confirmar</button>
+        <button mat-raised-button color="primary" [disabled]="waitTime > 0" (click)="resendCode()">
+            Reenviar codigo <span id="tiempoRestante" *ngIf="waitTime > 0">en {{waitTime}} segundos</span>
+        </button>
+    </div>
+</div>

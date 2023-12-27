@@ -1,16 +1,31 @@
 <app-header></app-header>
 
-<div class="all-page">
+<div *ngIf="!adminAuthentication" class="all-page">
     <h2>INICIO DE SESIÓN</h2>
-    <h3 *ngIf="errorAuthentication">Usuario y/o contraseña incorrecto</h3>
+    <h3 class="authError" *ngIf="errorAuthentication">Usuario y/o contraseña incorrecto</h3>
+    <h3 class="register" *ngIf="register">Ingresa por favor con el usuario que acabas de registrar</h3>
     <form (ngSubmit)="authenticate()" [formGroup]="userAuthFormGroup">
         <mat-form-field>
             <mat-label >Correo electrónico</mat-label>
-            <input matInput formControlName="email">
-            <mat-error *ngIf="userAuthFormGroup.get('email')?.errors?.['required']">Por favor ingresa un correo electrónico</mat-error>
-            <mat-error *ngIf="userAuthFormGroup.get('email')?.errors?.['uniqueValue']">No encontrado </mat-error>
+            <input matInput formControlName="userName">
+            <mat-error *ngIf="userAuthFormGroup.get('userName')?.errors?.['required']">Por favor ingresa un correo electrónico</mat-error>
+            <mat-error *ngIf="userAuthFormGroup.get('userName')?.errors?.['uniqueValue']">No encontrado </mat-error>
         </mat-form-field>
         <app-password [formPassword]="userAuthFormGroup.controls.password"></app-password>
         <button type="submit" mat-raised-button color="primary" [disabled]="userAuthFormGroup.invalid">Iniciar sesión</button>
     </form>
+</div>
+
+<app-confirm-code 
+*ngIf="adminAuthentication && !showOK"
+[email]="email" 
+(confirm)="confirmCode($event)" 
+(reSend)="authenticate()"
+[badCode]="badCode"
+></app-confirm-code>
+
+<div class="showOK" *ngIf="showOK">
+    <img src="assets/images/registerOK.png" alt="registerOK">
+    <h2>Bienvenido</h2>
+    <p>Te estamos redirigiendo a la pagina principal</p>
 </div>

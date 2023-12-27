@@ -1,7 +1,7 @@
 import { ProductsData } from "./productsData";
 
 export interface ProductsResponse {
-    amountProducts: number;
+    totalProducts: number;
     paginatedProducts: number;
     data: ProductsData[];
 }
