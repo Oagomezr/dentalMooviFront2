@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { Cart } from 'src/app/models/cart';
 import { CategoriesData } from 'src/app/models/categories/categoriesData';
 import { ProductsData } from 'src/app/models/products/productsData';
 import { AuthenticateService } from 'src/app/services/authenticate/authenticate.service';
@@ -37,10 +38,13 @@ export class HeaderComponent {
           this.name=response.firstName;
           this.lastName=response.lastName;
           this.isAuthenticate=true;
+          let userInfo = JSON.stringify(response);
+          localStorage.setItem('userData', userInfo);
         },
         error: error => {
           localStorage.removeItem("isLogged");
           localStorage.removeItem("isAdmin");
+          localStorage.removeItem("userData");
           this.isAuthenticate=false;
           console.log("Error to get user info", error);
         }
@@ -56,6 +60,7 @@ export class HeaderComponent {
           console.log("Logout complete");
           localStorage.removeItem('isLogged');
           localStorage.removeItem("isAdmin");
+          localStorage.removeItem("userData");
           window.location.reload();
         },
         error: error => {
@@ -110,5 +115,11 @@ export class HeaderComponent {
       let inputVoid = document.getElementById('search-products');
       inputVoid?.focus();
     }
+  }
+
+  shoppingCart : Cart ={
+    products: [],
+    amount: [],
+    prize: [],
   }
 }

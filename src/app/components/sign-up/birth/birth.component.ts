@@ -16,9 +16,13 @@ export class BirthComponent implements OnInit{
   @Input() formBirthDate : FormControl = new FormControl(new Date(1990, 0, 1));
   startDate = new Date(1990, 0, 1);
   ngOnInit(): void {
-    const currentDate = new Date();
-    const eighteenYearsAgo = currentDate.getFullYear() - 18;
+    let currentDate = new Date();
+    let eighteenYearsAgo = currentDate.getFullYear() - 18;
     this.startDate = new Date(eighteenYearsAgo, currentDate.getMonth(), currentDate.getDate());
+    /* if(this.formBirthDate.value !== ''){
+      let currentFormDate = new Date(this.formBirthDate.value);
+      this.formBirthDate.setValue(new Date(currentFormDate.getFullYear(), currentFormDate.getMonth(), currentFormDate.getDate() + 1));
+    } */
   }
   
 }
