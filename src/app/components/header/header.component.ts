@@ -45,6 +45,7 @@ export class HeaderComponent {
           localStorage.removeItem("isLogged");
           localStorage.removeItem("isAdmin");
           localStorage.removeItem("userData");
+          localStorage.removeItem("addressChosen");
           this.isAuthenticate=false;
           console.log("Error to get user info", error);
         }

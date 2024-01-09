@@ -1,9 +1,5 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { Users } from 'src/app/models/users';
-import { UsersService } from 'src/app/services/user/users.service';
-import { uniqueValueValidator } from 'src/app/validators/userFieldsValidator';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-user-settings',

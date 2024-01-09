@@ -1,0 +1,35 @@
+<app-header></app-header>
+<div class="all-page">
+    <h2 *ngIf="!isEdit">AGREGAR DOMICILIO</h2>
+    <h2 *ngIf="isEdit">EDITAR DOMICILIO</h2>
+    <h3 class="update-notice" *ngIf="isUpdated && !isEdit">Domicilio agregado con exito.</h3>
+    <h3 class="update-notice" *ngIf="isUpdated && isEdit">Domicilio actualizado con exito.</h3>
+    <form (ngSubmit)="sendCode()" [formGroup]="addressFormGroup">
+    
+        <div class="names">
+            <app-select-departament [formDepartament]="addressFormGroup.controls.departament"></app-select-departament>
+        
+            <mat-form-field>
+                <mat-label >Municipio, capital o localidad</mat-label>
+                <input matInput formControlName="location">
+                <mat-error *ngIf="addressFormGroup.get('location')?.errors?.['required']">Por favor ingresa este campo</mat-error>
+            </mat-form-field>
+        </div>
+        
+        <mat-form-field>
+            <mat-label >Dirección</mat-label>
+            <input matInput formControlName="address">
+            <mat-error *ngIf="addressFormGroup.get('address')?.errors?.['required']">Por favor ingresa la dirección</mat-error>
+        </mat-form-field>
+
+        <app-cel-phone [formCelphone]="addressFormGroup.controls.phone"></app-cel-phone>
+
+        <mat-form-field>
+            <mat-label>Descripción, referencias, indicaciones, etc. (Ej: torre x, apart y)</mat-label>
+            <textarea matInput formControlName="description"></textarea>
+        </mat-form-field>
+        
+        <button *ngIf="!isEdit" type="submit" mat-raised-button color="primary" [disabled]="addressFormGroup.invalid">Crear domicilio</button>
+        <button *ngIf="isEdit" type="submit" mat-raised-button color="primary" [disabled]="addressFormGroup.invalid">Actualizar domicilio</button>
+    </form>
+</div>

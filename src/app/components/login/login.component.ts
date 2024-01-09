@@ -17,7 +17,7 @@ export class LoginComponent{
     userName: new FormControl('', { validators:[Validators.required],
                               asyncValidators: [uniqueValueValidator(this.userService, false)],
                               updateOn: 'blur'}),
-    password: new FormControl('', { validators: Validators.required, updateOn: 'blur'}),
+    password: new FormControl('', { validators: Validators.required}),
     code: new FormControl('------')
   });
 

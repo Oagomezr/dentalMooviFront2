@@ -1,10 +1,14 @@
 <!-- hover-box.component.html -->
-<div class="profile-box">
+<a href="settings" class="profile-box">
     <!-- Contenido del recuadro -->
     <div class="welcome">
-        <i class="material-icons">person</i>Hola {{profileName}}
+        <i class="material-icons">person</i>
+        <div class="my-profile">
+            <div>{{userData?.firstName}}</div>
+            <div class="profile">
+                Mi perfil <i class="material-icons">navigate_next</i>
+            </div>
+        </div>
     </div>
-    
-    <button>Mi perfil</button>
-    <button>Mis direcciones</button>
-</div>
+        
+</a>

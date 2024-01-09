@@ -1,4 +1,4 @@
-import { Addresses } from "./addresses";
+import { AddressesData } from "./addresses/addressesData";
 import { Roles } from "./roles";
 
 export interface Users {
@@ -7,9 +7,9 @@ export interface Users {
     lastName?: string | null;
     email?: string | null;
     celPhone?: string | null;
-    birthday?: string | null;
+    birthdate?: string | null;
     gender?: string | null;
     password?: string | null;
     roles?: Roles[];
-    addresses?: Addresses[];
+    addresses?: AddressesData[];
 }

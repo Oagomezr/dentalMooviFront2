@@ -35,6 +35,11 @@ import { ConfirmCodeComponent } from './components/confirm-code/confirm-code.com
 import { DialogComponent } from './components/dialog/dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { VisibilityIconComponent } from './components/category-products/product/visibility-icon/visibility-icon.component';
+import { UserSettingsComponent } from './components/user-settings/user-settings.component';
+import { EditPersonalInfoComponent } from './components/user-settings/edit-personal-info/edit-personal-info.component';
+import { EditAddressesComponent } from './components/user-settings/edit-addresses/edit-addresses.component';
+import { EditAddressComponent } from './components/user-settings/edit-addresses/edit-address/edit-address.component';
+import { SelectDepartamentComponent } from './components/user-settings/edit-addresses/edit-address/select-departament/select-departament.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -43,8 +48,11 @@ const routes: Routes = [
   { path: 'admin', component: AdminComponent },
   { path: 'category/:parents', component: CategoryProductsComponent},
   { path: 'product/:product', component: ProductComponent},
+  { path: 'settings', component: UserSettingsComponent },
+  { path: 'settings/userInfo', component: EditPersonalInfoComponent },
+  { path: 'settings/addresses', component: EditAddressesComponent },
+  { path: 'settings/addresses/address', component: EditAddressComponent },
   { path: '**', component: PageNotFoundComponent },
-  
 ];
 
 @NgModule({
@@ -66,9 +74,10 @@ const routes: Routes = [
     DirectionComponent,
     ConfirmCodeComponent,
     DialogComponent,
-    
-    
-    
+    UserSettingsComponent,
+    EditPersonalInfoComponent,
+    EditAddressesComponent,
+    EditAddressComponent,
     
   ],
   imports: [
@@ -90,7 +99,8 @@ const routes: Routes = [
     BirthComponent,
     CelPhoneComponent,
     MatDialogModule,
-    VisibilityIconComponent
+    VisibilityIconComponent,
+    SelectDepartamentComponent,
   ],
   providers: [],
   bootstrap: [AppComponent]
