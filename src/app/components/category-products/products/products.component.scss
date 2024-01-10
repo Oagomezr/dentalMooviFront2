@@ -125,15 +125,34 @@
                 margin: 0 5%;
             }
             .product-add-cart{
+                position: relative;
                 display: flex;
-                align-items: center;
-                justify-content: left;
+                align-items:flex-start;
+                justify-content:space-between;
                 text-decoration: none;
-                margin: 0 5%;
+                height: 40px;
+                //margin: 0 5%;
+                margin-left: 5%;
+                margin-right: 5%;
+                margin-bottom: 5%;
                 button{
-                    width: 100%;
+                    width: 67%;
                     margin-bottom: 5%;
+                    height: 100%;
                 }
+                input{
+                    width: 30%;
+                    box-sizing: border-box;
+                    height: 100%;
+                    text-align: center;
+                }
+
+                input[type="number"]::-webkit-inner-spin-button,
+                input[type="number"]::-webkit-outer-spin-button {
+                    opacity: 1;
+                    height: 37px;
+                }
+
             }
         }
 

@@ -22,6 +22,7 @@ export class ProductComponent {
   textEdit: any = '';
 
   product: ProductsData ={
+    id:0,
     nameProduct: '',
     unitPrice: 0,
     description: '',

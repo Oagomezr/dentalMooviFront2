@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import {MatBadgeModule} from '@angular/material/badge';
@@ -11,6 +11,9 @@ import {MatBadgeModule} from '@angular/material/badge';
   imports: [MatBadgeModule, MatButtonModule, MatIconModule]
 })
 export class CartBadgeComponent {
+
+  @Input() amountOfProducts?: number;
+
   hidden = false;
 
   toggleBadgeVisibility() {

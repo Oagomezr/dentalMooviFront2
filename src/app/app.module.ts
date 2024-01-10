@@ -40,6 +40,7 @@ import { EditPersonalInfoComponent } from './components/user-settings/edit-perso
 import { EditAddressesComponent } from './components/user-settings/edit-addresses/edit-addresses.component';
 import { EditAddressComponent } from './components/user-settings/edit-addresses/edit-address/edit-address.component';
 import { SelectDepartamentComponent } from './components/user-settings/edit-addresses/edit-address/select-departament/select-departament.component';
+import { HoverBoxCartComponent } from './components/header/hover-box-cart/hover-box-cart.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -78,6 +79,7 @@ const routes: Routes = [
     EditPersonalInfoComponent,
     EditAddressesComponent,
     EditAddressComponent,
+    HoverBoxCartComponent,
     
   ],
   imports: [

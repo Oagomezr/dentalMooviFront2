@@ -33,14 +33,15 @@
                 </div>
             </div>
             <a class="product-price" [href]="'/product/'+product.nameProduct">
-                {{'$'+ product.unitPrice}}
+                {{'$'+ product.unitPrice.toLocaleString()}}
             </a>
             <a class="product-stock" [href]="'/product/'+product.nameProduct">
                 <span *ngIf="product.stock>0" style="color: green;">{{'Hay '+ product.stock+' disponibles'}}</span>
                 <span *ngIf="product.stock<=0" style="color: red;">No hay unidades disponibles</span>
             </a>
             <div class="product-add-cart">
-                <button class="material-icons">add_shopping_cart</button>
+                <input type="number" min="1" [max]="product.stock" step="1" value="1" #amount>
+                <button class="material-icons" (click)="addToCart(product.id, amount.value)">add_shopping_cart</button>
             </div>
         </div>
     </div>

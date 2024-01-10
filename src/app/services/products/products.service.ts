@@ -2,6 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { CartRequest } from 'src/app/models/cart/cartRequest';
+import { CartResponse } from 'src/app/models/cart/cartResponse';
 import { message } from 'src/app/models/message';
 import { ProductsData } from 'src/app/models/products/productsData';
 import { ProductsResponse } from 'src/app/models/products/productsResponse';
@@ -73,6 +75,10 @@ export class ProductsService {
 
   createProduct(categoryName: string): Observable<boolean> {
     return this.http.post<boolean>(`${this.baseUrl}/admin/products/createProduct`, categoryName, {withCredentials:true});
+  }
+
+  getShoppingCartProducts(store: CartRequest): Observable<CartResponse>{
+    return this.http.post<CartResponse>(`${this.baseUrl}/${this.access}/shoppingCart`, store);
   }
 
 }

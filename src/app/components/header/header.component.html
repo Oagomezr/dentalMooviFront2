@@ -80,8 +80,9 @@
                 <button>SEDE</button>
                 <button>CONTACTENOS</button>
             </div>
-            <div class="cart">
-                <app-cart-badge></app-cart-badge>
+            <div class="cart" (mouseover)="showBoxCart(true)" (mouseout)="showBoxCart(false)">
+                <app-cart-badge [amountOfProducts]="cartResponse.amountOfProducts"></app-cart-badge>
+                <app-hover-box-cart [hidden]="showHoverBoxCart" [cartResponse]="cartResponse"></app-hover-box-cart>
             </div>
         </div>
     </nav>

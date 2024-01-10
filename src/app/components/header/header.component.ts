@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { Cart } from 'src/app/models/cart';
+import { CartDtoResponse } from 'src/app/models/cart/cartData';
+import { CartRequest } from 'src/app/models/cart/cartRequest';
+import { CartResponse } from 'src/app/models/cart/cartResponse';
 import { CategoriesData } from 'src/app/models/categories/categoriesData';
 import { ProductsData } from 'src/app/models/products/productsData';
 import { AuthenticateService } from 'src/app/services/authenticate/authenticate.service';
@@ -19,6 +21,8 @@ export class HeaderComponent {
   name?: string|null;
   lastName?: string|null;
   categories?: CategoriesData[];
+  cartRequest: CartRequest = { data: [] };
+  cartResponse: CartResponse = { data: [], total:0, amountOfProducts:0};
 
   constructor(private userSer: UsersService, private productsSer: ProductsService, 
     private router: Router, private categoriesSer: CategoriesService, private authSer: AuthenticateService){
@@ -46,8 +50,21 @@ export class HeaderComponent {
           localStorage.removeItem("isAdmin");
           localStorage.removeItem("userData");
           localStorage.removeItem("addressChosen");
+          localStorage.removeItem("callerCart");
           this.isAuthenticate=false;
           console.log("Error to get user info", error);
+        }
+      });
+    }
+
+    if(localStorage.getItem('callerCart')){
+      let cartData = JSON.parse(localStorage.getItem('callerCart')!);
+      this.cartRequest.data = cartData;
+      this.productsSer.getShoppingCartProducts(this.cartRequest).subscribe({
+        next: response=>{
+          this.cartResponse = response;
+        },error:e=>{
+          console.log(e);
         }
       });
     }
@@ -75,6 +92,7 @@ export class HeaderComponent {
 
   showHoverBoxProfile: boolean = true;
   showHoverBoxProducts: boolean = true;
+  showHoverBoxCart: boolean = true;
 
   showBoxProfile(show: boolean): void {
     this.showHoverBoxProfile = !show;
@@ -82,6 +100,10 @@ export class HeaderComponent {
 
   showBoxProducts(show: boolean): void{
     this.showHoverBoxProducts = !show;
+  }
+
+  showBoxCart(show: boolean): void{
+    this.showHoverBoxCart = !show;
   }
 
   products?: ProductsData[];
@@ -118,9 +140,9 @@ export class HeaderComponent {
     }
   }
 
-  shoppingCart : Cart ={
+  /* shoppingCart : Cart ={
     products: [],
     amount: [],
     prize: [],
-  }
+  } */
 }

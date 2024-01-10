@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Router } from '@angular/router';
+import { CartDtoRequest } from 'src/app/models/cart/cartStore';
 import { ProductsData } from 'src/app/models/products/productsData';
 import { ProductsService } from 'src/app/services/products/products.service';
 
@@ -29,8 +30,8 @@ export class ProductsComponent {
     edit: boolean = false;
     textEdit:string = '';
     productEdit: string = '';
-
-    
+    callerCart: CartDtoRequest[] = localStorage.getItem('callerCart') ? JSON.parse(localStorage.getItem('callerCart')!) : [];
+    amount?: number;
 
     get pages() {
         return Array.from({ length: this.totalPages });
@@ -80,7 +81,6 @@ export class ProductsComponent {
                 }
             });
         }
-        console.log(this.products);
     }
 
     editProductInformation(shortDescription:string, nameProduct: string){
@@ -102,5 +102,34 @@ export class ProductsComponent {
                 console.log(this.locationCategory[0]);
             }
         });
+    }
+
+    addToCart(id:number, amount:string){
+
+        let shouldExit = false;
+        this.callerCart.forEach(elem => {
+            if(elem.id == id){
+                elem.amount += +amount;
+                localStorage.setItem('callerCart', JSON.stringify(this.callerCart));
+                shouldExit= true;
+                console.log(this.callerCart);
+                return;
+            }
+        });
+
+        if(shouldExit){
+            window.location.reload();
+            return;
+        }
+
+        let productAdded: CartDtoRequest ={
+            id: id,
+            amount: +amount
+        }
+
+        this.callerCart.push(productAdded);
+        localStorage.setItem('callerCart', JSON.stringify(this.callerCart));
+        console.log(this.callerCart);
+        window.location.reload();
     }
 }
