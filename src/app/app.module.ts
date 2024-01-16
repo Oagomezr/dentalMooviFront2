@@ -41,6 +41,7 @@ import { EditAddressesComponent } from './components/user-settings/edit-addresse
 import { EditAddressComponent } from './components/user-settings/edit-addresses/edit-address/edit-address.component';
 import { SelectDepartamentComponent } from './components/user-settings/edit-addresses/edit-address/select-departament/select-departament.component';
 import { HoverBoxCartComponent } from './components/header/hover-box-cart/hover-box-cart.component';
+import { OrderDetailsComponent } from './components/order-details/order-details.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -53,6 +54,7 @@ const routes: Routes = [
   { path: 'settings/userInfo', component: EditPersonalInfoComponent },
   { path: 'settings/addresses', component: EditAddressesComponent },
   { path: 'settings/addresses/address', component: EditAddressComponent },
+  { path: 'orderDetails', component: OrderDetailsComponent },
   { path: '**', component: PageNotFoundComponent },
 ];
 
@@ -80,6 +82,7 @@ const routes: Routes = [
     EditAddressesComponent,
     EditAddressComponent,
     HoverBoxCartComponent,
+    OrderDetailsComponent,
     
   ],
   imports: [

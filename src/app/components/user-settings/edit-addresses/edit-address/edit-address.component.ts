@@ -21,9 +21,15 @@ export class EditAddressComponent {
   }
 
   isEdit:boolean = this.addressInfo.id != 0;
+  addressNotice: boolean = false;
 
   constructor(private userService: UsersService, private router: Router){
     console.log(this.addressInfo);
+    if(localStorage.getItem('addressNotice') != null){
+      localStorage.removeItem("addressNotice");
+      this.addressNotice = true;
+    }
+    if(localStorage.getItem('isLogged')== null) this.router.navigate(['/']);
   }
 
   isUpdated: boolean = false;
@@ -37,13 +43,17 @@ export class EditAddressComponent {
     description: new FormControl( this.addressInfo.description),
   });
 
-  sendCode(){
+  send(){
     if(this.addressInfo.id == 0){
       this.userService.addAddress(this.addressFormGroup.value).subscribe({
         next: () =>{
           this.isUpdated=true;
           setTimeout(() => {
-            this.router.navigate(['/settings/addresses']);
+            if(this.addressNotice){
+              this.router.navigate(['/orderDetails']);
+            }else{
+              this.router.navigate(['/settings/addresses']);
+            }
           }, 2000);
         },error: e =>{
           console.error(e);

@@ -28,13 +28,15 @@ export class LoginComponent{
       }
       if (localStorage.getItem('register') != null) {
         localStorage.removeItem("register");
-        this.register = true;
-      } else {
-        this.register = false;
+        this.registrationNotice = true;
+      }
+      if(localStorage.getItem('shoppingNotice') != null){
+        this.shoppingNotice = true;
       }
   }
 
-  register: boolean;
+  registrationNotice: boolean = false;
+  shoppingNotice: boolean = false;
 
   email : string = '';
   authenticate(){
@@ -78,12 +80,28 @@ export class LoginComponent{
     }
   }
 
+  session:boolean = false;
   private login(){
     this.authSer.login(this.userAuthFormGroup.value).subscribe({
       next: () => {
         localStorage.removeItem("isLogged");
         localStorage.setItem("isLogged", "true");
-        this.router.navigate(['/']);
+        this.session = true;
+        this.errorAuthentication = false;
+        this.adminAuthentication = false;
+        this.registrationNotice = false;
+        if(this.shoppingNotice){
+          setTimeout(() => {
+            this.router.navigate(['/orderDetails']);
+          }, 3000);
+          
+        }else{
+          setTimeout(() => {
+            this.router.navigate(['/']);
+          }, 3000);
+          
+        }
+        localStorage.removeItem("shoppingNotice");
       },
       error: () => {
         this.errorAuthentication = true;

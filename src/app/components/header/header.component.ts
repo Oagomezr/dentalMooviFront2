@@ -1,11 +1,10 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { CartDtoResponse } from 'src/app/models/cart/cartData';
 import { CartRequest } from 'src/app/models/cart/cartRequest';
-import { CartResponse } from 'src/app/models/cart/cartResponse';
 import { CategoriesData } from 'src/app/models/categories/categoriesData';
 import { ProductsData } from 'src/app/models/products/productsData';
 import { AuthenticateService } from 'src/app/services/authenticate/authenticate.service';
+import { CartService } from 'src/app/services/cart/cart.service';
 import { CategoriesService } from 'src/app/services/categories/categories.service';
 import { ProductsService } from 'src/app/services/products/products.service';
 import { UsersService } from 'src/app/services/user/users.service';
@@ -22,9 +21,8 @@ export class HeaderComponent {
   lastName?: string|null;
   categories?: CategoriesData[];
   cartRequest: CartRequest = { data: [] };
-  cartResponse: CartResponse = { data: [], total:0, amountOfProducts:0};
 
-  constructor(private userSer: UsersService, private productsSer: ProductsService, 
+  constructor(private userSer: UsersService, private productsSer: ProductsService, public cartSer: CartService, 
     private router: Router, private categoriesSer: CategoriesService, private authSer: AuthenticateService){
     this.categoriesSer.getCategories().subscribe({
       next: responseGetC =>{
@@ -46,13 +44,9 @@ export class HeaderComponent {
           localStorage.setItem('userData', userInfo);
         },
         error: error => {
-          localStorage.removeItem("isLogged");
-          localStorage.removeItem("isAdmin");
-          localStorage.removeItem("userData");
-          localStorage.removeItem("addressChosen");
-          localStorage.removeItem("callerCart");
-          this.isAuthenticate=false;
+          localStorage.clear();
           console.log("Error to get user info", error);
+          window.location.reload();
         }
       });
     }
@@ -62,7 +56,7 @@ export class HeaderComponent {
       this.cartRequest.data = cartData;
       this.productsSer.getShoppingCartProducts(this.cartRequest).subscribe({
         next: response=>{
-          this.cartResponse = response;
+          this.cartSer.cartResponse = response;
         },error:e=>{
           console.log(e);
         }
@@ -76,9 +70,8 @@ export class HeaderComponent {
       this.authSer.logout().subscribe({
         next: () => {
           console.log("Logout complete");
-          localStorage.removeItem('isLogged');
-          localStorage.removeItem("isAdmin");
-          localStorage.removeItem("userData");
+          localStorage.clear();
+          this.router.navigate(['/']);
           window.location.reload();
         },
         error: error => {

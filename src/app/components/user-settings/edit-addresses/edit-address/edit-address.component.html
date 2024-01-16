@@ -2,9 +2,10 @@
 <div class="all-page">
     <h2 *ngIf="!isEdit">AGREGAR DOMICILIO</h2>
     <h2 *ngIf="isEdit">EDITAR DOMICILIO</h2>
-    <h3 class="update-notice" *ngIf="isUpdated && !isEdit">Domicilio agregado con exito.</h3>
-    <h3 class="update-notice" *ngIf="isUpdated && isEdit">Domicilio actualizado con exito.</h3>
-    <form (ngSubmit)="sendCode()" [formGroup]="addressFormGroup">
+    <h3 class="notice updated" *ngIf="isUpdated && !isEdit">Domicilio agregado con exito.</h3>
+    <h3 class="notice updated" *ngIf="isUpdated && isEdit">Domicilio actualizado con exito.</h3>
+    <h3 class="notice add" *ngIf="addressNotice"> Proporciona una dirección de entrega para que podamos enviar tu pedido</h3>
+    <form (ngSubmit)="send()" [formGroup]="addressFormGroup">
     
         <div class="names">
             <app-select-departament [formDepartament]="addressFormGroup.controls.departament"></app-select-departament>

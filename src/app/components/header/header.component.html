@@ -81,8 +81,8 @@
                 <button>CONTACTENOS</button>
             </div>
             <div class="cart" (mouseover)="showBoxCart(true)" (mouseout)="showBoxCart(false)">
-                <app-cart-badge [amountOfProducts]="cartResponse.amountOfProducts"></app-cart-badge>
-                <app-hover-box-cart [hidden]="showHoverBoxCart" [cartResponse]="cartResponse"></app-hover-box-cart>
+                <app-cart-badge [amountOfProducts]="cartSer.cartResponse.amountOfProducts"></app-cart-badge>
+                <app-hover-box-cart [hidden]="showHoverBoxCart" [cartResponse]="cartSer.cartResponse"></app-hover-box-cart>
             </div>
         </div>
     </nav>

@@ -1,9 +1,11 @@
 <app-header></app-header>
 
 <div *ngIf="!adminAuthentication" class="all-page">
+    <h3 class="shopping notice" *ngIf="shoppingNotice">Para completar la compra, es necesario iniciar sesión o registrarse</h3>
     <h2>INICIO DE SESIÓN</h2>
-    <h3 class="authError" *ngIf="errorAuthentication">Usuario y/o contraseña incorrecto</h3>
-    <h3 class="register" *ngIf="register">Ingresa por favor con el usuario que acabas de registrar</h3>
+    <h3 class="authError notice" *ngIf="errorAuthentication">Usuario y/o contraseña incorrecto</h3>
+    <h3 class="registration notice" *ngIf="registrationNotice">Ingresa por favor con el usuario que acabas de registrar</h3>
+    <h3 class="registration notice" *ngIf="session">Sesión iniciada con exito</h3>
     <form (ngSubmit)="authenticate()" [formGroup]="userAuthFormGroup">
         <mat-form-field>
             <mat-label >Correo electrónico</mat-label>
@@ -12,8 +14,11 @@
             <mat-error *ngIf="userAuthFormGroup.get('userName')?.errors?.['uniqueValue']">No encontrado </mat-error>
         </mat-form-field>
         <app-password [formPassword]="userAuthFormGroup.controls.password"></app-password>
-        <button type="submit" mat-raised-button color="primary" [disabled]="userAuthFormGroup.invalid">Iniciar sesión</button>
+        <button type="submit" mat-raised-button color="primary" style="margin-bottom: 10px;">Iniciar sesión</button>
     </form>
+    <div class="registration-button">
+        <a href="/signup"> Registrarse </a>
+    </div>
 </div>
 
 <app-confirm-code 
