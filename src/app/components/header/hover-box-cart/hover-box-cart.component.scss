@@ -46,13 +46,20 @@
                 justify-content: space-around;
                 align-items: left;
     
-                .prize{
-                    input{
+                .prize-calc{
+                    .amount{
                         width: 45px;
                     }
-                    input[type="number"]::-webkit-inner-spin-button,
-                    input[type="number"]::-webkit-outer-spin-button {
+                    .amount[type="number"]::-webkit-inner-spin-button,
+                    .amount[type="number"]::-webkit-outer-spin-button {
                         opacity: 1;
+                    }
+                    .prize{
+                        width: 55px;
+                    }
+                    .prize[type="number"]::-webkit-inner-spin-button,
+                    .prize[type="number"]::-webkit-outer-spin-button {
+                        display: none;
                     }
                 }
             }

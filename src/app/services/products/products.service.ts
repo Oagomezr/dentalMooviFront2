@@ -78,7 +78,7 @@ export class ProductsService {
   }
 
   getShoppingCartProducts(store: CartRequest): Observable<CartResponse>{
-    return this.http.post<CartResponse>(`${this.baseUrl}/${this.access}/shoppingCart`, store);
+    return this.http.post<CartResponse>(`${this.baseUrl}/${this.access}/shoppingCart`, store, {withCredentials:this.isAdmin});
   }
 
 }

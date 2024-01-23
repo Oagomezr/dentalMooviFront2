@@ -59,6 +59,7 @@ export class HeaderComponent {
           this.cartSer.cartResponse = response;
         },error:e=>{
           console.log(e);
+          localStorage.removeItem('callerCart');
         }
       });
     }

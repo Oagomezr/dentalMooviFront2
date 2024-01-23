@@ -41,7 +41,7 @@
             </a>
             <div class="product-add-cart">
                 <input type="number" min="1" [max]="product.stock" step="1" value="1" #amount>
-                <button class="material-icons" (click)="addToCart(product.id, amount.value)">add_shopping_cart</button>
+                <button class="material-icons" (click)="addToCart(product.id, product.unitPrice, amount.value)">add_shopping_cart</button>
             </div>
         </div>
     </div>

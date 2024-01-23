@@ -44,8 +44,15 @@ export class OrderDetailsComponent {
     }else{
       this.cartRequest.data = JSON.parse(localStorage.getItem('callerCart')!);
       this.cartSer.generateOrder(this.cartRequest, +this.selectedAddressId).subscribe({
-        next: response=>{
-          console.log(response);
+        next: data=>{
+          const blob = new Blob([data.body!], { type: 'application/pdf' });
+          const url = window.URL.createObjectURL(blob);
+          const link = document.createElement('a');
+          link.href = url;
+          link.download = 'orden.pdf'; 
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
         },error: e =>{
           console.log(e);
         }

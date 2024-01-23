@@ -12,6 +12,7 @@ export class HoverBoxCartComponent {
 
   constructor (private router: Router){}
 
+  isAdmin: boolean = localStorage.getItem('isAdmin') != null;
   callerCart: CartDtoRequest[] = localStorage.getItem('callerCart') ? JSON.parse(localStorage.getItem('callerCart')!) : [];
 
   @Input() cartResponse!: CartResponse;
@@ -38,6 +39,20 @@ export class HoverBoxCartComponent {
       }
     });
 
+  }
+
+  updatePrize(newValue: any, index: number){
+    this.cartResponse.total -= this.cartResponse.data[index].subtotal;
+    this.cartResponse.data[index].prize = +newValue.value;
+    this.cartResponse.data[index].subtotal = +newValue.value * this.cartResponse.data[index].amount;
+    this.cartResponse.total += this.cartResponse.data[index].subtotal;
+
+    this.callerCart.forEach(elem => {
+      if(elem.id == this.cartResponse.data[index].id){
+          elem.prize = +newValue.value;
+          localStorage.setItem('callerCart', JSON.stringify(this.callerCart));
+      }
+    });
   }
 
   deleteElem(index: number){

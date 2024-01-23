@@ -9,9 +9,14 @@
                 <div class="name">
                     {{ product.productName }}
                 </div>
-                <div class="prize">
-                    <input type="number" min="1" [max]="5" step="1" [value]="product.amount" (input)="updateAmounts($event.target, i)">
-                    {{ "X $"+product.prize.toLocaleString()+" = $"+product.subtotal.toLocaleString() }}
+                <div class="prize-calc">
+                    <input class="amount" type="number" min="1" [max]="5" step="1" [value]="product.amount" (input)="updateAmounts($event.target, i)">
+                    <span *ngIf="!isAdmin">{{ "X $"+product.prize.toLocaleString()}}</span>
+                    <span *ngIf="isAdmin">
+                        {{" X " }}
+                        <input class="prize" type="number" min="50" step="50" [value]="product.prize" (input)="updatePrize($event.target, i)">
+                    </span>
+                    {{" = $"+product.subtotal.toLocaleString() }}
                 </div>
             </div>
     

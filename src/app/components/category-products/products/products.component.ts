@@ -104,7 +104,7 @@ export class ProductsComponent {
         });
     }
 
-    addToCart(id:number, amount:string){
+    addToCart(id:number, prize:number, amount:string){
 
         let shouldExit = false;
         this.callerCart.forEach(elem => {
@@ -124,6 +124,7 @@ export class ProductsComponent {
 
         let productAdded: CartDtoRequest ={
             id: id,
+            prize: prize,
             amount: +amount
         }
 
