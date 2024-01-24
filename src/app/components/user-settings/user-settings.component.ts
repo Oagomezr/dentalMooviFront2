@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-settings',
@@ -7,7 +8,9 @@ import { FormControl } from '@angular/forms';
   styleUrls: ['./user-settings.component.scss']
 })
 export class UserSettingsComponent {
-
+  constructor(private router: Router){
+    this.router.navigate(['/orderDetails'])
+  }
   currentPassword: FormControl = new FormControl('');
   newPassword: FormControl = new FormControl('');
 }

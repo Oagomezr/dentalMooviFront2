@@ -8,7 +8,6 @@ import { AdminComponent } from './components/admin/admin.component';
 import { LoginComponent } from './components/login/login.component';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
-import { RouterModule, Routes } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HeaderComponent } from './components/header/header.component';
@@ -42,21 +41,9 @@ import { EditAddressComponent } from './components/user-settings/edit-addresses/
 import { SelectDepartamentComponent } from './components/user-settings/edit-addresses/edit-address/select-departament/select-departament.component';
 import { HoverBoxCartComponent } from './components/header/hover-box-cart/hover-box-cart.component';
 import { OrderDetailsComponent } from './components/order-details/order-details.component';
-
-const routes: Routes = [
-  { path: '', component: HomeComponent },
-  { path: 'login', component: LoginComponent },
-  { path: 'signup', component: SignUpComponent },
-  { path: 'admin', component: AdminComponent },
-  { path: 'category/:parents', component: CategoryProductsComponent},
-  { path: 'product/:product', component: ProductComponent},
-  { path: 'settings', component: UserSettingsComponent },
-  { path: 'settings/userInfo', component: EditPersonalInfoComponent },
-  { path: 'settings/addresses', component: EditAddressesComponent },
-  { path: 'settings/addresses/address', component: EditAddressComponent },
-  { path: 'orderDetails', component: OrderDetailsComponent },
-  { path: '**', component: PageNotFoundComponent },
-];
+import { OrderAdminComponent } from './components/order-admin/order-admin.component';
+import { MatIconModule } from '@angular/material/icon';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -83,13 +70,13 @@ const routes: Routes = [
     EditAddressComponent,
     HoverBoxCartComponent,
     OrderDetailsComponent,
+    OrderAdminComponent,
     
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    RouterModule.forRoot(routes),
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
@@ -106,6 +93,8 @@ const routes: Routes = [
     MatDialogModule,
     VisibilityIconComponent,
     SelectDepartamentComponent,
+    MatIconModule, 
+    CommonModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

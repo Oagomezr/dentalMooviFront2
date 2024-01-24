@@ -74,7 +74,7 @@ export class HoverBoxCartComponent {
       this.router.navigate(['/login']);
     }else{
       localStorage.setItem('purchase', "true");
-      this.router.navigate(['/orderDetails']);
+      this.isAdmin ? this.router.navigate(['/orderDetails']) : this.router.navigate(['/orderDetails']);
     }
   }
 }
