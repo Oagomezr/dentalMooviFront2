@@ -1,13 +1,32 @@
 import { Component } from '@angular/core';
 import { UsersService } from 'src/app/services/user/users.service';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { uniqueValueValidator } from 'src/app/validators/userFieldsValidator';
 import { Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { BirthComponent } from "./birth/birth.component";
+import { SelectGenderComponent } from "./select-gender/select-gender.component";
+import { CelPhoneComponent } from "./cel-phone/cel-phone.component";
+import { PasswordComponent } from "../password-field/password.component";
+import { ConfirmCodeComponent } from "../confirm-code/confirm-code.component";
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatSelectModule } from '@angular/material/select';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 
 @Component({
-  selector: 'app-sign-up',
-  templateUrl: './sign-up.component.html',
-  styleUrls: ['./sign-up.component.scss']
+    selector: 'app-sign-up',
+    templateUrl: './sign-up.component.html',
+    styleUrls: ['./sign-up.component.scss'],
+    standalone: true,
+    imports: [
+      CommonModule, MatFormFieldModule, ReactiveFormsModule, BirthComponent, 
+      SelectGenderComponent, CelPhoneComponent, PasswordComponent, ConfirmCodeComponent, 
+      MatInputModule, MatButtonModule, MatSelectModule, MatDatepickerModule,
+      MatNativeDateModule, MatIconModule, ]
 })
 export class SignUpComponent {
   userFormGroup = new FormGroup({

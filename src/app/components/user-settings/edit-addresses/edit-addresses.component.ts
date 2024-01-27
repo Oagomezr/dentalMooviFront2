@@ -4,19 +4,26 @@ import { AddressesData } from 'src/app/models/addresses/addressesData';
 import { UsersService } from 'src/app/services/user/users.service';
 import { DialogComponent } from '../../dialog/dialog.component';
 import { MatDialog } from '@angular/material/dialog';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-edit-addresses',
   templateUrl: './edit-addresses.component.html',
-  styleUrls: ['./edit-addresses.component.scss']
+  styleUrls: ['./edit-addresses.component.scss'],
+  standalone: true, 
+  imports: [CommonModule]
 })
 export class EditAddressesComponent {
 
   addresses: AddressesData[] = [];
+  ref:string | null = localStorage.getItem('isLogged');
+  isDelete:boolean = false;
 
-  constructor(private userService: UsersService, private router: Router, public dialog: MatDialog){
+  constructor(private userService: UsersService, private router: Router, public dialog: MatDialog){}
+
+  ngOnInit(){
     localStorage.removeItem("addressChosen");
-    this.userService.getAddresses().subscribe({
+    this.userService.getAddresses(this.ref!).subscribe({
       next: response=>{
         console.log(response);
         this.addresses = response.data;
@@ -33,8 +40,6 @@ export class EditAddressesComponent {
     this.router.navigate(['settings/addresses/address']);
   }
 
-  isDelete:boolean = false;
-
   openDialog(index:number){
 
     const dialogRef = this.dialog.open(DialogComponent, {
@@ -47,7 +52,7 @@ export class EditAddressesComponent {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.userService.deleteAddress(this.addresses[index].id!).subscribe({
+        this.userService.deleteAddress(this.addresses[index].id!, this.ref!).subscribe({
           next:()=>{
             this.isDelete = true;
             setTimeout(() => {

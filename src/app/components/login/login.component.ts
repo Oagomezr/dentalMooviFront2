@@ -1,18 +1,40 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthenticateService } from 'src/app/services/authenticate/authenticate.service';
 import { uniqueValueValidator } from 'src/app/validators/userFieldsValidator';
 import { Router } from '@angular/router';
 import { UsersService } from 'src/app/services/user/users.service';
+import { CommonModule } from '@angular/common';
+import { PasswordComponent } from "../password-field/password.component";
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { ConfirmCodeComponent } from "../confirm-code/confirm-code.component";
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+    selector: 'app-login',
+    templateUrl: './login.component.html',
+    styleUrls: ['./login.component.scss'],
+    standalone: true,
+    imports: [CommonModule, PasswordComponent, MatFormFieldModule, ReactiveFormsModule, 
+      ConfirmCodeComponent, MatInputModule, MatButtonModule]
 })
 export class LoginComponent{
+
+  constructor(private authSer: AuthenticateService, 
+    private router: Router, private userService: UsersService,){}
+
+  registrationNotice: boolean = false;
+  shoppingNotice: boolean = false;
   errorAuthentication: boolean = false;
   adminAuthentication: boolean = false;
+  session:boolean = false;
+
+  email : string = '';
+
+  showOK: boolean = false;
+  badCode: boolean = false;
+
   userAuthFormGroup = new FormGroup({
     userName: new FormControl('', { validators:[Validators.required],
                               asyncValidators: [uniqueValueValidator(this.userService, false)],
@@ -21,24 +43,19 @@ export class LoginComponent{
     code: new FormControl('------')
   });
 
-  constructor(private authSer: AuthenticateService, 
-    private router: Router, private userService: UsersService,){
-      if(localStorage.getItem('isLogged') != null){
-        this.router.navigate(['/']);
-      }
-      if (localStorage.getItem('register') != null) {
-        localStorage.removeItem("register");
-        this.registrationNotice = true;
-      }
-      if(localStorage.getItem('shoppingNotice') != null){
-        this.shoppingNotice = true;
-      }
+  ngOnInit(){
+    if(localStorage.getItem('isLogged') != null){
+      this.router.navigate(['/']);
+    }
+    if (localStorage.getItem('register') != null) {
+      localStorage.removeItem("register");
+      this.registrationNotice = true;
+    }
+    if(localStorage.getItem('shoppingNotice') != null){
+      this.shoppingNotice = true;
+    }
   }
-
-  registrationNotice: boolean = false;
-  shoppingNotice: boolean = false;
-
-  email : string = '';
+  
   authenticate(){
     this.organizeInformation();
     this.authSer.checkRole(this.userAuthFormGroup.value).subscribe({
@@ -54,9 +71,7 @@ export class LoginComponent{
       }
     });
   }
-
-  showOK: boolean = false;
-  badCode: boolean = false;
+  
   confirmCode(code: string){
     this.userAuthFormGroup.get('code')?.setValue(code);
     if (/^\d*$/.test(this.userAuthFormGroup.get('code')?.value || 'x')) {
@@ -80,12 +95,12 @@ export class LoginComponent{
     }
   }
 
-  session:boolean = false;
+  
   private login(){
     this.authSer.login(this.userAuthFormGroup.value).subscribe({
-      next: () => {
-        localStorage.removeItem("isLogged");
-        localStorage.setItem("isLogged", "true");
+      next: r => {
+        console.log(r);
+        localStorage.setItem("isLogged", r.infoMessage);
         this.session = true;
         this.errorAuthentication = false;
         this.adminAuthentication = false;

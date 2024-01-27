@@ -1,13 +1,19 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AddressesData } from 'src/app/models/addresses/addressesData';
 import { UsersService } from 'src/app/services/user/users.service';
+import { SelectDepartamentComponent } from "./select-departament/select-departament.component";
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { CelPhoneComponent } from "../../../sign-up/cel-phone/cel-phone.component";
 
 @Component({
-  selector: 'app-edit-address',
-  templateUrl: './edit-address.component.html',
-  styleUrls: ['./edit-address.component.scss']
+    selector: 'app-edit-address',
+    templateUrl: './edit-address.component.html',
+    styleUrls: ['./edit-address.component.scss'],
+    standalone: true,
+    imports: [CommonModule, SelectDepartamentComponent, MatFormFieldModule, ReactiveFormsModule, CelPhoneComponent]
 })
 export class EditAddressComponent {
 
@@ -20,6 +26,7 @@ export class EditAddressComponent {
     description: ''
   }
 
+  ref:string | null = localStorage.getItem('isLogged');
   isEdit:boolean = this.addressInfo.id != 0;
   addressNotice: boolean = false;
 
@@ -29,7 +36,7 @@ export class EditAddressComponent {
       localStorage.removeItem("addressNotice");
       this.addressNotice = true;
     }
-    if(localStorage.getItem('isLogged')== null) this.router.navigate(['/']);
+    if(this.ref == null) this.router.navigate(['/']);
   }
 
   isUpdated: boolean = false;
@@ -45,7 +52,7 @@ export class EditAddressComponent {
 
   send(){
     if(this.addressInfo.id == 0){
-      this.userService.addAddress(this.addressFormGroup.value).subscribe({
+      this.userService.addAddress(this.addressFormGroup.value, this.ref!).subscribe({
         next: () =>{
           this.isUpdated=true;
           setTimeout(() => {
@@ -61,7 +68,7 @@ export class EditAddressComponent {
         }
       });
     }else{
-      this.userService.updateAddress(this.addressFormGroup.value).subscribe({
+      this.userService.updateAddress(this.addressFormGroup.value, this.ref!).subscribe({
         next: () =>{
           this.isUpdated=true;
           setTimeout(() => {

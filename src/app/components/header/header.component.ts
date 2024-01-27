@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { CartRequest } from 'src/app/models/cart/cartRequest';
@@ -8,66 +9,46 @@ import { CartService } from 'src/app/services/cart/cart.service';
 import { CategoriesService } from 'src/app/services/categories/categories.service';
 import { ProductsService } from 'src/app/services/products/products.service';
 import { UsersService } from 'src/app/services/user/users.service';
+import { HoverBoxProfileComponent } from "./hover-box-profile/hover-box-profile.component";
+import { HoverBoxProductsComponent } from "./hover-box-products/hover-box-products.component";
+import { CartBadgeComponent } from "./cart-badge/cart-badge.component";
+import { HoverBoxCartComponent } from "./hover-box-cart/hover-box-cart.component";
 
 @Component({
-  selector: 'app-header',
-  templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss']
+    selector: 'app-header',
+    templateUrl: './header.component.html',
+    styleUrls: ['./header.component.scss'],
+    standalone: true,
+    imports: [CommonModule, HoverBoxProfileComponent, HoverBoxProductsComponent, CartBadgeComponent, HoverBoxCartComponent]
 })
 export class HeaderComponent {
 
-  isAuthenticate:boolean = false;
+  constructor(
+    private userSer: UsersService, private productsSer: ProductsService, 
+    public cartSer: CartService, private router: Router, 
+    private categoriesSer: CategoriesService, private authSer: AuthenticateService){}
+
   name?: string|null;
-  lastName?: string|null;
   categories?: CategoriesData[];
   cartRequest: CartRequest = { data: [] };
+  ref:string | null = localStorage.getItem('isLogged');
+  isAuthenticate:boolean = this.ref != null;
 
-  constructor(private userSer: UsersService, private productsSer: ProductsService, public cartSer: CartService, 
-    private router: Router, private categoriesSer: CategoriesService, private authSer: AuthenticateService){
-    this.categoriesSer.getCategories().subscribe({
-      next: responseGetC =>{
-        this.categories = responseGetC.data;
-      },
-      error: error=>{
-        console.log('Error to get categories', error);
-      }
-    });
+  showHoverBoxProfile: boolean = true;
+  showHoverBoxProducts: boolean = true;
+  showHoverBoxCart: boolean = true;
 
-    let isLogged = localStorage.getItem('isLogged');
-    if(isLogged!=null){
-      this.userSer.getUser().subscribe({
-        next: response => {
-          this.name=response.firstName;
-          this.lastName=response.lastName;
-          this.isAuthenticate=true;
-          let userInfo = JSON.stringify(response);
-          localStorage.setItem('userData', userInfo);
-        },
-        error: error => {
-          localStorage.clear();
-          console.log("Error to get user info", error);
-          window.location.reload();
-        }
-      });
-    }
+  products?: ProductsData[];
+  notFoundProducts: boolean = false;
 
-    if(localStorage.getItem('callerCart')){
-      let cartData = JSON.parse(localStorage.getItem('callerCart')!);
-      this.cartRequest.data = cartData;
-      this.productsSer.getShoppingCartProducts(this.cartRequest).subscribe({
-        next: response=>{
-          this.cartSer.cartResponse = response;
-        },error:e=>{
-          console.log(e);
-          localStorage.removeItem('callerCart');
-        }
-      });
-    }
+  ngOnInit(){
+    this.getCategories();
+    this.getShoppingCart();
+    this.getNameOfUser();
   }
 
   logout(){
-    let isLogged = localStorage.getItem('isLogged');
-    if(isLogged != null){
+    if(this.ref){
       this.authSer.logout().subscribe({
         next: () => {
           console.log("Logout complete");
@@ -84,10 +65,6 @@ export class HeaderComponent {
     }
   }
 
-  showHoverBoxProfile: boolean = true;
-  showHoverBoxProducts: boolean = true;
-  showHoverBoxCart: boolean = true;
-
   showBoxProfile(show: boolean): void {
     this.showHoverBoxProfile = !show;
   }
@@ -100,8 +77,6 @@ export class HeaderComponent {
     this.showHoverBoxCart = !show;
   }
 
-  products?: ProductsData[];
-  notFoundProducts: boolean = false;
   searchProduct(inputSearch: any){
     let nameProduct: string = inputSearch.target.value;
     let productFound = document.getElementById('search');
@@ -134,9 +109,46 @@ export class HeaderComponent {
     }
   }
 
-  /* shoppingCart : Cart ={
-    products: [],
-    amount: [],
-    prize: [],
-  } */
+  getCategories(){
+    this.categoriesSer.getCategories().subscribe({
+      next: responseGetC =>{
+        this.categories = responseGetC.data;
+      },
+      error: error=>{
+        console.log('Error to get categories', error);
+      }
+    });
+  }
+
+  getNameOfUser(){
+    if(this.ref){
+      console.log("loged");
+      this.userSer.getName(this.ref!).subscribe({
+        next: r => {
+          this.name = r.infoMessage;
+          this.isAuthenticate = true;
+        },
+        error: e => {
+          localStorage.clear();
+          console.log(e);
+          //window.location.reload();
+        }
+      });
+    }
+  }
+
+  getShoppingCart(){
+    if(localStorage.getItem('callerCart')){
+      let cartData = JSON.parse(localStorage.getItem('callerCart')!);
+      this.cartRequest.data = cartData;
+      this.productsSer.getShoppingCartProducts(this.cartRequest).subscribe({
+        next: response=>{
+          this.cartSer.cartResponse = response;
+        },error:e=>{
+          console.log(e);
+          localStorage.removeItem('callerCart');
+        }
+      });
+    }
+  }
 }

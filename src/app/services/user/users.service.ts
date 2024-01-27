@@ -23,31 +23,35 @@ export class UsersService {
     return this.http.post<void>(`${this.baseUrl}/public/sendEmail`, email);
   }
 
-  getUser(): Observable<Users>{
-    return this.http.get<Users>(`${this.baseUrl}/user/getUser`, {withCredentials:true});
+  getName(ref:string): Observable<message> {
+    return this.http.get<message>(`${this.baseUrl}/user/name/${ref}`, {withCredentials:true});
+  }
+
+  getUser(ref:string): Observable<Users>{
+    return this.http.get<Users>(`${this.baseUrl}/user/getUser/${ref}`, {withCredentials:true});
   }
 
   checkIfValueExists(email: string) {
     return this.http.get<boolean>(`${this.baseUrl}/public/${email}`);
   }
 
-  updateUser(user: Users): Observable<message>{
-    return this.http.put<message>(`${this.baseUrl}/user/update`, user, {withCredentials:true});
+  updateUser(user: Users, ref:string): Observable<message>{
+    return this.http.put<message>(`${this.baseUrl}/user/update/${ref}`, user, {withCredentials:true});
   }
 
-  addAddress(address:AddressesData): Observable<message>{
-    return this.http.post<message>(`${this.baseUrl}/user/addAddress`, address, {withCredentials:true});
+  addAddress(address:AddressesData, ref:string): Observable<message>{
+    return this.http.post<message>(`${this.baseUrl}/user/addAddress/${ref}`, address, {withCredentials:true});
   }
 
-  getAddresses(): Observable<AddressesResponse>{
-    return this.http.get<AddressesResponse>(`${this.baseUrl}/user/getAddresses`, {withCredentials:true});
+  getAddresses(ref:string): Observable<AddressesResponse>{
+    return this.http.get<AddressesResponse>(`${this.baseUrl}/user/getAddresses/${ref}`, {withCredentials:true});
   }
 
-  updateAddress(address:AddressesData): Observable<message>{
-    return this.http.put<message>(`${this.baseUrl}/user/updateAddress`, address, {withCredentials:true});
+  updateAddress(address:AddressesData, ref:string): Observable<message>{
+    return this.http.put<message>(`${this.baseUrl}/user/updateAddress/${ref}`, address, {withCredentials:true});
   }
 
-  deleteAddress(id:number): Observable<message>{
-    return this.http.delete<message>(`${this.baseUrl}/user/deleteAddress/${id}`, {withCredentials:true});
+  deleteAddress(id:number, ref:string): Observable<message>{
+    return this.http.delete<message>(`${this.baseUrl}/user/deleteAddress/${id}/${ref}`, {withCredentials:true});
   }
 }

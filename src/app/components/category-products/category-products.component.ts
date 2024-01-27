@@ -4,16 +4,24 @@ import { CategoriesData } from 'src/app/models/categories/categoriesData';
 import { CategoriesService } from 'src/app/services/categories/categories.service';
 import { DialogComponent } from './../dialog/dialog.component';
 import { MatDialog } from '@angular/material/dialog';
+import { CommonModule } from '@angular/common';
+import { DirectionComponent } from "./direction/direction.component";
+import { ProductsComponent } from "./products/products.component";
+import { FormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'app-category-products',
-  templateUrl: './category-products.component.html',
-  styleUrls: ['./category-products.component.scss']
+    selector: 'app-category-products',
+    templateUrl: './category-products.component.html',
+    styleUrls: ['./category-products.component.scss'],
+    standalone: true,
+    imports: [CommonModule, DirectionComponent, ProductsComponent, FormsModule]
 })
 export class CategoryProductsComponent {
 
   constructor(private route: ActivatedRoute, private categoriesSer: CategoriesService, 
-      public dialog: MatDialog) {
+    public dialog: MatDialog) {}
+
+  ngOnInit(){
     this.categoriesSer.getCategories().subscribe({
       next: responseGetC =>{
         this.categories = responseGetC.data;
@@ -26,7 +34,6 @@ export class CategoryProductsComponent {
       this.locationCategory = params['parents'].split(',');
       this.toggleSubcategories(this.locationCategory, true);
     });
-    
   }
 
   actions:string[] = [];
@@ -182,4 +189,5 @@ export class CategoryProductsComponent {
       });
     }
   }
+  
 }

@@ -1,13 +1,16 @@
+import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-confirm-code',
   templateUrl: './confirm-code.component.html',
-  styleUrls: ['./confirm-code.component.scss']
+  styleUrls: ['./confirm-code.component.scss'],
+  standalone: true,
+  imports:[CommonModule]
 })
 export class ConfirmCodeComponent {
 
-  constructor(){
+  ngOnInit(){
     this.waitTime = 60;
     this.counter();
   }
@@ -18,6 +21,7 @@ export class ConfirmCodeComponent {
   @Output() reSend = new EventEmitter<void>();
 
   code: string = '------';
+  waitTime: number = 0;
 
   typeCode(index: number, event: any) {
     let character = event.target.value;
@@ -41,7 +45,7 @@ export class ConfirmCodeComponent {
     }
   }
 
-  waitTime: number = 0;
+  
   counter(){
 
     setTimeout(() => {

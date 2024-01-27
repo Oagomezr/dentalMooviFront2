@@ -11,7 +11,7 @@ export class CategoriesService {
 
   private baseUrl = 'http://localhost:8087';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   getCategories(): Observable<CategoriesResponse>{
     return this.http.get<CategoriesResponse>(`${this.baseUrl}/public/categories`);

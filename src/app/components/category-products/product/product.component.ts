@@ -4,15 +4,39 @@ import { ProductsData } from 'src/app/models/products/productsData';
 import { ProductsService } from 'src/app/services/products/products.service';
 import { DialogComponent } from '../../dialog/dialog.component';
 import { MatDialog } from '@angular/material/dialog';
+import { CommonModule } from '@angular/common';
+import { DirectionComponent } from "../direction/direction.component";
+import { VisibilityIconComponent } from "./visibility-icon/visibility-icon.component";
+import { FormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'app-product',
-  templateUrl: './product.component.html',
-  styleUrls: ['./product.component.scss'],
+    selector: 'app-product',
+    templateUrl: './product.component.html',
+    styleUrls: ['./product.component.scss'],
+    standalone: true,
+    imports: [CommonModule, DirectionComponent, VisibilityIconComponent, FormsModule]
 })
 export class ProductComponent {
 
-  constructor(private route: ActivatedRoute, private productSer: ProductsService, public dialog: MatDialog) {}
+  constructor(private route: ActivatedRoute, 
+    private productSer: ProductsService, public dialog: MatDialog) {}
+
+  ngOnInit() {
+    this.route.params.subscribe((params: Params) => {
+      this.nameProduct = params['product'];
+      
+      this.productSer.getProductByName(this.nameProduct).subscribe({
+        next: response => {
+          this.product = response;
+          console.log(response);
+          this.locationCategory = response.location;
+        },
+        error: error => {
+          console.error("error to load product: "+error);
+        }
+      });
+    });
+  }
 
   locationCategory: string[] = [];
   nameProduct: string = '';
@@ -33,22 +57,7 @@ export class ProductComponent {
     hidden: null
   };
 
-  ngOnInit(): void {
-    this.route.params.subscribe((params: Params) => {
-      this.nameProduct = params['product'];
-      
-      this.productSer.getProductByName(this.nameProduct).subscribe({
-        next: response => {
-          this.product = response;
-          console.log(response);
-          this.locationCategory = response.location;
-        },
-        error: error => {
-          console.error("error to load product: "+error);
-        }
-      });
-    });
-  }
+  
 
   changeImg(index: number){
     this.indexImg = index;

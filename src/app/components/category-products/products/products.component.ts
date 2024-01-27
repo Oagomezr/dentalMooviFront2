@@ -1,4 +1,6 @@
+import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CartDtoRequest } from 'src/app/models/cart/cartStore';
 import { ProductsData } from 'src/app/models/products/productsData';
@@ -7,16 +9,15 @@ import { ProductsService } from 'src/app/services/products/products.service';
 @Component({
     selector: 'app-products',
     templateUrl: './products.component.html',
-    styleUrls: ['./products.component.scss']
+    styleUrls: ['./products.component.scss'],
+    standalone: true,
+    imports: [CommonModule, FormsModule]
 })
 export class ProductsComponent {
 
-    ngOnInit(): void {
-        this.getProducts();
-        
-    }
-
     constructor(private productsSer: ProductsService, private router: Router) {}
+
+    ngOnInit() { this.getProducts(); }
 
     @Output() sendCurrentPage = new EventEmitter<number>();
     @Input() locationCategory: string[] = [];
@@ -113,7 +114,6 @@ export class ProductsComponent {
                 localStorage.setItem('callerCart', JSON.stringify(this.callerCart));
                 shouldExit= true;
                 console.log(this.callerCart);
-                return;
             }
         });
 

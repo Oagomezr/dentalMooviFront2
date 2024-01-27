@@ -5,22 +5,32 @@ import { AddressesData } from 'src/app/models/addresses/addressesData';
 import { UsersService } from 'src/app/services/user/users.service';
 import { CartService } from 'src/app/services/cart/cart.service';
 import { CartRequest } from 'src/app/models/cart/cartRequest';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-order-details',
   templateUrl: './order-details.component.html',
-  styleUrls: ['./order-details.component.scss']
+  styleUrls: ['./order-details.component.scss'],
+  standalone: true,
+  imports:[CommonModule, FormsModule, MatButtonModule]
 })
 export class OrderDetailsComponent {
+  
+  constructor(private userService: UsersService, private router: Router, 
+    public dialog: MatDialog, public cartSer: CartService){
+    localStorage.removeItem("addressChosen");
+  }
+
   addresses: AddressesData[] = [];
   selectedAddressId: string = '';
   selectNotice: boolean = false;
   cartRequest: CartRequest = { data:[] };
+  ref:string | null = localStorage.getItem('isLogged');
 
-  constructor(private userService: UsersService, private router: Router, 
-    public dialog: MatDialog, public cartSer: CartService){
-    localStorage.removeItem("addressChosen");
-    this.userService.getAddresses().subscribe({
+  ngOnInit(){
+    this.userService.getAddresses(this.ref!).subscribe({
       next: response=>{
         console.log(response);
         if(response.data.length == 0) this.addAddress();
@@ -59,5 +69,4 @@ export class OrderDetailsComponent {
       });
     }
   }
-
 }

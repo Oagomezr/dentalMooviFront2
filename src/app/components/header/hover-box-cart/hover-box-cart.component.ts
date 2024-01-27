@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { CartResponse } from 'src/app/models/cart/cartResponse';
@@ -6,7 +7,9 @@ import { CartDtoRequest } from 'src/app/models/cart/cartStore';
 @Component({
   selector: 'app-hover-box-cart',
   templateUrl: './hover-box-cart.component.html',
-  styleUrls: ['./hover-box-cart.component.scss']
+  styleUrls: ['./hover-box-cart.component.scss'],
+  standalone: true,
+  imports:[CommonModule]
 })
 export class HoverBoxCartComponent {
 
@@ -74,7 +77,7 @@ export class HoverBoxCartComponent {
       this.router.navigate(['/login']);
     }else{
       localStorage.setItem('purchase', "true");
-      this.isAdmin ? this.router.navigate(['/orderDetails']) : this.router.navigate(['/orderDetails']);
+      this.isAdmin ? this.router.navigate(['/orderAdmin']) : this.router.navigate(['/orderDetails']);
     }
   }
 }
