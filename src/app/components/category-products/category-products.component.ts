@@ -21,6 +21,15 @@ export class CategoryProductsComponent {
   constructor(private route: ActivatedRoute, private categoriesSer: CategoriesService, 
     public dialog: MatDialog) {}
 
+  actions:string[] = [];
+  textCategory: string = '';
+  isAdmin: boolean = localStorage.getItem('isAdmin') != null;
+  locationCategory: string[] = [];
+  currentPage?: string;
+  categories?: CategoriesData[];
+  beforeExpanded: string[]=[];
+  expandedCategories: { [key: string]: boolean } = {};
+
   ngOnInit(){
     this.categoriesSer.getCategories().subscribe({
       next: responseGetC =>{
@@ -35,15 +44,6 @@ export class CategoryProductsComponent {
       this.toggleSubcategories(this.locationCategory, true);
     });
   }
-
-  actions:string[] = [];
-  textCategory: string = '';
-  isAdmin: boolean = localStorage.getItem('isAdmin') != null;
-  locationCategory: string[] = [];
-  currentPage?: string;
-  categories?: CategoriesData[];
-  beforeExpanded: string[]=[];
-  expandedCategories: { [key: string]: boolean } = {};
 
   toggleSubcategories(categoryAndParents: string[], init: boolean) { 
     if(init){

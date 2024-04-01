@@ -108,11 +108,13 @@ export class LoginComponent{
         if(this.shoppingNotice){
           setTimeout(() => {
             this.router.navigate(['/orderDetails']);
+            window.location.reload();
           }, 3000);
           
         }else{
           setTimeout(() => {
             this.router.navigate(['/']);
+            window.location.reload();
           }, 3000);
           
         }

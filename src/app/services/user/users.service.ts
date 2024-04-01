@@ -31,8 +31,8 @@ export class UsersService {
     return this.http.get<Users>(`${this.baseUrl}/user/getUser/${ref}`, {withCredentials:true});
   }
 
-  checkIfValueExists(email: string) {
-    return this.http.get<boolean>(`${this.baseUrl}/public/${email}`);
+  checkIfValueExists(email: string, signup: boolean) {
+    return this.http.get<boolean>(`${this.baseUrl}/public/${email}/${signup}`);
   }
 
   updateUser(user: Users, ref:string): Observable<message>{

@@ -12,10 +12,13 @@ import { PasswordComponent } from "../password-field/password.component";
     imports: [CommonModule, PasswordComponent]
 })
 export class UserSettingsComponent {
+  
+  constructor(private router: Router){}
+
   isLogged: boolean = localStorage.getItem('isLogged') != null;
-  constructor(private router: Router){
-    if(!this.isLogged) this.router.navigate(['/']);
-  }
   currentPassword: FormControl = new FormControl('');
   newPassword: FormControl = new FormControl('');
+
+  ngOnInit(){ if(!this.isLogged) this.router.navigate(['/']); }
+  
 }
