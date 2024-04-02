@@ -1,12 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-confirm-code',
   templateUrl: './confirm-code.component.html',
   styleUrls: ['./confirm-code.component.scss'],
   standalone: true,
-  imports:[CommonModule]
+  imports:[CommonModule, FormsModule]
 })
 export class ConfirmCodeComponent {
 
@@ -20,39 +21,44 @@ export class ConfirmCodeComponent {
   @Output() confirm = new EventEmitter<string>();
   @Output() reSend = new EventEmitter<void>();
 
+  inputValues: string[] = ['', '', '', '', '', ''];
+
   code: string = '------';
   waitTime: number = 0;
 
   typeCode(index: number, event: any) {
-    let character = event.target.value;
+    const character = event.target.value;
+    const isNumeric = /^\d*$/.test(character) && character !== '';
+    const nextInput = event.target.nextElementSibling as HTMLInputElement;
+    const prevInput = event.target.previousElementSibling as HTMLInputElement;
 
-    let charaters = this.code?.split('') || [''];
-    
-    //If the entered value is numeric, add and focus the next input
-    if (/^\d*$/.test(character) && character != '') {
-
-      charaters[index] = character;
-      this.code= charaters.join('');
-
-      let nextInput = event.target.nextElementSibling as HTMLInputElement;
-      if (nextInput) {
-        nextInput.focus();
-      }
-
-    } else {
-      //If the entered value is not numeric, delete the content
-      event.target.value = '';
-    }
+    if (character.length === 0 && prevInput) {
+      prevInput.focus();
+    } else if (character.length === 1) {
+        if (isNumeric) {
+          let characters = this.code?.split('') || [''];
+          characters[index] = character;
+          this.code = characters.join('');
+          if (nextInput) nextInput.focus();
+        } else {
+          event.target.value = '';
+        }
+    } else if (character.length === 6 && isNumeric) {
+        this.code = character;
+        this.inputValues = character.split('');
+    } else if (character.length > 2) {
+        alert("El código pegado es incorrecto");
+        this.inputValues = character.split('');
+    } else
+        event.target.value = event.target.value.slice(0, -1);
   }
 
   
   counter(){
-
     setTimeout(() => {
       this.waitTime -= 1;
       if(this.waitTime > 0) this.counter();
     }, 1000);
-
   }
 
   confirmCode(){

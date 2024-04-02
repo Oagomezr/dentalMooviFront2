@@ -39,7 +39,11 @@ export class SignUpComponent {
     celPhone: new FormControl('', { validators: [Validators.required, Validators.minLength(12), Validators.pattern('^[0-9-]*$')]}),
     birthdate: new FormControl(''),
     gender: new FormControl('', Validators.required),
-    password: new FormControl('', Validators.required),
+    password: new FormControl('', [
+      Validators.required,
+      Validators.minLength(5),
+      Validators.pattern(/^(?=.*[a-zA-Z])(?=.*\d).+$/)
+    ]),
     code: new FormControl('------')
   });
 
