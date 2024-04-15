@@ -1,13 +1,14 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-confirm-code',
   templateUrl: './confirm-code.component.html',
   styleUrls: ['./confirm-code.component.scss'],
   standalone: true,
-  imports:[CommonModule, FormsModule]
+  imports:[CommonModule, FormsModule, MatButtonModule]
 })
 export class ConfirmCodeComponent {
 
@@ -30,19 +31,16 @@ export class ConfirmCodeComponent {
     const character = event.target.value;
     const isNumeric = /^\d*$/.test(character) && character !== '';
     const nextInput = event.target.nextElementSibling as HTMLInputElement;
-    const prevInput = event.target.previousElementSibling as HTMLInputElement;
 
-    if (character.length === 0 && prevInput) {
-      prevInput.focus();
-    } else if (character.length === 1) {
-        if (isNumeric) {
-          let characters = this.code?.split('') || [''];
-          characters[index] = character;
-          this.code = characters.join('');
-          if (nextInput) nextInput.focus();
-        } else {
-          event.target.value = '';
-        }
+    if (character.length === 1) {
+      if (isNumeric) {
+        let characters = this.code?.split('') || [''];
+        characters[index] = character;
+        this.code = characters.join('');
+        if (nextInput) nextInput.focus();
+      } else {
+        event.target.value = '';
+      }
     } else if (character.length === 6 && isNumeric) {
         this.code = character;
         this.inputValues = character.split('');

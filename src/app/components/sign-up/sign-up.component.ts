@@ -26,7 +26,7 @@ import { MatNativeDateModule } from '@angular/material/core';
       CommonModule, MatFormFieldModule, ReactiveFormsModule, BirthComponent, 
       SelectGenderComponent, CelPhoneComponent, PasswordComponent, ConfirmCodeComponent, 
       MatInputModule, MatButtonModule, MatSelectModule, MatDatepickerModule,
-      MatNativeDateModule, MatIconModule, ]
+      MatNativeDateModule, MatIconModule]
 })
 export class SignUpComponent {
   userFormGroup = new FormGroup({
@@ -66,7 +66,6 @@ export class SignUpComponent {
         }
       });
     }
-    
   }
 
   //process each field to have organized information to database
