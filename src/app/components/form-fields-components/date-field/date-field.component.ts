@@ -6,23 +6,20 @@ import {MatNativeDateModule} from '@angular/material/core';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'app-birth',
-  templateUrl: './birth.component.html',
-  styleUrls: ['./birth.component.scss'],
+  selector: 'app-date-field',
+  templateUrl: './date-field.component.html',
+  styleUrls: ['./date-field.component.scss'],
   standalone: true,
   imports: [MatFormFieldModule, MatInputModule, MatDatepickerModule, MatNativeDateModule, FormsModule, ReactiveFormsModule],
 })
-export class BirthComponent implements OnInit{
+export class DateFieldComponent implements OnInit{
   @Input() formBirthDate : FormControl = new FormControl(new Date(1990, 0, 1));
+  @Input() labelName: string = '';
   startDate = new Date(1990, 0, 1);
   ngOnInit(): void {
     let currentDate = new Date();
     let eighteenYearsAgo = currentDate.getFullYear() - 18;
     this.startDate = new Date(eighteenYearsAgo, currentDate.getMonth(), currentDate.getDate());
-    /* if(this.formBirthDate.value !== ''){
-      let currentFormDate = new Date(this.formBirthDate.value);
-      this.formBirthDate.setValue(new Date(currentFormDate.getFullYear(), currentFormDate.getMonth(), currentFormDate.getDate() + 1));
-    } */
   }
   
 }

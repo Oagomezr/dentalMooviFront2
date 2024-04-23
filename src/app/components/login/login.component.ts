@@ -5,9 +5,9 @@ import { uniqueValueValidator } from 'src/app/validators/userFieldsValidator';
 import { Router } from '@angular/router';
 import { UsersService } from 'src/app/services/user/users.service';
 import { CommonModule } from '@angular/common';
-import { PasswordComponent } from "../password-field/password.component";
+import { PasswordFieldComponent } from "../form-fields-components/password-field/password-field.component";
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { ConfirmCodeComponent } from "../confirm-code/confirm-code.component";
+import { ConfirmCodeFieldComponent } from "../form-fields-components/confirm-code-field/confirm-code-field.component";
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 
@@ -16,8 +16,8 @@ import { MatButtonModule } from '@angular/material/button';
     templateUrl: './login.component.html',
     styleUrls: ['./login.component.scss'],
     standalone: true,
-    imports: [CommonModule, PasswordComponent, MatFormFieldModule, ReactiveFormsModule, 
-      ConfirmCodeComponent, MatInputModule, MatButtonModule]
+    imports: [CommonModule, PasswordFieldComponent, MatFormFieldModule, ReactiveFormsModule, 
+      ConfirmCodeFieldComponent, MatInputModule, MatButtonModule]
 })
 export class LoginComponent{
 

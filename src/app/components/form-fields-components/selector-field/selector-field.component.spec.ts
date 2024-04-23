@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ConfirmCodeComponent } from './confirm-code.component';
+import { SelectorFieldComponent } from './selector-field.component';
 
-describe('ConfirmCodeComponent', () => {
-  let component: ConfirmCodeComponent;
-  let fixture: ComponentFixture<ConfirmCodeComponent>;
+describe('SelectorFieldComponent', () => {
+  let component: SelectorFieldComponent;
+  let fixture: ComponentFixture<SelectorFieldComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ConfirmCodeComponent ]
+      declarations: [ SelectorFieldComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(ConfirmCodeComponent);
+    fixture = TestBed.createComponent(SelectorFieldComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

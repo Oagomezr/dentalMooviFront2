@@ -7,13 +7,26 @@
     <form (ngSubmit)="send()" [formGroup]="addressFormGroup">
     
         <div class="names">
-            <app-select-departament [formDepartament]="addressFormGroup.controls.departament"></app-select-departament>
-        
-            <mat-form-field>
-                <mat-label >Municipio, capital o localidad</mat-label>
-                <input matInput formControlName="location">
-                <mat-error *ngIf="addressFormGroup.get('location')?.errors?.['required']">Por favor ingresa este campo</mat-error>
-            </mat-form-field>
+
+            <app-autocomplete-field 
+            class="fields"
+            [label]="'Departamento'"
+            [options]="departamens"
+            (sendSearch)="searchDepartaments($event)"
+            (sendOption)="setDepartament($event)"
+            [fieldText]="addressInfo.departament!"
+            ></app-autocomplete-field>
+
+            <app-autocomplete-field
+            class="fields"
+            [label]="'Municipio, capital o localidad'"
+            [options]="municipalies"
+            (sendSearch)="searchMunicipalies($event)"
+            (sendOption)="setMunicipaly($event)"
+            [disabled]="idDepartament == 0"
+            [disabledLabel]="'Municipio, capital o localidad'"
+            [fieldText]="addressInfo.location!"
+            ></app-autocomplete-field>
         </div>
         
         <mat-form-field>
@@ -22,7 +35,7 @@
             <mat-error *ngIf="addressFormGroup.get('address')?.errors?.['required']">Por favor ingresa la dirección</mat-error>
         </mat-form-field>
 
-        <app-cel-phone [formCelphone]="addressFormGroup.controls.phone"></app-cel-phone>
+        <app-cel-phone-field [formCelphone]="addressFormGroup.controls.phone"></app-cel-phone-field>
 
         <mat-form-field>
             <mat-label>Descripción, referencias, indicaciones, etc. (Ej: torre x, apart y)</mat-label>

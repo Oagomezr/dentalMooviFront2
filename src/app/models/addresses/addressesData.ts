@@ -5,4 +5,5 @@ export interface AddressesData {
     address?: string | null;
     phone?: string | null;
     description?: string | null;
+    idMunicipaly?: number | null;
 }

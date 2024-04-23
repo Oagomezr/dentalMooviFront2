@@ -28,27 +28,35 @@
         </mat-form-field>
 
         <div class="birth-gender">
-            
-            <app-birth [formBirthDate]="userFormGroup.controls.birthdate"></app-birth>
-            <app-select-gender [formGender]="userFormGroup.controls.gender"></app-select-gender>
+            <app-date-field 
+            [formBirthDate]="userFormGroup.controls.birthdate"
+            [labelName]="'Fecha de nacimiento(opcional)'"
+            ></app-date-field>
+
+            <app-selector-field 
+            [formSelector]="userFormGroup.controls.gender"
+            [fields]="genders"
+            [labelName]="'Genero'"
+            [errorLabel]="'Por favor seleccione un genero'"
+            ></app-selector-field>
         </div>
 
         <div class="celphone-password">
-            <app-cel-phone [formCelphone]="userFormGroup.controls.celPhone"></app-cel-phone>
-            <app-password [formPassword]="userFormGroup.controls.password"></app-password>
+            <app-cel-phone-field [formCelphone]="userFormGroup.controls.celPhone"></app-cel-phone-field>
+            <app-password-field [formPassword]="userFormGroup.controls.password"></app-password-field>
         </div> 
     
         <button type="submit" mat-raised-button color="primary" [disabled]="userFormGroup.invalid">Crear usuario</button>
     </form>
 </div>
     
-<app-confirm-code 
+<app-confirm-code-field 
 *ngIf="confirm && !showRegisterOK"
 [email]="email" 
 (confirm)="confirmCode($event)" 
 (reSend)="sendCode()"
 [badCode]="badCode"
-></app-confirm-code>
+></app-confirm-code-field>
 
 
 <div class="registerOK" *ngIf="showRegisterOK">

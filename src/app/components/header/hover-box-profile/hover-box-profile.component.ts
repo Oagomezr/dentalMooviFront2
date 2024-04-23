@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Users } from 'src/app/models/users';
 
 @Component({
@@ -10,5 +10,5 @@ import { Users } from 'src/app/models/users';
   imports: [CommonModule]
 })
 export class HoverBoxProfileComponent {
-  userData: Users | null = localStorage.getItem('userData') ? JSON.parse(localStorage.getItem('userData')!) : null;
+  @Input() nameUser?:string|null;
 }

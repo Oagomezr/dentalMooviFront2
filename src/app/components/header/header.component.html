@@ -59,7 +59,8 @@
                         <button>
                             <i class="material-icons">person</i>{{name}}<i class="material-icons">expand_more</i>
                         </button>
-                        <app-hover-box-profile [hidden]="showHoverBoxProfile"></app-hover-box-profile>
+                        <app-hover-box-profile [hidden]="showHoverBoxProfile"
+                        [nameUser]="name"></app-hover-box-profile>
                     </div>
                     <button>Mis compras</button>
                     <button (click)="logout()">Salir <i class="material-icons">logout</i></button>

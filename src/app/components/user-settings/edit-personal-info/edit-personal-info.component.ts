@@ -6,9 +6,9 @@ import { Router } from '@angular/router';
 import { Users } from 'src/app/models/users';
 import { UsersService } from 'src/app/services/user/users.service';
 import { uniqueValueValidator } from 'src/app/validators/userFieldsValidator';
-import { BirthComponent } from "../../sign-up/birth/birth.component";
-import { SelectGenderComponent } from "../../sign-up/select-gender/select-gender.component";
-import { CelPhoneComponent } from "../../sign-up/cel-phone/cel-phone.component";
+import { DateFieldComponent } from "../../form-fields-components/date-field/date-field.component";
+import { SelectorFieldComponent } from "../../form-fields-components/selector-field/selector-field.component";
+import { CelPhoneFieldComponent } from "../../form-fields-components/cel-phone-field/cel-phone-field.component";
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 
@@ -18,8 +18,8 @@ import { MatButtonModule } from '@angular/material/button';
     styleUrls: ['./edit-personal-info.component.scss'],
     standalone: true,
     imports: [
-      CommonModule, MatFormFieldModule, ReactiveFormsModule, BirthComponent, 
-      SelectGenderComponent, CelPhoneComponent, MatFormFieldModule, MatInputModule, 
+      CommonModule, MatFormFieldModule, ReactiveFormsModule, DateFieldComponent, 
+      SelectorFieldComponent, CelPhoneFieldComponent, MatFormFieldModule, MatInputModule, 
       MatButtonModule]
 })
 export class EditPersonalInfoComponent {

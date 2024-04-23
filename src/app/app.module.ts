@@ -12,17 +12,17 @@ import { HttpClientModule } from '@angular/common/http';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { CartBadgeComponent } from './components/header/cart-badge/cart-badge.component';
-import { SelectGenderComponent } from './components/sign-up/select-gender/select-gender.component';
-import { PasswordComponent } from './components/password-field/password.component';
-import { BirthComponent } from './components/sign-up/birth/birth.component';
-import { CelPhoneComponent } from './components/sign-up/cel-phone/cel-phone.component';
+import { SelectorFieldComponent } from './components/form-fields-components/selector-field/selector-field.component';
+import { PasswordFieldComponent } from './components/form-fields-components/password-field/password-field.component';
+import { DateFieldComponent } from './components/form-fields-components/date-field/date-field.component';
+import { CelPhoneFieldComponent } from './components/form-fields-components/cel-phone-field/cel-phone-field.component';
 import { HoverBoxProfileComponent } from './components/header/hover-box-profile/hover-box-profile.component';
 import { HoverBoxProductsComponent } from './components/header/hover-box-products/hover-box-products.component';
 import { CategoryProductsComponent } from './components/category-products/category-products.component';
 import { ProductsComponent } from './components/category-products/products/products.component';
 import { ProductComponent } from './components/category-products/product/product.component';
 import { DirectionComponent } from './components/category-products/direction/direction.component';
-import { ConfirmCodeComponent } from './components/confirm-code/confirm-code.component';
+import { ConfirmCodeFieldComponent } from './components/form-fields-components/confirm-code-field/confirm-code-field.component';
 import { DialogComponent } from './components/dialog/dialog.component';
 import { VisibilityIconComponent } from './components/category-products/product/visibility-icon/visibility-icon.component';
 import { UserSettingsComponent } from './components/user-settings/user-settings.component';
@@ -37,8 +37,7 @@ import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    
+    AppComponent
   ],
   imports: [
     BrowserModule,
@@ -46,10 +45,10 @@ import { MatIconModule } from '@angular/material/icon';
     BrowserAnimationsModule,
     HttpClientModule,
     CartBadgeComponent,
-    SelectGenderComponent,
-    PasswordComponent,
-    BirthComponent,
-    CelPhoneComponent,
+    SelectorFieldComponent,
+    PasswordFieldComponent,
+    DateFieldComponent,
+    CelPhoneFieldComponent,
     VisibilityIconComponent,
     SelectDepartamentComponent,
     MatIconModule, 
@@ -57,7 +56,7 @@ import { MatIconModule } from '@angular/material/icon';
     ProductsComponent,
     ProductComponent,
     DirectionComponent,
-    ConfirmCodeComponent,
+    ConfirmCodeFieldComponent,
     DialogComponent,
     HoverBoxCartComponent,
     HoverBoxProductsComponent,

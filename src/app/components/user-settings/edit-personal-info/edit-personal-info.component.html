@@ -21,11 +21,11 @@
 
         <div class="birth-gender">
             
-            <app-birth [formBirthDate]="userFormGroup.controls.birthdate"></app-birth>
-            <app-select-gender [formGender]="userFormGroup.controls.gender"></app-select-gender>
+            <app-date-field [formBirthDate]="userFormGroup.controls.birthdate"></app-date-field>
+            <app-selector-field [formSelector]="userFormGroup.controls.gender"></app-selector-field>
         </div>
 
-        <app-cel-phone [formCelphone]="userFormGroup.controls.celPhone"></app-cel-phone>
+        <app-cel-phone-field [formCelphone]="userFormGroup.controls.celPhone"></app-cel-phone-field>
     
         <button type="submit" mat-raised-button color="primary">Actualizar información</button>
         <a class="back-button" mat-raised-button color="secondary" href="settings">Regresar</a>

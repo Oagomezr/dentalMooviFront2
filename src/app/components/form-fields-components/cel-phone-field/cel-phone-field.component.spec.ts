@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SelectGenderComponent } from './select-gender.component';
+import { CelPhoneFieldComponent } from './cel-phone-field.component';
 
-describe('SelectGenderComponent', () => {
-  let component: SelectGenderComponent;
-  let fixture: ComponentFixture<SelectGenderComponent>;
+describe('CelPhoneFieldComponent', () => {
+  let component: CelPhoneFieldComponent;
+  let fixture: ComponentFixture<CelPhoneFieldComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SelectGenderComponent ]
+      declarations: [ CelPhoneFieldComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(SelectGenderComponent);
+    fixture = TestBed.createComponent(CelPhoneFieldComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

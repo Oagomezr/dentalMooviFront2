@@ -1,5 +1,5 @@
 <mat-form-field>
-    <mat-label>Fecha de nacimiento(opcional)</mat-label>
+    <mat-label>{{ labelName }}</mat-label>
     <input matInput [matDatepicker]="dp3" [readonly]="true" [formControl]="formBirthDate">
     <!-- <mat-hint>MM/DD/YYYY</mat-hint> -->
     <mat-datepicker-toggle matIconSuffix [for]="dp3"></mat-datepicker-toggle>

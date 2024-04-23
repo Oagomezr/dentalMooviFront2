@@ -74,7 +74,8 @@ export class HeaderComponent {
   }
 
   showBoxCart(show: boolean): void{
-    this.showHoverBoxCart = !show;
+    if(this.cartSer.cartResponse.amountOfProducts>0) 
+      this.showHoverBoxCart = !show;
   }
 
   searchProduct(inputSearch: any){
@@ -129,9 +130,9 @@ export class HeaderComponent {
           this.isAuthenticate = true;
         },
         error: e => {
+          this.isAuthenticate = false;
           localStorage.clear();
           console.log(e);
-          //window.location.reload();
         }
       });
     }

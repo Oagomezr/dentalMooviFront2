@@ -11,7 +11,7 @@
             <mat-error *ngIf="userAuthFormGroup.get('userName')?.errors?.['required']">Por favor ingresa un correo electrónico</mat-error>
             <mat-error *ngIf="userAuthFormGroup.get('userName')?.errors?.['uniqueValue']">No encontrado </mat-error>
         </mat-form-field>
-        <app-password [formPassword]="userAuthFormGroup.controls.password"></app-password>
+        <app-password-field [formPassword]="userAuthFormGroup.controls.password"></app-password-field>
         <button type="submit" mat-raised-button color="primary" style="margin-bottom: 10px;">Iniciar sesión</button>
     </form>
     <div class="registration-button">
@@ -19,13 +19,13 @@
     </div>
 </div>
 
-<app-confirm-code 
+<app-confirm-code-field 
 *ngIf="adminAuthentication && !showOK"
 [email]="email" 
 (confirm)="confirmCode($event)" 
 (reSend)="authenticate()"
 [badCode]="badCode"
-></app-confirm-code>
+></app-confirm-code-field>
 
 <div class="showOK" *ngIf="showOK">
     <img src="assets/images/registerOK.png" alt="registerOK">

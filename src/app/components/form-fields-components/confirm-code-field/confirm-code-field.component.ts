@@ -4,13 +4,13 @@ import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 
 @Component({
-  selector: 'app-confirm-code',
-  templateUrl: './confirm-code.component.html',
-  styleUrls: ['./confirm-code.component.scss'],
+  selector: 'app-confirm-code-field',
+  templateUrl: './confirm-code-field.component.html',
+  styleUrls: ['./confirm-code-field.component.scss'],
   standalone: true,
   imports:[CommonModule, FormsModule, MatButtonModule]
 })
-export class ConfirmCodeComponent {
+export class ConfirmCodeFieldComponent {
 
   ngOnInit(){
     this.waitTime = 60;
@@ -46,7 +46,8 @@ export class ConfirmCodeComponent {
         this.inputValues = character.split('');
     } else if (character.length > 2) {
         alert("El código pegado es incorrecto");
-        this.inputValues = character.split('');
+        this.inputValues = ['', '', '', '', '', ''];
+        event.target.value = '';
     } else
         event.target.value = event.target.value.slice(0, -1);
   }

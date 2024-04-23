@@ -7,13 +7,13 @@ import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-password',
-  templateUrl: './password.component.html',
-  styleUrls: ['./password.component.scss'],
+  selector: 'app-password-field',
+  templateUrl: './password-field.component.html',
+  styleUrls: ['./password-field.component.scss'],
   standalone: true,
   imports: [MatFormFieldModule, MatInputModule, MatButtonModule, MatIconModule, FormsModule, ReactiveFormsModule, CommonModule],
 })
-export class PasswordComponent {
+export class PasswordFieldComponent {
 
   @Input() formPassword : FormControl = new FormControl('');
   hide = true;

@@ -5,17 +5,18 @@ import { uniqueValueValidator } from 'src/app/validators/userFieldsValidator';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { BirthComponent } from "./birth/birth.component";
-import { SelectGenderComponent } from "./select-gender/select-gender.component";
-import { CelPhoneComponent } from "./cel-phone/cel-phone.component";
-import { PasswordComponent } from "../password-field/password.component";
-import { ConfirmCodeComponent } from "../confirm-code/confirm-code.component";
+import { DateFieldComponent } from "../form-fields-components/date-field/date-field.component";
+import { SelectorFieldComponent } from "../form-fields-components/selector-field/selector-field.component";
+import { CelPhoneFieldComponent } from "../form-fields-components/cel-phone-field/cel-phone-field.component";
+import { PasswordFieldComponent } from "../form-fields-components/password-field/password-field.component";
+import { ConfirmCodeFieldComponent } from "../form-fields-components/confirm-code-field/confirm-code-field.component";
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { Enum1 } from 'src/app/models/enums/enum1/enum1';
 
 @Component({
     selector: 'app-sign-up',
@@ -23,8 +24,8 @@ import { MatNativeDateModule } from '@angular/material/core';
     styleUrls: ['./sign-up.component.scss'],
     standalone: true,
     imports: [
-      CommonModule, MatFormFieldModule, ReactiveFormsModule, BirthComponent, 
-      SelectGenderComponent, CelPhoneComponent, PasswordComponent, ConfirmCodeComponent, 
+      CommonModule, MatFormFieldModule, ReactiveFormsModule, DateFieldComponent, 
+      SelectorFieldComponent, CelPhoneFieldComponent, PasswordFieldComponent, ConfirmCodeFieldComponent, 
       MatInputModule, MatButtonModule, MatSelectModule, MatDatepickerModule,
       MatNativeDateModule, MatIconModule]
 })
@@ -46,6 +47,13 @@ export class SignUpComponent {
     ]),
     code: new FormControl('------')
   });
+
+  genders:Enum1[] = [
+    {id:'MALE', description: 'Masculino'},
+    {id:'FEMALE', description: 'Femenino'},
+    {id:'OTHER', description: 'Otro'},
+    {id:'UNDEFINED', description: 'Prefiero no decirlo'}
+  ];
 
   confirm : boolean = false;
 

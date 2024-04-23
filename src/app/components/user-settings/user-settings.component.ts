@@ -2,14 +2,14 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
-import { PasswordComponent } from "../password-field/password.component";
+import { PasswordFieldComponent } from "../form-fields-components/password-field/password-field.component";
 
 @Component({
     selector: 'app-user-settings',
     templateUrl: './user-settings.component.html',
     styleUrls: ['./user-settings.component.scss'],
     standalone: true,
-    imports: [CommonModule, PasswordComponent]
+    imports: [CommonModule, PasswordFieldComponent]
 })
 export class UserSettingsComponent {
   

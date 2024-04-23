@@ -38,7 +38,7 @@
                     Pagas {{" "+ cartSer.cartResponse.amountOfProducts}} articulos
                 </div>
                 <div class="total-purchases">
-                    {{"$"+cartSer.cartResponse.total}}
+                    {{ cartSer.cartResponse.total | currency:'':'symbol':'1.0-0' }}
                 </div>
             </div>
         </div>

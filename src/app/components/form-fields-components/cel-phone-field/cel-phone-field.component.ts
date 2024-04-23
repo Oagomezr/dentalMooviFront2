@@ -6,13 +6,13 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'app-cel-phone',
-  templateUrl: './cel-phone.component.html',
-  styleUrls: ['./cel-phone.component.scss'],
+  selector: 'app-cel-phone-field',
+  templateUrl: './cel-phone-field.component.html',
+  styleUrls: ['./cel-phone-field.component.scss'],
   standalone: true,
   imports: [MatFormFieldModule, MatInputModule, MatIconModule, FormsModule, ReactiveFormsModule, CommonModule],
 })
-export class CelPhoneComponent {
+export class CelPhoneFieldComponent {
   @Input() formCelphone : FormControl = new FormControl('');
   isPhoneNumberComplete: boolean = true;
 

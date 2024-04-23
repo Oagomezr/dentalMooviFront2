@@ -17,7 +17,7 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            mat-form-field {
+            app-autocomplete-field {
                 width: 48%;
             }
             app-select-departament{

@@ -25,7 +25,7 @@
             display: flex;
             align-items: flex-start;
             justify-content: space-between;
-            app-birth{
+            app-date-field{
                 width: 56%;
             }
         }
@@ -33,10 +33,10 @@
             display: flex;
             align-items: flex-start;
             justify-content: space-between;
-            app-cel-phone{
+            app-cel-phone-field{
                 width: 38%;
             }
-            app-password{
+            app-password-field{
                 width: 58%;
             }
         }
