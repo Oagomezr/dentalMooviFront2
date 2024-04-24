@@ -31,7 +31,7 @@ export class ProductsComponent {
     edit: boolean = false;
     textEdit:string = '';
     productEdit: string = '';
-    callerCart: CartDtoRequest[] = localStorage.getItem('callerCart') ? JSON.parse(localStorage.getItem('callerCart')!) : [];
+    callerCart: CartDtoRequest[] = [];
     amount?: number;
 
     get pages() {
@@ -107,13 +107,13 @@ export class ProductsComponent {
 
     addToCart(id:number, prize:number, amount:string){
 
+        this.callerCart = localStorage.getItem('callerCart') ? JSON.parse(localStorage.getItem('callerCart')!) : [];
         let shouldExit = false;
         this.callerCart.forEach(elem => {
             if(elem.id == id){
                 elem.amount += +amount;
                 localStorage.setItem('callerCart', JSON.stringify(this.callerCart));
                 shouldExit= true;
-                console.log(this.callerCart);
             }
         });
 

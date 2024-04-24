@@ -15,6 +15,14 @@
         justify-content:flex-start;
         flex-direction: column;
 
+        h3{
+            background-color: red;
+            color: white;
+            border-radius: 15px;
+            padding: 10px;
+            border: red solid 2px;
+        }
+
         .setting{
             border: none;
             text-decoration: none;

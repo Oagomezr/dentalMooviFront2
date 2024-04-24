@@ -30,6 +30,9 @@ export class OrderDetailsComponent {
   ref:string | null = localStorage.getItem('isLogged');
 
   ngOnInit(){
+    if(this.cartSer.cartResponse.amountOfProducts == 0){ 
+      this.router.navigate(['']); 
+    }
     this.userService.getAddresses(this.ref!).subscribe({
       next: response=>{
         console.log(response);

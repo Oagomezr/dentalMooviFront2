@@ -4,7 +4,6 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { Router } from '@angular/router';
 import { AddressesData } from 'src/app/models/addresses/addressesData';
 import { UsersService } from 'src/app/services/user/users.service';
-import { SelectDepartamentComponent } from "./select-departament/select-departament.component";
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { CelPhoneFieldComponent } from "../../../form-fields-components/cel-phone-field/cel-phone-field.component";
 import { MatInputModule } from '@angular/material/input';
@@ -21,7 +20,7 @@ import { MatSelectModule } from '@angular/material/select';
     templateUrl: './edit-address.component.html',
     styleUrls: ['./edit-address.component.scss'],
     standalone: true,
-    imports: [CommonModule, SelectDepartamentComponent, MatFormFieldModule, AutocompleteFieldComponent,
+    imports: [CommonModule, MatFormFieldModule, AutocompleteFieldComponent,
       ReactiveFormsModule, CelPhoneFieldComponent, MatInputModule, MatButtonModule, MatAutocompleteModule,
       MatSlideToggleModule, MatSelectModule]
 })

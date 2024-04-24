@@ -76,6 +76,7 @@ export class HeaderComponent {
   showBoxCart(show: boolean): void{
     if(this.cartSer.cartResponse.amountOfProducts>0) 
       this.showHoverBoxCart = !show;
+    else this.showHoverBoxCart = true;
   }
 
   searchProduct(inputSearch: any){

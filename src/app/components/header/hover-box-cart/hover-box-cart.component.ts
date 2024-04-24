@@ -66,7 +66,6 @@ export class HoverBoxCartComponent {
     this.callerCart = this.callerCart.filter(elem=>
       elem.id !== this.cartResponse.data[index].id
     );
-    console.log(this.callerCart)
     this.cartResponse.data.splice(index,1);
     localStorage.setItem('callerCart', JSON.stringify(this.callerCart));
   }

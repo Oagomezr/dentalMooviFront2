@@ -29,7 +29,6 @@ import { UserSettingsComponent } from './components/user-settings/user-settings.
 import { EditPersonalInfoComponent } from './components/user-settings/edit-personal-info/edit-personal-info.component';
 import { EditAddressesComponent } from './components/user-settings/edit-addresses/edit-addresses.component';
 import { EditAddressComponent } from './components/user-settings/edit-addresses/edit-address/edit-address.component';
-import { SelectDepartamentComponent } from './components/user-settings/edit-addresses/edit-address/select-departament/select-departament.component';
 import { HoverBoxCartComponent } from './components/header/hover-box-cart/hover-box-cart.component';
 import { OrderDetailsComponent } from './components/order-details/order-details.component';
 import { OrderAdminComponent } from './components/order-admin/order-admin.component';
@@ -50,7 +49,6 @@ import { MatIconModule } from '@angular/material/icon';
     DateFieldComponent,
     CelPhoneFieldComponent,
     VisibilityIconComponent,
-    SelectDepartamentComponent,
     MatIconModule, 
     CategoryProductsComponent,
     ProductsComponent,
