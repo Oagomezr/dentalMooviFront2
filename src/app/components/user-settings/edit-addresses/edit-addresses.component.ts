@@ -5,13 +5,14 @@ import { UsersService } from 'src/app/services/user/users.service';
 import { DialogComponent } from '../../dialog/dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { CommonModule } from '@angular/common';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-edit-addresses',
   templateUrl: './edit-addresses.component.html',
   styleUrls: ['./edit-addresses.component.scss'],
   standalone: true, 
-  imports: [CommonModule]
+  imports: [CommonModule, MatButtonModule]
 })
 export class EditAddressesComponent {
 

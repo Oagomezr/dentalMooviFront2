@@ -5,6 +5,7 @@ import { Users } from '../../models/users';
 import { message } from 'src/app/models/message';
 import { AddressesData } from 'src/app/models/addresses/addressesData';
 import { AddressesResponse } from 'src/app/models/addresses/addressesResponse';
+import { CPW } from 'src/app/models/cPw';
 
 @Injectable({
   providedIn: 'root'

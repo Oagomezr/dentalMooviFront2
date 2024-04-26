@@ -49,17 +49,9 @@ export class HeaderComponent {
 
   logout(){
     if(this.ref){
-      this.authSer.logout().subscribe({
-        next: () => {
-          console.log("Logout complete");
-          localStorage.clear();
-          this.router.navigate(['/']);
-          window.location.reload();
-        },
-        error: error => {
-          console.error('Error in logout:', error);
-        }
-      });
+      this.authSer.logoutAction();
+      this.router.navigate(['/']);
+      window.location.reload();
     }else{
       console.log("User not login");
     }
