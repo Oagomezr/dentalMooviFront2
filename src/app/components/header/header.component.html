@@ -7,7 +7,7 @@
             <div class="search" id="search">
                 <div class="search-button">
                     <input type="text" id="search-products" (input)="searchProduct($event)" class="search-input" placeholder="Buscar" #search>
-                    <div class="search-icon" (click)="selectInputSearch(search.value)">
+                    <div class="search-icon" (click)="selectInputSearch(search.value)" (keydown.enter)="selectInputSearch(search.value)">
                         <i class="fas fa-search"></i>
                     </div>
                 </div>
@@ -55,7 +55,7 @@
                     <a href="/signup" class="signup">REGISTRARSE</a>
                 </div>
                 <div *ngIf="isAuthenticate" class="user-options">
-                    <div class="profile" (mouseover)="showBoxProfile(true)" (mouseout)="showBoxProfile(false)">
+                    <div class="profile" (mouseover)="showBoxProfile(true)" (mouseout)="showBoxProfile(false)" (focus)="showBoxProducts(true)" (blur)="showBoxProducts(false)">
                         <button>
                             <i class="material-icons">person</i>{{name}}<i class="material-icons">expand_more</i>
                         </button>
@@ -70,7 +70,7 @@
         <div class="bottom-nav">
             <div class="menu">
                 <button class="inicio">INICIO</button>
-                <div class="products" (mouseover)="showBoxProducts(true)" (mouseout)="showBoxProducts(false)">
+                <div class="products" (mouseover)="showBoxProducts(true)" (mouseout)="showBoxProducts(false)" (focus)="showBoxProducts(true)" (blur)="showBoxProducts(false)">
                     <button>
                         PRODUCTOS 
                         <i class="material-icons" [ngClass]="{'expanded-icon': !showHoverBoxProducts, 'no-expanded-icon': showHoverBoxProducts}">expand_more</i>
@@ -81,7 +81,7 @@
                 <button>SEDE</button>
                 <button>CONTACTENOS</button>
             </div>
-            <div class="cart" (mouseover)="showBoxCart(true)" (mouseout)="showBoxCart(false)">
+            <div class="cart" (mouseover)="showBoxCart(true)" (mouseout)="showBoxCart(false)" (focus)="showBoxProducts(true)" (blur)="showBoxProducts(false)">
                 <app-cart-badge [amountOfProducts]="cartSer.cartResponse.amountOfProducts"></app-cart-badge>
                 <app-hover-box-cart [hidden]="showHoverBoxCart" [cartResponse]="cartSer.cartResponse"></app-hover-box-cart>
             </div>
