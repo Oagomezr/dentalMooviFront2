@@ -28,6 +28,8 @@ export class UserSettingsComponent {
     newP: new FormControl('', [Validators.required])
   });
 
+  userUpdated:boolean = localStorage.getItem('userUpdated') != null;
+
   changePassword(){
     console.log(this.changePasswordFormGroup.value);
     this.authSer.uPw(this.changePasswordFormGroup.value, this.cache).subscribe({
@@ -45,6 +47,12 @@ export class UserSettingsComponent {
     });
   }
   
-  ngOnInit(){ if(!this.isLogged) this.router.navigate(['/']); }
+  ngOnInit(){ 
+    if(!this.isLogged) this.router.navigate(['/']); 
+    if(this.userUpdated) {
+      window.location.reload();
+      localStorage.removeItem('userUpdated');
+    }
+  }
   
 }

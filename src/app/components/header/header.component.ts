@@ -50,8 +50,6 @@ export class HeaderComponent {
   logout(){
     if(this.ref){
       this.authSer.logoutAction();
-      this.router.navigate(['/']);
-      window.location.reload();
     }else{
       console.log("User not login");
     }
@@ -117,7 +115,7 @@ export class HeaderComponent {
   getNameOfUser(){
     if(this.ref){
       console.log("loged");
-      this.userSer.getName(this.ref!).subscribe({
+      this.userSer.getName(this.ref).subscribe({
         next: r => {
           this.name = r.infoMessage;
           this.isAuthenticate = true;

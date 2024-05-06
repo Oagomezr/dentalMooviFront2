@@ -17,6 +17,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { Enum1 } from 'src/app/models/enums/enum1/enum1';
+import { NamesFieldComponent } from '../form-fields-components/names-field/names-field.component';
 
 @Component({
     selector: 'app-sign-up',
@@ -27,33 +28,43 @@ import { Enum1 } from 'src/app/models/enums/enum1/enum1';
       CommonModule, MatFormFieldModule, ReactiveFormsModule, DateFieldComponent, 
       SelectorFieldComponent, CelPhoneFieldComponent, PasswordFieldComponent, ConfirmCodeFieldComponent, 
       MatInputModule, MatButtonModule, MatSelectModule, MatDatepickerModule,
-      MatNativeDateModule, MatIconModule]
+      MatNativeDateModule, MatIconModule, NamesFieldComponent]
 })
 export class SignUpComponent {
+
   userFormGroup = new FormGroup({
     idUser: new FormControl(0),
-    firstName: new FormControl('', { validators: [Validators.required, Validators.pattern('^[a-zA-Z0-9_áéíóúÁÉÍÓÚñÑ\\s]*$')], updateOn: 'blur'}),
-    lastName: new FormControl('', { validators: [Validators.required, Validators.pattern('^[a-zA-Z0-9_áéíóúÁÉÍÓÚñÑ\\s]*$')], updateOn: 'blur'}),
-    email: new FormControl( '', { validators: [Validators.required, Validators.email],
-                            asyncValidators: uniqueValueValidator(this.userService, true),
-                            updateOn: 'blur'}),
-    celPhone: new FormControl('', { validators: [Validators.required, Validators.minLength(12), Validators.pattern('^[0-9-]*$')]}),
+
+    firstName: new FormControl('', { validators: 
+      [Validators.required, Validators.pattern('^[^0-9,!@#$%^&*()_+={}<>?/|\'":;`~]*$'), Validators.minLength(3)], 
+      updateOn: 'blur'}),
+
+    lastName: new FormControl('', { validators: 
+      [Validators.required, Validators.pattern('^[^0-9,!@#$%^&*()_+={}<>?/|\'":;`~]*$'), Validators.minLength(3)], 
+      updateOn: 'blur'}),
+    
+    email: new FormControl( '', { validators: 
+      [Validators.required, Validators.email],
+      asyncValidators: uniqueValueValidator(this.userService, true),
+      updateOn: 'blur'}),
+
+    celPhone: new FormControl('', { validators: 
+      [Validators.required, Validators.minLength(12), Validators.pattern('^[0-9-]*$')]}),
+    
     birthdate: new FormControl(''),
+
     gender: new FormControl('', Validators.required),
+
     password: new FormControl('', [
       Validators.required,
       Validators.minLength(5),
       Validators.pattern(/^(?=.*[a-zA-Z])(?=.*\d).+$/)
     ]),
+
     code: new FormControl('------')
   });
 
-  genders:Enum1[] = [
-    {id:'MALE', description: 'Masculino'},
-    {id:'FEMALE', description: 'Femenino'},
-    {id:'OTHER', description: 'Otro'},
-    {id:'UNDEFINED', description: 'Prefiero no decirlo'}
-  ];
+  genders:Enum1[] = this.userService.genders;
 
   confirm : boolean = false;
 
@@ -119,7 +130,6 @@ export class SignUpComponent {
       event.target.value = '';
     }
   }
-
   
   showRegisterOK: boolean = false;
   badCode: boolean = false;

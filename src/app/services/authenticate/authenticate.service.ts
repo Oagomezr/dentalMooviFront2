@@ -36,6 +36,7 @@ export class AuthenticateService {
       next: () => {
         console.log("Logout complete");
         localStorage.clear();
+        window.location.reload();
       },
       error: error => {
         console.error('Error in logout:', error);

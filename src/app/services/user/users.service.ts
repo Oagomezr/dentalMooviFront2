@@ -5,7 +5,7 @@ import { Users } from '../../models/users';
 import { message } from 'src/app/models/message';
 import { AddressesData } from 'src/app/models/addresses/addressesData';
 import { AddressesResponse } from 'src/app/models/addresses/addressesResponse';
-import { CPW } from 'src/app/models/cPw';
+import { Enum1 } from 'src/app/models/enums/enum1/enum1';
 
 @Injectable({
   providedIn: 'root'
@@ -55,4 +55,11 @@ export class UsersService {
   deleteAddress(id:number, ref:string): Observable<message>{
     return this.http.delete<message>(`${this.baseUrl}/user/deleteAddress/${id}/${ref}`, {withCredentials:true});
   }
+
+  genders:Enum1[] = [
+    {id:'MALE', description: 'Masculino'},
+    {id:'FEMALE', description: 'Femenino'},
+    {id:'OTHER', description: 'Otro'},
+    {id:'UNDEFINED', description: 'Prefiero no decirlo'}
+  ];
 }
