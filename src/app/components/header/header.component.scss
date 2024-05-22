@@ -300,7 +300,9 @@ header{
                             width: auto;
                         }
                     }
-                    button{
+                    
+                    button, a{
+                        
                         display: flex;
                         justify-content: center;
                         align-items: center;
@@ -342,7 +344,10 @@ header{
                     }
                 } 
 
-                button{
+                a, button{
+                    color: black;
+                    padding-left: 5px;
+                    padding-right: 5px;
                     font-family: 'Roboto', sans-serif;
                     font-size:$font-size-letter;
                     display: flex;

@@ -33,7 +33,7 @@
                 </div>
             </div>
             <a class="product-price" [href]="'/product/'+product.nameProduct">
-                {{'$'+ product.unitPrice.toLocaleString()}}
+                {{ product.unitPrice == 0 && !isAdmin ? "" : '$'+product.unitPrice.toLocaleString()}}
             </a>
             <a class="product-stock" [href]="'/product/'+product.nameProduct">
                 <span *ngIf="product.stock>0" style="color: green;">{{'Hay '+ product.stock+' disponibles'}}</span>

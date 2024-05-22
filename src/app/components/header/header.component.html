@@ -62,14 +62,15 @@
                         <app-hover-box-profile [hidden]="showHoverBoxProfile"
                         [nameUser]="name"></app-hover-box-profile>
                     </div>
-                    <button>Mis compras</button>
+                    <button *ngIf="!isAdmin">Mis compras</button>
+                    <a *ngIf="isAdmin" href="/" >Mis pedidos</a>
                     <button (click)="logout()">Salir <i class="material-icons">logout</i></button>
                 </div>
             </div>
         </div>
         <div class="bottom-nav">
             <div class="menu">
-                <button class="inicio">INICIO</button>
+                <a class="inicio" href="/">INICIO</a>
                 <div class="products" (mouseover)="showBoxProducts(true)" (mouseout)="showBoxProducts(false)" (focus)="showBoxProducts(true)" (blur)="showBoxProducts(false)">
                     <button>
                         PRODUCTOS 
@@ -77,9 +78,9 @@
                     </button>
                     <app-hover-box-products [hidden]="showHoverBoxProducts" [categories]="categories"></app-hover-box-products>
                 </div>
-                <button>QUIENES SOMOS</button>
-                <button>SEDE</button>
-                <button>CONTACTENOS</button>
+                <a>QUIENES SOMOS</a>
+                <a>SEDE</a>
+                <a>CONTACTENOS</a>
             </div>
             <div class="cart" (mouseover)="showBoxCart(true)" (mouseout)="showBoxCart(false)" (focus)="showBoxProducts(true)" (blur)="showBoxProducts(false)">
                 <app-cart-badge [amountOfProducts]="cartSer.cartResponse.amountOfProducts"></app-cart-badge>

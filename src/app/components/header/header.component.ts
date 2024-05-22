@@ -33,6 +33,7 @@ export class HeaderComponent {
   cartRequest: CartRequest = { data: [] };
   ref:string | null = localStorage.getItem('isLogged');
   isAuthenticate:boolean = this.ref != null;
+  isAdmin: boolean = localStorage.getItem('isAdmin') != null;
 
   showHoverBoxProfile: boolean = true;
   showHoverBoxProducts: boolean = true;

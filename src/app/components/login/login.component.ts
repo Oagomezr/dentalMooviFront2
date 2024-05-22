@@ -76,14 +76,15 @@ export class LoginComponent{
     this.userAuthFormGroup.get('code')?.setValue(code);
     if (/^\d*$/.test(this.userAuthFormGroup.get('code')?.value || 'x')) {
       this.authSer.login(this.userAuthFormGroup.value).subscribe({
-        next: () => {
+        next: r => {
           this.showOK = true;
           localStorage.removeItem("isLogged");
-          localStorage.setItem("isLogged", "true");
+          localStorage.setItem("isLogged", r.infoMessage);
           localStorage.removeItem("isAdmin");
           localStorage.setItem("isAdmin", "true");
           setTimeout(() => {
             this.router.navigate(['/']);
+            window.location.reload();
           }, 3000);
 
         },
@@ -99,7 +100,6 @@ export class LoginComponent{
   private login(){
     this.authSer.login(this.userAuthFormGroup.value).subscribe({
       next: r => {
-        console.log(r);
         localStorage.setItem("isLogged", r.infoMessage);
         this.session = true;
         this.errorAuthentication = false;
@@ -122,6 +122,7 @@ export class LoginComponent{
       },
       error: () => {
         this.errorAuthentication = true;
+        localStorage.removeItem("isAdmin");
       }
     });
   }

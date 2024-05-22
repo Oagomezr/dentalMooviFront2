@@ -8,6 +8,7 @@ import { CommonModule } from '@angular/common';
 import { DirectionComponent } from "../direction/direction.component";
 import { VisibilityIconComponent } from "./visibility-icon/visibility-icon.component";
 import { FormsModule } from '@angular/forms';
+import { CartDtoRequest } from 'src/app/models/cart/cartStore';
 
 @Component({
     selector: 'app-product',
@@ -44,6 +45,7 @@ export class ProductComponent {
   isAdmin: boolean = localStorage.getItem('isAdmin') != null;
   editArray: boolean[] = [true, true, true, true];
   textEdit: any = '';
+  callerCart: CartDtoRequest[] = [];
 
   product: ProductsData ={
     id:0,
@@ -164,6 +166,7 @@ export class ProductComponent {
   }
 
   editProductInformation(option:number){
+    this.editArray =  [true, true, true, true];
     this.editArray[option] = !this.editArray[option];
     switch (option) {
       case 0:
@@ -182,7 +185,41 @@ export class ProductComponent {
         console.log("error");
     }
   }
+
+  cancelProductInformation(){
+    this.editArray =  [true, true, true, true];
+  }
+
   updateProductInformation(option:number){
     this.productSer.updateProductInformation(option, this.product.nameProduct, this.textEdit);
   }
+
+  addToCart(id:number, prize:number, amount:string){
+
+    this.callerCart = localStorage.getItem('callerCart') ? JSON.parse(localStorage.getItem('callerCart')!) : [];
+    let shouldExit = false;
+    this.callerCart.forEach(elem => {
+        if(elem.id == id){
+            elem.amount += +amount;
+            localStorage.setItem('callerCart', JSON.stringify(this.callerCart));
+            shouldExit= true;
+        }
+    });
+
+    if(shouldExit){
+        window.location.reload();
+        return;
+    }
+
+    let productAdded: CartDtoRequest ={
+        id: id,
+        prize: prize,
+        amount: +amount
+    }
+
+    this.callerCart.push(productAdded);
+    localStorage.setItem('callerCart', JSON.stringify(this.callerCart));
+    console.log(this.callerCart);
+    window.location.reload();
+}
 }

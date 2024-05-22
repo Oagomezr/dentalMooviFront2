@@ -19,10 +19,10 @@
                             {{ category.categoryAndParents[0] }}<span *ngIf="locationCategory[0] == category.categoryAndParents[0]">&nbsp;{{'<-'}}</span>
                         </a>
                         <div class="options" *ngIf="isAdmin" [ngClass]="'lvl-'+(category.categoryAndParents.length - 1)">
-                            <button class="optionsIcons" (click)="openDialog(category.categoryAndParents[0], 1)"><i class="material-icons">edit</i></button>
-                            <button class="optionsIcons" (click)="openDialog(category.categoryAndParents[0], 2)"><i class="material-icons">delete</i></button>
-                            <button class="optionsIcons" (click)="openDialog(category.categoryAndParents[0], 3)"><i class="material-icons">add</i></button>
-                            <button class="optionsIcons" (click)="openDialog(category.categoryAndParents[0], 4)"><i class="material-icons">subdirectory_arrow_right</i></button>
+                            <button title="Cambiar nombre" class="optionsIcons" (click)="openDialog(category.categoryAndParents[0], 1)"><i class="material-icons">edit</i></button>
+                            <button title="Eliminar Categoria" class="optionsIcons" (click)="openDialog(category.categoryAndParents[0], 2)"><i class="material-icons">delete</i></button>
+                            <button title="Añadir subCategoria" class="optionsIcons" (click)="openDialog(category.categoryAndParents[0], 3)"><i class="material-icons">add</i></button>
+                            <button title="Mover categoria" class="optionsIcons" (click)="openDialog(category.categoryAndParents[0], 4)"><i class="material-icons">subdirectory_arrow_right</i></button>
                         </div>
                         
                     </div>
