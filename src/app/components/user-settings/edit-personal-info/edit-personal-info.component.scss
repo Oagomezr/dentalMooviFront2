@@ -44,7 +44,13 @@
             }
         }
 
-        
+        .update-button{
+            background-color: #a83fe1;
+            font-weight: bolder;
+            &:hover{
+                background-color: #8632b3;
+            }
+        }
     }
 
     .update-notice{

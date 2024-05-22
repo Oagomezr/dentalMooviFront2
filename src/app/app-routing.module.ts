@@ -12,11 +12,13 @@ import { EditAddressComponent } from './components/user-settings/edit-addresses/
 import { OrderDetailsComponent } from './components/order-details/order-details.component';
 import { OrderAdminComponent } from './components/order-admin/order-admin.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { ForgottenPwComponent } from './components/forgotten-pw/forgotten-pw.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignUpComponent },
+  { path: 'pwForgotten', component: ForgottenPwComponent },
   { path: 'category/:parents', component: CategoryProductsComponent},
   { path: 'product/:product', component: ProductComponent},
   { path: 'settings', component: UserSettingsComponent },

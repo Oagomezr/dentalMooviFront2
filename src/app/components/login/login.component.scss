@@ -11,6 +11,15 @@
         display: flex;
         flex-direction: column;
         width: 550px;
+
+        .login-button{
+            margin-bottom: 10px;
+            background-color: #a83fe1;
+            font-weight: bolder;
+            &:hover{
+                background-color: #8632b3;
+            }
+        }
     }
 
     .notice{
@@ -44,7 +53,7 @@
         align-items:flex-end;
         border-top: 1px solid rgb(209, 208, 208);
         a{
-            background-color: rgb(0, 158, 0);
+            background-color: #2e54fe;
             text-decoration: none;
             width: 500px;
             height: 35px;
@@ -56,7 +65,7 @@
             font-weight: bold;
             color: white;
             &:hover{
-                background-color: green;
+                background-color: #02a1ff;
             }
         }
     }

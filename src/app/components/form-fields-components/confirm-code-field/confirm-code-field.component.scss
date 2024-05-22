@@ -22,11 +22,22 @@
             border-radius: 20px;
         }
     }
+
     .buttons{
         display: flex;
         flex-direction: column;
         button{
             margin-top: 30px;
+            background-color: #a83fe1;
+            font-weight: bolder;
+            &:hover{
+                background-color: #8632b3;
+            }
+
+            &:disabled {
+                background-color: #ccc; 
+                cursor: not-allowed;
+            }
         }
     }
     .badCode{
