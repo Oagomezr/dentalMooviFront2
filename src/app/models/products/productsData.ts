@@ -10,4 +10,5 @@ export interface ProductsData {
     images:Images[];
     location: string[];
     hidden:string | null;
+    category: string | null;
 }

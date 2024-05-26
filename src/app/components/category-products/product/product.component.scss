@@ -129,6 +129,18 @@
             z-index: 1;
         }
 
+        .category-button{
+            left: 0;
+            bottom: 0;
+            position: absolute;
+            z-index: 1;
+            border-radius: 5px;
+            cursor: pointer;
+            color: white;
+            background-color: #fe2ed8;
+            border: none;
+        }
+
         .product-name{
             display: flex;
             align-items: center;
@@ -172,7 +184,16 @@
             margin: 0 5%;
         }
 
+        .product-category{
+            display: flex;
+            align-items: center;
+            justify-content: left;
+            text-decoration: none;
+            margin: 0 5%;
+        }
+
         .product-add-cart{
+            background-color: yellow;
             position: relative;
             display: flex;
             align-items:flex-start;
@@ -205,6 +226,7 @@
                 opacity: 1;
                 height: 37px;
             }
+
         }
         
     }

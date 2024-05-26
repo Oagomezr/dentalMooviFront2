@@ -21,6 +21,9 @@
     </div>
     <div class="characteristics">
         <app-visibility-icon *ngIf="isAdmin" [hide]="product.hidden != null" (changeVisibility)="openDialog($event,2)"></app-visibility-icon>
+        <button *ngIf="isAdmin && editArray[4]" (click)="editProductInformation(4)" class="category-button">
+            <i class="material-icons">category</i>
+        </button>
         <div class="product-name">
              <h1 *ngIf="editArray[0]" style="font-weight: bolder;">{{ product.nameProduct }}</h1>
             <input *ngIf="!editArray[0]" type="text" [(ngModel)]="textEdit" />
@@ -79,11 +82,31 @@
                 <i class="material-icons">cancel</i>
             </button>
         </div>
+
+        <div *ngIf="isAdmin && !editArray[4]" class="product-category">
+            <app-autocomplete-field
+            [label]="'Categoria'"
+            [options]="categories"
+            (sendSearch)="searchCategories($event)"
+            (sendOption)="setDepartament($event)"
+            [fieldText]="product.category!"
+            ></app-autocomplete-field>
+            
+            <button *ngIf="isAdmin && !editArray[4]" (click)="updateProductInformation(5)" class="editOptions" style="background: green;">
+                <i class="material-icons">done</i>
+            </button>
+            <button *ngIf="isAdmin && !editArray[4]" (click)="cancelProductInformation()" class="editOptions" style="background: red;">
+                <i class="material-icons">cancel</i>
+            </button>
+        </div>
+
         <div class="product-add-cart">
             <input type="number" min="1" [max]="product.stock" step="1" value="1" #amount>
             <button (click)="addToCart(product.id, product.unitPrice, amount.value)">
                 <i class="material-icons">add_shopping_cart</i> Añadir al carrito
             </button>
         </div>
+
+        
     </div>
 </div>

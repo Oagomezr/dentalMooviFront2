@@ -26,4 +26,8 @@ export class EnumsService {
   getServiciosEspeciales(): Observable<Enum1Response>{
     return this.http.get<Enum1Response>(`${this.baseUrl}/public/vehiculos/serviciosEspeciales`);
   }
+
+  getCategories(name:string): Observable<Enum1Response>{
+    return this.http.get<Enum1Response>(`${this.baseUrl}/admin/categories/${name}`, {withCredentials:true});
+  }
 }

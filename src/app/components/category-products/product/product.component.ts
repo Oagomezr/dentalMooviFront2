@@ -9,18 +9,21 @@ import { DirectionComponent } from "../direction/direction.component";
 import { VisibilityIconComponent } from "./visibility-icon/visibility-icon.component";
 import { FormsModule } from '@angular/forms';
 import { CartDtoRequest } from 'src/app/models/cart/cartStore';
+import { AutocompleteFieldComponent } from '../../form-fields-components/autocomplete-field/autocomplete-field.component';
+import { EnumsService } from 'src/app/services/enums/enums.service';
+import { Enum1 } from 'src/app/models/enums/enum1/enum1';
 
 @Component({
     selector: 'app-product',
     templateUrl: './product.component.html',
     styleUrls: ['./product.component.scss'],
     standalone: true,
-    imports: [CommonModule, DirectionComponent, VisibilityIconComponent, FormsModule]
+    imports: [CommonModule, DirectionComponent, VisibilityIconComponent, FormsModule, AutocompleteFieldComponent]
 })
 export class ProductComponent {
 
   constructor(private route: ActivatedRoute, 
-    private productSer: ProductsService, public dialog: MatDialog) {}
+    private productSer: ProductsService, public dialog: MatDialog, private enumSer: EnumsService) {}
 
   ngOnInit() {
     this.route.params.subscribe((params: Params) => {
@@ -43,9 +46,10 @@ export class ProductComponent {
   nameProduct: string = '';
   indexImg: number = 0;
   isAdmin: boolean = localStorage.getItem('isAdmin') != null;
-  editArray: boolean[] = [true, true, true, true];
+  editArray: boolean[] = [true, true, true, true, true];
   textEdit: any = '';
   callerCart: CartDtoRequest[] = [];
+  categories!: Enum1[];
 
   product: ProductsData ={
     id:0,
@@ -56,7 +60,8 @@ export class ProductComponent {
     stock: 0,
     images:[],
     location: [],
-    hidden: null
+    hidden: null,
+    category: null
   };
 
   
@@ -166,7 +171,7 @@ export class ProductComponent {
   }
 
   editProductInformation(option:number){
-    this.editArray =  [true, true, true, true];
+    this.editArray =  [true, true, true, true, true];
     this.editArray[option] = !this.editArray[option];
     switch (option) {
       case 0:
@@ -181,13 +186,16 @@ export class ProductComponent {
       case 3:
         this.textEdit = this.product.stock;
       break;
+      case 4:
+        console.log("category");
+      break;
       default:
         console.log("error");
     }
   }
 
   cancelProductInformation(){
-    this.editArray =  [true, true, true, true];
+    this.editArray =  [true, true, true, true, true];
   }
 
   updateProductInformation(option:number){
@@ -221,5 +229,25 @@ export class ProductComponent {
     localStorage.setItem('callerCart', JSON.stringify(this.callerCart));
     console.log(this.callerCart);
     window.location.reload();
-}
+  }
+
+  searchCategories(value:string){
+    if (value.length >1) {
+      this.enumSer.getCategories(value).subscribe({
+        next: response => {
+          this.categories = response.data;
+        },
+        error: error => {
+          console.error("categories not found: ", error);
+        }
+      });
+    } else {
+      this.categories = [];
+    }
+  }
+
+  idCategory: number =  0;
+  setDepartament(id:number){
+    this.textEdit = id;
+  }
 }

@@ -123,7 +123,7 @@ export class EditAddressComponent {
   searchMunicipalies(value:string){
     let departament = this.idDepartament;
     if (value.length >1 && departament != 0) {
-      this.enumSer.getMunicipalies(value, departament!).subscribe({
+      this.enumSer.getMunicipalies(value, departament).subscribe({
         next: response => {
           this.municipalies = response.data;
         },
