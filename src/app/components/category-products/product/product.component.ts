@@ -32,7 +32,6 @@ export class ProductComponent {
       this.productSer.getProductByName(this.nameProduct).subscribe({
         next: response => {
           this.product = response;
-          console.log(response);
           this.locationCategory = response.location;
         },
         error: error => {

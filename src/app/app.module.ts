@@ -31,7 +31,6 @@ import { EditAddressesComponent } from './components/user-settings/edit-addresse
 import { EditAddressComponent } from './components/user-settings/edit-addresses/edit-address/edit-address.component';
 import { HoverBoxCartComponent } from './components/header/hover-box-cart/hover-box-cart.component';
 import { OrderDetailsComponent } from './components/order-details/order-details.component';
-import { OrderAdminComponent } from './components/order-admin/order-admin.component';
 import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
@@ -70,7 +69,6 @@ import { MatIconModule } from '@angular/material/icon';
     EditAddressesComponent,
     EditAddressComponent,
     OrderDetailsComponent,
-    OrderAdminComponent,
   ],
   providers: [],
   bootstrap: [AppComponent]

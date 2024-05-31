@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { OrderAdminComponent } from './order-admin.component';
+import { PdfViewerComponent } from './pdf-viewer.component';
 
-describe('OrderAdminComponent', () => {
-  let component: OrderAdminComponent;
-  let fixture: ComponentFixture<OrderAdminComponent>;
+describe('PdfViewerComponent', () => {
+  let component: PdfViewerComponent;
+  let fixture: ComponentFixture<PdfViewerComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ OrderAdminComponent ]
+      imports: [ PdfViewerComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(OrderAdminComponent);
+    fixture = TestBed.createComponent(PdfViewerComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
