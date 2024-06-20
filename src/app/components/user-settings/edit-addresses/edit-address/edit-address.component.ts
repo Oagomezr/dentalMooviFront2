@@ -64,7 +64,7 @@ export class EditAddressComponent {
   send(){
     if(this.addressInfo.id == 0){
       console.log(this.addressFormGroup);
-      this.userService.addAddress(this.addressFormGroup.value, this.ref!).subscribe({
+      this.userService.addAddress(this.addressFormGroup.value).subscribe({
         next: () =>{
           this.isUpdated=true;
           setTimeout(() => {
@@ -80,7 +80,7 @@ export class EditAddressComponent {
         }
       });
     }else{
-      this.userService.updateAddress(this.addressFormGroup.value, this.ref!).subscribe({
+      this.userService.updateAddress(this.addressFormGroup.value).subscribe({
         next: () =>{
           this.isUpdated=true;
           setTimeout(() => {

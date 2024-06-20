@@ -33,7 +33,7 @@ export class OrderDetailsComponent {
     if(this.cartSer.cartResponse.amountOfProducts == 0){ 
       this.router.navigate(['']); 
     }
-    this.userService.getAddresses(this.ref!).subscribe({
+    this.userService.getAddresses().subscribe({
       next: response=>{
         console.log(response);
         if(response.data.length == 0) this.addAddress();

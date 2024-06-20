@@ -116,7 +116,7 @@ export class HeaderComponent {
   getNameOfUser(){
     if(this.ref){
       console.log("loged");
-      this.userSer.getName(this.ref).subscribe({
+      this.userSer.getName().subscribe({
         next: r => {
           this.name = r.infoMessage;
           this.isAuthenticate = true;

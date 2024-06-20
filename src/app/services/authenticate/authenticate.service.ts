@@ -4,31 +4,31 @@ import { Observable } from 'rxjs';
 import { CPW } from 'src/app/models/cPw';
 import { message } from 'src/app/models/message';
 import { UserAuth } from 'src/app/models/userAuth';
+import { URL_BACK } from '../../env';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticateService {
 
-  private baseUrl = 'http://localhost:8087';
   private count: number = 0;
 
   constructor(private http: HttpClient) {}
 
   login(userAuth: UserAuth): Observable<any> {
-    return this.http.post<any>(`${this.baseUrl}/public/login`, userAuth, {withCredentials:true});
+    return this.http.post<any>(`${URL_BACK}/public/login`, userAuth, {withCredentials:true});
   }
 
   checkRole(userAuth: UserAuth): Observable<any> {
-    return this.http.post<any>(`${this.baseUrl}/public/isAuthorized`, userAuth, {withCredentials:true});
+    return this.http.post<any>(`${URL_BACK}/public/isAuthorized`, userAuth, {withCredentials:true});
   }
 
   logout() {
-    return this.http.delete(`${this.baseUrl}/public/logout`, {withCredentials:true});
+    return this.http.delete(`${URL_BACK}/public/logout`, {withCredentials:true});
   }
   
   uPw(data:CPW, ref:string): Observable<message>{
-    return this.http.put<message>(`${this.baseUrl}/user/upw/${ref}`, data, {withCredentials:true});
+    return this.http.put<message>(`${URL_BACK}/user/upw/${ref}`, data, {withCredentials:true});
   }
 
   logoutAction(){

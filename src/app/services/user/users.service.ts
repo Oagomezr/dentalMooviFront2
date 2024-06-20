@@ -7,58 +7,57 @@ import { AddressesData } from 'src/app/models/addresses/addressesData';
 import { AddressesResponse } from 'src/app/models/addresses/addressesResponse';
 import { Enum1 } from 'src/app/models/enums/enum1/enum1';
 import { UserAuth } from 'src/app/models/userAuth';
+import { URL_BACK } from 'src/app/env';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UsersService {
 
-  private baseUrl = 'http://localhost:8087';
-
   constructor(private http: HttpClient) {}
 
   createUser(user: Users): Observable<void> {
-    return this.http.post<void>(`${this.baseUrl}/public/create`, user);
+    return this.http.post<void>(`${URL_BACK}/public/create`, user);
   }
 
   sendEmailNotification(email:string): Observable<void>{
-    return this.http.post<void>(`${this.baseUrl}/public/sendEmail`, email);
+    return this.http.post<void>(`${URL_BACK}/public/sendEmail`, email);
   }
 
-  getName(ref:string): Observable<message> {
-    return this.http.get<message>(`${this.baseUrl}/user/name/${ref}`, {withCredentials:true});
+  getName(): Observable<message> {
+    return this.http.get<message>(`${URL_BACK}/user/name`, {withCredentials:true});
   }
 
-  getUser(ref:string): Observable<Users>{
-    return this.http.get<Users>(`${this.baseUrl}/user/getUser/${ref}`, {withCredentials:true});
+  getUser(): Observable<Users>{
+    return this.http.get<Users>(`${URL_BACK}/user/getUser`, {withCredentials:true});
   }
 
   checkIfValueExists(email: string, signup: boolean) {
-    return this.http.get<boolean>(`${this.baseUrl}/public/${email}/${signup}`);
+    return this.http.get<boolean>(`${URL_BACK}/public/${email}/${signup}`);
   }
 
-  updateUser(user: Users, ref:string): Observable<message>{
-    return this.http.put<message>(`${this.baseUrl}/user/update/${ref}`, user, {withCredentials:true});
+  updateUser(user: Users): Observable<message>{
+    return this.http.put<message>(`${URL_BACK}/user/update`, user, {withCredentials:true});
   }
 
-  addAddress(address:AddressesData, ref:string): Observable<message>{
-    return this.http.post<message>(`${this.baseUrl}/user/addAddress/${ref}`, address, {withCredentials:true});
+  addAddress(address:AddressesData): Observable<message>{
+    return this.http.post<message>(`${URL_BACK}/user/addAddress`, address, {withCredentials:true});
   }
 
-  getAddresses(ref:string): Observable<AddressesResponse>{
-    return this.http.get<AddressesResponse>(`${this.baseUrl}/user/getAddresses/${ref}`, {withCredentials:true});
+  getAddresses(): Observable<AddressesResponse>{
+    return this.http.get<AddressesResponse>(`${URL_BACK}/user/getAddresses`, {withCredentials:true});
   }
 
-  updateAddress(address:AddressesData, ref:string): Observable<message>{
-    return this.http.put<message>(`${this.baseUrl}/user/updateAddress/${ref}`, address, {withCredentials:true});
+  updateAddress(address:AddressesData): Observable<message>{
+    return this.http.put<message>(`${URL_BACK}/user/updateAddress`, address, {withCredentials:true});
   }
 
-  deleteAddress(id:number, ref:string): Observable<message>{
-    return this.http.delete<message>(`${this.baseUrl}/user/deleteAddress/${id}/${ref}`, {withCredentials:true});
+  deleteAddress(id:number): Observable<message>{
+    return this.http.delete<message>(`${URL_BACK}/user/deleteAddress/${id}`, {withCredentials:true});
   }
 
   rPw(userCredentials:UserAuth): Observable<message>{
-    return this.http.put<message>(`${this.baseUrl}/public/rpw`, userCredentials, {withCredentials:true});
+    return this.http.put<message>(`${URL_BACK}/public/rpw`, userCredentials, {withCredentials:true});
   }
 
   genders:Enum1[] = [

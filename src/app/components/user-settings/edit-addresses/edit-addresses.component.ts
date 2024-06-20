@@ -24,7 +24,7 @@ export class EditAddressesComponent {
 
   ngOnInit(){
     localStorage.removeItem("addressChosen");
-    this.userService.getAddresses(this.ref!).subscribe({
+    this.userService.getAddresses().subscribe({
       next: response=>{
         console.log(response);
         this.addresses = response.data;
@@ -53,7 +53,7 @@ export class EditAddressesComponent {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.userService.deleteAddress(this.addresses[index].id!, this.ref!).subscribe({
+        this.userService.deleteAddress(this.addresses[index].id!).subscribe({
           next:()=>{
             this.isDelete = true;
             setTimeout(() => {

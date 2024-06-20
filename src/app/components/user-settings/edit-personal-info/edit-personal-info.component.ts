@@ -36,7 +36,7 @@ export class EditPersonalInfoComponent implements OnInit{
   ngOnInit(){
     if(!this.isLogged) this.router.navigate(['/']);
 
-    this.userSer.getUser(this.ref!).subscribe({
+    this.userSer.getUser().subscribe({
       next: r => {
         console.log(r);
         this.response = true;
@@ -89,7 +89,7 @@ export class EditPersonalInfoComponent implements OnInit{
   });
 
   update(){
-    this.userSer.updateUser(this.userFormGroup.value, this.ref!).subscribe({
+    this.userSer.updateUser(this.userFormGroup.value).subscribe({
       next: () => {
         this.isUpdated=true;
         setTimeout(() => {
