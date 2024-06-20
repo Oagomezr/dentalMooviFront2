@@ -18,7 +18,7 @@
             <mat-label >Correo electrónico</mat-label>
             <input type="email" matInput formControlName="email">
             <mat-error *ngIf="userFormGroup.get('email')?.errors?.['required']">Por favor ingresa el correo electrónico</mat-error>
-            <mat-error *ngIf="userFormGroup.get('email')?.errors?.['email']">El email debe contener un @</mat-error>
+            <mat-error *ngIf="userFormGroup.get('email')?.errors?.['email']">El email debe contener un &#64;</mat-error>
             <mat-error *ngIf="userFormGroup.get('email')?.errors?.['uniqueValue']">Ese email actualmente se encuentra registrado</mat-error>
         </mat-form-field>
 

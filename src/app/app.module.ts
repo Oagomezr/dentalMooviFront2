@@ -8,7 +8,7 @@ import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { CartBadgeComponent } from './components/header/cart-badge/cart-badge.component';
@@ -33,44 +33,37 @@ import { HoverBoxCartComponent } from './components/header/hover-box-cart/hover-
 import { OrderDetailsComponent } from './components/order-details/order-details.component';
 import { MatIconModule } from '@angular/material/icon';
 
-@NgModule({
-  declarations: [
-    AppComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    HttpClientModule,
-    CartBadgeComponent,
-    SelectorFieldComponent,
-    PasswordFieldComponent,
-    DateFieldComponent,
-    CelPhoneFieldComponent,
-    VisibilityIconComponent,
-    MatIconModule, 
-    CategoryProductsComponent,
-    ProductsComponent,
-    ProductComponent,
-    DirectionComponent,
-    ConfirmCodeFieldComponent,
-    DialogComponent,
-    HoverBoxCartComponent,
-    HoverBoxProductsComponent,
-    HoverBoxProfileComponent,
-    HeaderComponent,
-    HomeComponent,
-    LoginComponent,
-    SignUpComponent,
-    PageNotFoundComponent,
-    FooterComponent,
-    UserSettingsComponent,
-    EditPersonalInfoComponent,
-    EditAddressesComponent,
-    EditAddressComponent,
-    OrderDetailsComponent,
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
-})
+@NgModule({ declarations: [
+        AppComponent
+    ],
+    bootstrap: [AppComponent], imports: [BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        CartBadgeComponent,
+        SelectorFieldComponent,
+        PasswordFieldComponent,
+        DateFieldComponent,
+        CelPhoneFieldComponent,
+        VisibilityIconComponent,
+        MatIconModule,
+        CategoryProductsComponent,
+        ProductsComponent,
+        ProductComponent,
+        DirectionComponent,
+        ConfirmCodeFieldComponent,
+        DialogComponent,
+        HoverBoxCartComponent,
+        HoverBoxProductsComponent,
+        HoverBoxProfileComponent,
+        HeaderComponent,
+        HomeComponent,
+        LoginComponent,
+        SignUpComponent,
+        PageNotFoundComponent,
+        FooterComponent,
+        UserSettingsComponent,
+        EditPersonalInfoComponent,
+        EditAddressesComponent,
+        EditAddressComponent,
+        OrderDetailsComponent], providers: [provideHttpClient(withInterceptorsFromDi())] })
 export class AppModule { }

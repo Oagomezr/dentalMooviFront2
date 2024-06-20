@@ -80,10 +80,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "dental-moovi:build:production"
+              "buildTarget": "dental-moovi:build:production"
             },
             "development": {
-              "browserTarget": "dental-moovi:build:development"
+              "buildTarget": "dental-moovi:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -91,7 +91,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "dental-moovi:build"
+            "buildTarget": "dental-moovi:build"
           }
         },
         "test": {
