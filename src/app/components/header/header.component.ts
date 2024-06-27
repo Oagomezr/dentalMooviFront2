@@ -108,7 +108,7 @@ export class HeaderComponent {
         this.categories = responseGetC.data;
       },
       error: error=>{
-        console.log('Error to get categories', error);
+        console.log('Error to get categories', error.error);
       }
     });
   }

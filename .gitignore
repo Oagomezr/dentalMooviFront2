@@ -43,3 +43,5 @@ Thumbs.db
 
 #environment variables
 .env
+nginx.conf
+proxy.conf.json

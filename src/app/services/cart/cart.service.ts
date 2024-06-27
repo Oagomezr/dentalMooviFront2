@@ -1,7 +1,7 @@
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { URL_BACK } from 'src/app/env';
+import { environment } from 'src/environments/environment';
 import { CartRequest } from 'src/app/models/cart/cartRequest';
 import { CartResponse } from 'src/app/models/cart/cartResponse';
 
@@ -17,7 +17,7 @@ export class CartService {
   constructor(private http: HttpClient) {}
 
   generateOrder(req: CartRequest, idAddress: number): Observable<HttpResponse<Blob>> {
-    const url = `${URL_BACK}/${this.access}/generateOrder/${idAddress}`;
+    const url = `${environment.url_back}/${this.access}/generateOrder/${idAddress}`;
     
     return this.http.post(url, req, {
       observe: 'response',
